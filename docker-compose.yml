@@ -1,0 +1,36 @@
+services:
+
+  server:
+    build: ./server
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+      - cache
+    environment:
+      DATABASE_URL: mysql+pymysql://root:root@db:3306/gym_platform
+      REDIS_URL: redis://cache:6379
+
+  client:
+    build: ./client
+    ports:
+      - "5173:5173"
+    depends_on:
+      - server
+
+  db:
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: gym_platform
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  cache:
+    image: redis:7
+
+volumes:
+  mysql_data:

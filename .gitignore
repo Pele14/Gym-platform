@@ -6,21 +6,29 @@ __pycache__/
 *.db
 *.sqlite3
 
-# Virtual environment
+# Virtual environments
 venv/
-.env
-.env.*
+.env/
 
 # Flask
 instance/
-
-# Node / React
-node_modules/
-build/
-dist/
-
-# Logs
 *.log
+
+# Node
+node_modules/
+dist/
+build/
+
+# Vite
+.vite/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Docker
+mysql_data/
 
 # OS files
 .DS_Store
@@ -30,7 +38,7 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Docker
-*.pid
-*.seed
-*.pid.lock
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
