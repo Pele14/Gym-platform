@@ -1,0 +1,124 @@
+Gym Platform
+Project Goal
+
+The main goal of this project is the development of a full-stack web application that enables users to manage their physical progress in a structured and scientifically based way.
+
+The application should provide:
+
+Systematic workout tracking – digitalization of the training process through recording sets, repetitions, and working weights, allowing users to track progressive overload over time.
+
+Nutrition management – precise control of daily calorie intake and macronutrients (proteins, fats, and carbohydrates) according to personalized user goals.
+
+Technologies
+1. Frontend
+
+The user interface is a React web application that communicates with the server via REST API requests.
+
+2. Backend
+
+A Python Flask application is used to serve the client and communicate directly with the database.
+It is responsible for processing all REST API requests sent by the client.
+
+3. Database
+
+A MySQL database is used for persistent storage of all information related to users, workouts, and nutrition.
+
+It is connected to Flask through the SQLAlchemy ORM, which simplifies working with data through Python code.
+
+4. Caching
+
+To improve application performance, Redis will be used as an in-memory data store.
+
+Core Functionalities
+1. Authentication
+
+User registration – creating a new account by entering basic information (first name, last name, email, password, date of birth).
+
+Login system – user authentication using email and password.
+
+JWT Security – after successful login, the server issues a JSON Web Token (JWT) that is stored on the frontend (React) and sent with each API request to verify user identity.
+
+Password hashing – passwords are never stored as plain text. Libraries such as bcrypt are used to securely hash passwords before storing them in the database.
+
+The application supports two roles:
+
+Administrator
+
+User
+
+Administrator Panel
+
+Exercise catalog management – adding, editing, and deleting exercises in the global system (exercise name, description, primary muscle group).
+
+Nutrition database – adding and validating food items and their nutritional values available to all users.
+
+Dashboard
+
+The dashboard provides an overview of the user's current daily status.
+
+Nutrition status – shows remaining calories and protein until the daily goal is reached.
+
+Last workout – short information about the last workout session and routine performed.
+
+Quick Start button – allows users to quickly start a workout or log a meal.
+
+Workout Module
+
+This module is divided into three phases:
+
+Routine Creator
+
+Users can select exercises from the catalog (created by the administrator) and define the number of planned sets and weights.
+Users can also modify their routines.
+
+Routine Overview
+
+Displays all saved routines (e.g. Push, Pull, Legs) and allows the user to choose which routine to perform that day.
+
+Active Workout
+
+Timer – automatic workout duration tracking
+
+Result input – fields for entering actual weight and repetitions
+
+Users mark completed sets using a checkbox
+
+Clicking Save permanently stores the workout data in the history for that date
+
+Nutrition Module
+
+Calculator – input parameters for calculating BMI and target intake (calories, proteins, fats, carbohydrates) based on the user's goal.
+
+Daily Log – adding meals throughout the day.
+
+The application automatically sums all food entries and compares them with the defined nutritional goal.
+
+Profile
+
+Personal data management – editing and managing user information.
+
+Additional Features
+
+Progress visualization – line charts showing body weight and strength progression.
+
+Workout calendar – calendar highlighting days when workouts were completed.
+
+Progress tracking – automatic tracking of exercise performance.
+
+Gym map – using the user's location, the application displays nearby gyms and fitness centers.
+
+Gym information – users can see basic gym information (name, address, working hours).
+
+Caching frequently used data
+
+Email confirmation via SMTP (e.g. Gmail)
+
+Notifications/reminders if workouts or meals have not been logged for a long time
+
+Smart food search with autocomplete
+
+Dark mode / theme switcher
+
+Audit log
+
+Dockerization of the project
