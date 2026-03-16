@@ -10,7 +10,7 @@ services:
     environment:
       DATABASE_URL: mysql+pymysql://root:root@db:3306/gym_platform
       REDIS_URL: redis://cache:6379
-
+      JWT_SECRET_KEY: super-secret-key-change-this
   client:
     build: ./client
     ports:
