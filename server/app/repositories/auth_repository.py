@@ -17,15 +17,16 @@ class AuthRepository:
         return db.session.get(User, user_id)
 
     @staticmethod
-    def create_user(username: str, email: str, password: str):
+    def create_user(username: str, first_name: str, last_name: str, email: str, password: str):
         user = User(
             username=username,
+            first_name=first_name,
+            last_name=last_name,
             email=email,
-            role="user"
+        role="user"
         )
 
         user.set_password(password)
-
         db.session.add(user)
         db.session.commit()
 

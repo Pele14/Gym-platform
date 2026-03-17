@@ -6,7 +6,9 @@ from app.utils.authvalidators import (
     validate_email,
     validate_password,
     validate_username,
-    validate_login_password
+    validate_login_password,
+    validate_first_name,
+    validate_last_name
 )
 
 auth_bp = Blueprint("auth", __name__, url_prefix="/api/auth")
@@ -17,10 +19,13 @@ def register():
     data = request.get_json() or {}
 
     username = data.get("username", "").strip()
+    first_name = data.get("first_name", "").strip()
+    last_name = data.get("last_name", "").strip()
     email = data.get("email", "").strip().lower()
     password = data.get("password", "").strip()
+   
 
-    valid, error = validate_username(username)
+    valid, error = validate_first_name(first_name)
     if not valid:
         return {"message": error}, 400
 
@@ -31,8 +36,16 @@ def register():
     valid, error = validate_password(password)
     if not valid:
         return {"message": error}, 400
+    
+    valid, error = validate_first_name(first_name)
+    if not valid:
+        return {"message": error}, 400
 
-    user, error = AuthService.register_user(username, email, password)
+    valid, error = validate_last_name(last_name)
+    if not valid:
+        return {"message": error}, 400
+    
+    user, error = AuthService.register_user(username, first_name, last_name, email, password)
 
     if error:
         return {"message": error}, 400

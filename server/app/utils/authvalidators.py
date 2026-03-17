@@ -41,3 +41,22 @@ def validate_login_password(password: str):
         return False, "Password is required."
 
     return True, None
+
+def validate_first_name(first_name: str):
+    if not first_name:
+        return False, "First name is required."
+
+    if len(first_name) < 2:
+        return False, "First name must be at least 2 characters long."
+
+    return True, None
+
+
+def validate_last_name(last_name: str):
+    if not last_name:
+        return False, "Last name is required."
+
+    if len(last_name) < 2:
+        return False, "Last name must be at least 2 characters long."
+
+    return True, None

@@ -4,7 +4,7 @@ from app.repositories.auth_repository import AuthRepository
 class AuthService:
 
     @staticmethod
-    def register_user(username: str, email: str, password: str):
+    def register_user(username: str, first_name: str, last_name: str, email: str, password: str):
         existing_email = AuthRepository.get_by_email(email)
         if existing_email:
             return None, "Email already exists."
@@ -12,8 +12,14 @@ class AuthService:
         existing_username = AuthRepository.get_by_username(username)
         if existing_username:
             return None, "Username already exists."
-
-        user = AuthRepository.create_user(username, email, password)
+        user = AuthRepository.create_user(
+            username,
+            first_name,
+            last_name,
+            email,
+            password
+        )
+        ProfileRepository.create_empty_profile(user.id)
 
         return user, None
 
