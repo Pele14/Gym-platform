@@ -27,6 +27,13 @@ class User(db.Model):
         nullable=False
     )
 
+    profile = db.relationship(
+        "UserProfile",
+        backref="user",
+        uselist=False,
+        cascade="all, delete-orphan"
+    )
+
     def set_password(self, password: str):
         self.password_hash = generate_password_hash(password)
 
@@ -40,5 +47,20 @@ class User(db.Model):
             "first_name": self.first_name,
             "last_name": self.last_name,
             "email": self.email,
-            "role": self.role
+            "role": self.role,
+            "is_active": self.is_active
+        }
+
+    def to_admin_dict(self):
+        return {
+            "id": self.id,
+            "username": self.username,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "email": self.email,
+            "role": self.role,
+            "is_active": self.is_active,
+            "created_at": self.created_at.isoformat(),
+            "updated_at": self.updated_at.isoformat(),
+            "profile": self.profile.to_dict() if self.profile else None
         }

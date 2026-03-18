@@ -25,7 +25,7 @@ def register():
     password = data.get("password", "").strip()
    
 
-    valid, error = validate_first_name(first_name)
+    valid, error = validate_username(username)
     if not valid:
         return {"message": error}, 400
 

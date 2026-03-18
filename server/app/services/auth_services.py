@@ -1,5 +1,5 @@
 from app.repositories.auth_repository import AuthRepository
-
+from app.repositories.profile_repository import ProfileRepository
 
 class AuthService:
 
