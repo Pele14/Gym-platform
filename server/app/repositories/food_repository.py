@@ -10,6 +10,10 @@ class FoodRepository:
         ).order_by(Food.name.asc()).all()
 
     @staticmethod
+    def get_all():
+        return Food.query.order_by(Food.name.asc()).all()
+
+    @staticmethod
     def get_by_id(food_id: int):
         return db.session.get(Food, food_id)
 

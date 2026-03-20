@@ -10,6 +10,10 @@ class ExerciseRepository:
         ).order_by(Exercise.name.asc()).all()
 
     @staticmethod
+    def get_all():
+        return Exercise.query.order_by(Exercise.name.asc()).all()
+
+    @staticmethod
     def get_by_id(exercise_id: int):
         return db.session.get(Exercise, exercise_id)
 

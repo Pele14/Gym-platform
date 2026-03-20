@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../features/auth";
 import { UsersTable } from "../features/user";
-
+import { ExerciseList } from "../features/exercises";
 export default function DashboardPage() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -86,30 +86,33 @@ export default function DashboardPage() {
         </div>
 
         {user?.role === "admin" ? (
-          <UsersTable />
-        ) : (
-          <div
-            style={{
-              background: "white",
-              borderRadius: "12px",
-              padding: "1.5rem",
-              boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
-            }}
-          >
-            <h2
-              style={{
-                marginTop: 0,
-                color: "#111827",
-              }}
-            >
-              User Dashboard
-            </h2>
+  <>
+    <UsersTable />
+    <ExerciseList />
+  </>
+) : (
+  <div
+    style={{
+      background: "white",
+      borderRadius: "12px",
+      padding: "1.5rem",
+      boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
+    }}
+  >
+    <h2
+      style={{
+        marginTop: 0,
+        color: "#111827",
+      }}
+    >
+      User Dashboard
+    </h2>
 
-            <p style={{ color: "#4b5563" }}>
-              Here you can later add profile, workouts, nutrition and progress tracking.
-            </p>
-          </div>
-        )}
+    <p style={{ color: "#4b5563" }}>
+      Here you can later add profile, workouts, nutrition and progress tracking.
+    </p>
+  </div>
+)}
       </div>
     </div>
   );

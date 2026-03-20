@@ -26,10 +26,13 @@ def get_exercises():
 @exercise_bp.route("/<int:exercise_id>", methods=["GET"])
 @jwt_required()
 def get_exercise(exercise_id):
-    exercise = ExerciseService.get_exercise_by_id(exercise_id)
+    current_user_id = int(get_jwt_identity())
 
-    if not exercise:
-        return {"message": "Exercise not found."}, 404
+    exercise, error = ExerciseService.get_exercise_by_id(current_user_id, exercise_id)
+
+    if error:
+        status = 404 if error == "Exercise not found." else 403
+        return {"message": error}, status
 
     return {"exercise": exercise.to_dict()}, 200
 
