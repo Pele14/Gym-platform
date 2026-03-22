@@ -20,6 +20,10 @@ class UserProfile(db.Model):
     height_cm = db.Column(db.Float, nullable=True)
     weight_kg = db.Column(db.Float, nullable=True)
 
+    sex = db.Column(db.String(20), nullable=True)
+    activity_level = db.Column(db.String(30), nullable=True)
+    goal_type = db.Column(db.String(20), nullable=True)
+
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     updated_at = db.Column(
         db.DateTime,
@@ -49,6 +53,9 @@ class UserProfile(db.Model):
             "profile_image_url": self.profile_image_url,
             "height_cm": self.height_cm,
             "weight_kg": self.weight_kg,
+            "sex": self.sex,
+            "activity_level": self.activity_level,
+            "goal_type": self.goal_type,
             "created_at": self.created_at.isoformat(),
             "updated_at": self.updated_at.isoformat()
         }
