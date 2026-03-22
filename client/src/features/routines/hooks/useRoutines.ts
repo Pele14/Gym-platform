@@ -95,6 +95,28 @@ export function useRoutines() {
     }
   };
 
+  const updateRoutineExercise = async (
+    planId: number,
+    planExerciseId: number,
+    payload: AddExerciseToRoutinePayload
+  ) => {
+    try {
+      setIsSubmitting(true);
+      setError(null);
+
+      await routineService.updateRoutineExercise(planId, planExerciseId, payload);
+      const refreshed = await routineService.getRoutineById(planId);
+      setSelectedRoutine(refreshed.plan);
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : "Failed to update routine exercise."
+      );
+      throw err;
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const deleteRoutineExercise = async (planId: number, planExerciseId: number) => {
     try {
       setError(null);
@@ -135,6 +157,35 @@ export function useRoutines() {
     }
   };
 
+  const updateRoutineExerciseSet = async (
+    planId: number,
+    planExerciseId: number,
+    setId: number,
+    payload: AddSetToRoutineExercisePayload
+  ) => {
+    try {
+      setIsSubmitting(true);
+      setError(null);
+
+      await routineService.updateRoutineExerciseSet(
+        planId,
+        planExerciseId,
+        setId,
+        payload
+      );
+
+      if (selectedRoutine?.id === planId) {
+        const refreshed = await routineService.getRoutineById(planId);
+        setSelectedRoutine(refreshed.plan);
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to update set.");
+      throw err;
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const deleteRoutineExerciseSet = async (
     planId: number,
     planExerciseId: number,
@@ -167,8 +218,10 @@ export function useRoutines() {
     createRoutine,
     deleteRoutine,
     addExerciseToRoutine,
+    updateRoutineExercise,
     deleteRoutineExercise,
     addSetToRoutineExercise,
+    updateRoutineExerciseSet,
     deleteRoutineExerciseSet,
   };
 }

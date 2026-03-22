@@ -3,6 +3,7 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import DashboardPage from "./pages/DashboardPage";
+import ActiveWorkoutPage from "./pages/ActiveWorkoutPage";
 import { ProtectedRoute } from "./features/auth";
 
 export default function App() {
@@ -11,11 +12,21 @@ export default function App() {
       <Route path="/" element={<HomePage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
+
       <Route
         path="/dashboard"
         element={
           <ProtectedRoute>
             <DashboardPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/workout-session/:sessionId"
+        element={
+          <ProtectedRoute>
+            <ActiveWorkoutPage />
           </ProtectedRoute>
         }
       />

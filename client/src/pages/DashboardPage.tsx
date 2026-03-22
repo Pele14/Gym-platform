@@ -3,6 +3,7 @@ import { useAuth } from "../features/auth";
 import { UsersTable } from "../features/user";
 import { ExerciseList } from "../features/exercises";
 import { RoutineList } from "../features/routines";
+import { WorkoutHistory } from "../features/workout_session";
 
 export default function DashboardPage() {
   const { user, logout } = useAuth();
@@ -93,8 +94,11 @@ export default function DashboardPage() {
             <ExerciseList />
           </>
         ) : (
-          <RoutineList />
-        )}
+  <>
+    <RoutineList />
+    <WorkoutHistory />
+  </>
+)}
       </div>
     </div>
   );

@@ -1,9 +1,13 @@
+import { useNavigate } from "react-router-dom";
 import styles from "../routines.module.css";
 import RoutineForm from "./RoutineForm";
 import RoutineDetail from "./RoutineDetail";
 import { useRoutines } from "../hooks/useRoutines";
+import { useWorkoutSession } from "../../workout_session";
 
 export default function RoutineList() {
+  const navigate = useNavigate();
+
   const {
     routines,
     selectedRoutine,
@@ -14,10 +18,17 @@ export default function RoutineList() {
     createRoutine,
     deleteRoutine,
     addExerciseToRoutine,
+    updateRoutineExercise,
     deleteRoutineExercise,
     addSetToRoutineExercise,
+    updateRoutineExerciseSet,
     deleteRoutineExerciseSet,
   } = useRoutines();
+
+  const {
+    startWorkout,
+    isSubmitting: isStartingWorkout,
+  } = useWorkoutSession();
 
   if (isLoading) {
     return (
@@ -59,13 +70,27 @@ export default function RoutineList() {
                   <button
                     className={styles.secondaryButton}
                     onClick={() => selectRoutine(routine.id)}
+                    type="button"
                   >
                     Open
                   </button>
 
                   <button
+                    className={styles.button}
+                    onClick={async () => {
+                      const session = await startWorkout(routine.id);
+                      navigate(`/workout-session/${session.id}`);
+                    }}
+                    disabled={isStartingWorkout}
+                    type="button"
+                  >
+                    {isStartingWorkout ? "Starting..." : "Start Workout"}
+                  </button>
+
+                  <button
                     className={styles.deleteButton}
                     onClick={() => deleteRoutine(routine.id)}
+                    type="button"
                   >
                     Delete
                   </button>
@@ -87,6 +112,10 @@ export default function RoutineList() {
           if (!selectedRoutine) return;
           await addExerciseToRoutine(selectedRoutine.id, payload);
         }}
+        onUpdateExercise={async (planExerciseId, payload) => {
+          if (!selectedRoutine) return;
+          await updateRoutineExercise(selectedRoutine.id, planExerciseId, payload);
+        }}
         onDeleteExercise={async (planExerciseId) => {
           if (!selectedRoutine) return;
           await deleteRoutineExercise(selectedRoutine.id, planExerciseId);
@@ -94,6 +123,15 @@ export default function RoutineList() {
         onAddSet={async (planExerciseId, payload) => {
           if (!selectedRoutine) return;
           await addSetToRoutineExercise(selectedRoutine.id, planExerciseId, payload);
+        }}
+        onUpdateSet={async (planExerciseId, setId, payload) => {
+          if (!selectedRoutine) return;
+          await updateRoutineExerciseSet(
+            selectedRoutine.id,
+            planExerciseId,
+            setId,
+            payload
+          );
         }}
         onDeleteSet={async (planExerciseId, setId) => {
           if (!selectedRoutine) return;

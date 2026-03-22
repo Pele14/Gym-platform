@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styles from "../routines.module.css";
 import AddExerciseToRoutineForm from "./AddExerciseToRoutineForm";
 import AddSetForm from "./AddSetForm";
@@ -11,9 +12,26 @@ interface RoutineDetailProps {
     exercise_order: number;
     notes?: string;
   }) => Promise<void>;
+  onUpdateExercise: (
+    planExerciseId: number,
+    payload: {
+      exercise_id: number;
+      exercise_order: number;
+      notes?: string;
+    }
+  ) => Promise<void>;
   onDeleteExercise: (planExerciseId: number) => Promise<void>;
   onAddSet: (
     planExerciseId: number,
+    payload: {
+      set_order: number;
+      target_reps?: number;
+      target_weight_kg?: number;
+    }
+  ) => Promise<void>;
+  onUpdateSet: (
+    planExerciseId: number,
+    setId: number,
     payload: {
       set_order: number;
       target_reps?: number;
@@ -27,10 +45,27 @@ export default function RoutineDetail({
   routine,
   isSubmitting,
   onAddExercise,
+  onUpdateExercise,
   onDeleteExercise,
   onAddSet,
+  onUpdateSet,
   onDeleteSet,
 }: RoutineDetailProps) {
+  const [editingExerciseId, setEditingExerciseId] = useState<number | null>(null);
+  const [editingSetId, setEditingSetId] = useState<number | null>(null);
+
+  const [exerciseEditData, setExerciseEditData] = useState({
+    exercise_id: "",
+    exercise_order: "",
+    notes: "",
+  });
+
+  const [setEditData, setSetEditData] = useState({
+    set_order: "",
+    target_reps: "",
+    target_weight_kg: "",
+  });
+
   if (!routine) {
     return <p className={styles.message}>Select a routine to view details.</p>;
   }
@@ -65,13 +100,98 @@ export default function RoutineDetail({
                   </p>
                 </div>
 
-                <button
-                  className={styles.deleteButton}
-                  onClick={() => onDeleteExercise(planExercise.id)}
-                >
-                  Delete exercise
-                </button>
+                <div className={styles.row}>
+                  <button
+                    className={styles.secondaryButton}
+                    onClick={() => {
+                      setEditingExerciseId(planExercise.id);
+                      setExerciseEditData({
+                        exercise_id: String(planExercise.exercise_id),
+                        exercise_order: String(planExercise.exercise_order),
+                        notes: planExercise.notes || "",
+                      });
+                    }}
+                  >
+                    Edit exercise
+                  </button>
+
+                  <button
+                    className={styles.deleteButton}
+                    onClick={() => onDeleteExercise(planExercise.id)}
+                  >
+                    Delete exercise
+                  </button>
+                </div>
               </div>
+
+              {editingExerciseId === planExercise.id && (
+                <form
+                  className={styles.form}
+                  onSubmit={async (e) => {
+                    e.preventDefault();
+
+                    await onUpdateExercise(planExercise.id, {
+                      exercise_id: Number(exerciseEditData.exercise_id),
+                      exercise_order: Number(exerciseEditData.exercise_order),
+                      notes: exerciseEditData.notes.trim() || undefined,
+                    });
+
+                    setEditingExerciseId(null);
+                  }}
+                >
+                  <input
+                    className={styles.input}
+                    type="number"
+                    placeholder="Exercise ID"
+                    value={exerciseEditData.exercise_id}
+                    onChange={(e) =>
+                      setExerciseEditData((prev) => ({
+                        ...prev,
+                        exercise_id: e.target.value,
+                      }))
+                    }
+                  />
+
+                  <input
+                    className={styles.input}
+                    type="number"
+                    placeholder="Exercise order"
+                    value={exerciseEditData.exercise_order}
+                    onChange={(e) =>
+                      setExerciseEditData((prev) => ({
+                        ...prev,
+                        exercise_order: e.target.value,
+                      }))
+                    }
+                  />
+
+                  <textarea
+                    className={styles.textarea}
+                    placeholder="Notes"
+                    value={exerciseEditData.notes}
+                    onChange={(e) =>
+                      setExerciseEditData((prev) => ({
+                        ...prev,
+                        notes: e.target.value,
+                      }))
+                    }
+                  />
+
+                  <div className={styles.row}>
+                    <button className={styles.button} type="submit" disabled={isSubmitting}>
+                      Save exercise
+                    </button>
+
+                    <button
+                      className={styles.deleteButton}
+                      type="button"
+                      onClick={() => setEditingExerciseId(null)}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+              )}
 
               <div className={styles.section}>
                 <h4 className={styles.subtitle}>Add set</h4>
@@ -97,13 +217,108 @@ export default function RoutineDetail({
                           </p>
                         </div>
 
-                        <button
-                          className={styles.deleteButton}
-                          onClick={() => onDeleteSet(planExercise.id, setItem.id)}
-                        >
-                          Delete set
-                        </button>
+                        <div className={styles.row}>
+                          <button
+                            className={styles.secondaryButton}
+                            onClick={() => {
+                              setEditingSetId(setItem.id);
+                              setSetEditData({
+                                set_order: String(setItem.set_order),
+                                target_reps: setItem.target_reps
+                                  ? String(setItem.target_reps)
+                                  : "",
+                                target_weight_kg: setItem.target_weight_kg
+                                  ? String(setItem.target_weight_kg)
+                                  : "",
+                              });
+                            }}
+                          >
+                            Edit set
+                          </button>
+
+                          <button
+                            className={styles.deleteButton}
+                            onClick={() => onDeleteSet(planExercise.id, setItem.id)}
+                          >
+                            Delete set
+                          </button>
+                        </div>
                       </div>
+
+                      {editingSetId === setItem.id && (
+                        <form
+                          className={styles.form}
+                          onSubmit={async (e) => {
+                            e.preventDefault();
+
+                            await onUpdateSet(planExercise.id, setItem.id, {
+                              set_order: Number(setEditData.set_order),
+                              target_reps: setEditData.target_reps
+                                ? Number(setEditData.target_reps)
+                                : undefined,
+                              target_weight_kg: setEditData.target_weight_kg
+                                ? Number(setEditData.target_weight_kg)
+                                : undefined,
+                            });
+
+                            setEditingSetId(null);
+                          }}
+                        >
+                          <input
+                            className={styles.input}
+                            type="number"
+                            placeholder="Set order"
+                            value={setEditData.set_order}
+                            onChange={(e) =>
+                              setSetEditData((prev) => ({
+                                ...prev,
+                                set_order: e.target.value,
+                              }))
+                            }
+                          />
+
+                          <input
+                            className={styles.input}
+                            type="number"
+                            placeholder="Target reps"
+                            value={setEditData.target_reps}
+                            onChange={(e) =>
+                              setSetEditData((prev) => ({
+                                ...prev,
+                                target_reps: e.target.value,
+                              }))
+                            }
+                          />
+
+                          <input
+                            className={styles.input}
+                            type="number"
+                            step="0.5"
+                            placeholder="Target weight (kg)"
+                            value={setEditData.target_weight_kg}
+                            onChange={(e) =>
+                              setSetEditData((prev) => ({
+                                ...prev,
+                                target_weight_kg: e.target.value,
+                              }))
+                            }
+                          />
+
+                          <div className={styles.row}>
+                            <button className={styles.button} type="submit" disabled={isSubmitting}>
+                              Save set
+                            </button>
+
+                            <button
+                              className={styles.deleteButton}
+                              type="button"
+                              onClick={() => setEditingSetId(null)}
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        </form>
+                      )}
                     </div>
                   ))}
 

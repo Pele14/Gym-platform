@@ -56,6 +56,20 @@ export const routineService = {
     });
   },
 
+  async updateRoutineExercise(
+    planId: number,
+    planExerciseId: number,
+    payload: AddExerciseToRoutinePayload
+  ): Promise<RoutineExerciseResponse> {
+    return http<RoutineExerciseResponse>(
+      `/api/workouts/${planId}/exercises/${planExerciseId}`,
+      {
+        method: "PUT",
+        body: JSON.stringify(payload),
+      }
+    );
+  },
+
   async deleteRoutineExercise(
     planId: number,
     planExerciseId: number
@@ -77,6 +91,21 @@ export const routineService = {
       `/api/workouts/${planId}/exercises/${planExerciseId}/sets`,
       {
         method: "POST",
+        body: JSON.stringify(payload),
+      }
+    );
+  },
+
+  async updateRoutineExerciseSet(
+    planId: number,
+    planExerciseId: number,
+    setId: number,
+    payload: AddSetToRoutineExercisePayload
+  ): Promise<RoutineSetResponse> {
+    return http<RoutineSetResponse>(
+      `/api/workouts/${planId}/exercises/${planExerciseId}/sets/${setId}`,
+      {
+        method: "PUT",
         body: JSON.stringify(payload),
       }
     );
