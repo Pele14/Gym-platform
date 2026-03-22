@@ -14,7 +14,10 @@ class ProfileRepository:
             date_of_birth=None,
             profile_image_url=None,
             height_cm=None,
-            weight_kg=None
+            weight_kg=None,
+            sex=None,
+            activity_level=None,
+            goal_type=None
         )
 
         db.session.add(profile)
@@ -28,7 +31,10 @@ class ProfileRepository:
         date_of_birth=None,
         profile_image_url=None,
         height_cm=None,
-        weight_kg=None
+        weight_kg=None,
+        sex=None,
+        activity_level=None,
+        goal_type=None
     ):
         if date_of_birth is not None:
             profile.date_of_birth = date_of_birth
@@ -41,6 +47,15 @@ class ProfileRepository:
 
         if weight_kg is not None:
             profile.weight_kg = weight_kg
+
+        if sex is not None:
+            profile.sex = sex
+
+        if activity_level is not None:
+            profile.activity_level = activity_level
+
+        if goal_type is not None:
+            profile.goal_type = goal_type
 
         db.session.commit()
 

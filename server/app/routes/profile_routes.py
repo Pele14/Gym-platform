@@ -6,6 +6,9 @@ from app.services.profile_service import ProfileService
 profile_bp = Blueprint("profile", __name__, url_prefix="/api/profile")
 
 
+# ======================
+# GET MY PROFILE
+# ======================
 @profile_bp.route("/me", methods=["GET"])
 @jwt_required()
 def get_my_profile():
@@ -19,26 +22,24 @@ def get_my_profile():
     return {"profile": profile.to_dict()}, 200
 
 
+# ======================
+# UPDATE MY PROFILE
+# ======================
 @profile_bp.route("/me", methods=["PUT"])
 @jwt_required()
 def update_my_profile():
     user_id = int(get_jwt_identity())
     data = request.get_json() or {}
 
-    date_of_birth = data.get("date_of_birth") if "date_of_birth" in data else None
-    profile_image_url = data.get("profile_image_url") if "profile_image_url" in data else None
-    height_cm = data.get("height_cm") if "height_cm" in data else None
-    weight_kg = data.get("weight_kg") if "weight_kg" in data else None
-
-    if isinstance(profile_image_url, str):
-        profile_image_url = profile_image_url.strip() or None
-
     profile, error = ProfileService.update_profile(
         user_id=user_id,
-        date_of_birth=date_of_birth,
-        profile_image_url=profile_image_url,
-        height_cm=height_cm,
-        weight_kg=weight_kg
+        date_of_birth=data.get("date_of_birth"),
+        profile_image_url=data.get("profile_image_url"),
+        height_cm=data.get("height_cm"),
+        weight_kg=data.get("weight_kg"),
+        sex=data.get("sex"),
+        activity_level=data.get("activity_level"),
+        goal_type=data.get("goal_type"),
     )
 
     if error:

@@ -1,7 +1,7 @@
 from datetime import datetime, date
 
 from app.extensions import db
-
+from app.models.enums import GoalTypeEnum, ActivityLevelEnum, SexEnum
 
 class UserProfile(db.Model):
     __tablename__ = "user_profiles"
@@ -19,10 +19,9 @@ class UserProfile(db.Model):
     profile_image_url = db.Column(db.String(500), nullable=True)
     height_cm = db.Column(db.Float, nullable=True)
     weight_kg = db.Column(db.Float, nullable=True)
-
-    sex = db.Column(db.String(20), nullable=True)
-    activity_level = db.Column(db.String(30), nullable=True)
-    goal_type = db.Column(db.String(20), nullable=True)
+    sex = db.Column(db.Enum(SexEnum), nullable=True)
+    activity_level = db.Column(db.Enum(ActivityLevelEnum), nullable=True)
+    goal_type = db.Column(db.Enum(GoalTypeEnum), nullable=True)
 
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     updated_at = db.Column(
@@ -53,9 +52,9 @@ class UserProfile(db.Model):
             "profile_image_url": self.profile_image_url,
             "height_cm": self.height_cm,
             "weight_kg": self.weight_kg,
-            "sex": self.sex,
-            "activity_level": self.activity_level,
-            "goal_type": self.goal_type,
+            "sex": self.sex.value if self.sex else None,
+            "activity_level": self.activity_level.value if self.activity_level else None,
+            "goal_type": self.goal_type.value if self.goal_type else None,
             "created_at": self.created_at.isoformat(),
             "updated_at": self.updated_at.isoformat()
         }
