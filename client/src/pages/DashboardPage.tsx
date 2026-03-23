@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../features/auth";
-import { UsersTable } from "../features/user";
+import { UsersTable, SettingsForm} from "../features/user";
 import { ExerciseList } from "../features/exercises";
 import { RoutineList } from "../features/routines";
 import { WorkoutHistory } from "../features/workout_session";
 import { FoodList } from "../features/food";  
+
 export default function DashboardPage() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -98,6 +99,7 @@ export default function DashboardPage() {
   <>
     <RoutineList />
     <WorkoutHistory />
+    <SettingsForm />
   </>
 )}
       </div>

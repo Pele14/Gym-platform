@@ -64,3 +64,11 @@ class User(db.Model):
             "updated_at": self.updated_at.isoformat(),
             "profile": self.profile.to_dict() if self.profile else None
         }
+    def to_client_dict(self):
+        return {
+            "username": self.username,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "email": self.email,
+            "profile": self.profile.to_dict() if self.profile else None
+        }

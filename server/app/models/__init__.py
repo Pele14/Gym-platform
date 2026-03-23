@@ -8,3 +8,5 @@ from .workout_plan_exercise_set import WorkoutPlanExerciseSet
 from .workout_session import WorkoutSession
 from .workout_exercise_session import WorkoutExerciseSession
 from .workout_set_session import WorkoutSetSession
+from .nutrition_goal import NutritionGoal
+from .enums import GoalTypeEnum, ActivityLevelEnum, SexEnum, ActivityFactorEnum
