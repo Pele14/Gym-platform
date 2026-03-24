@@ -9,4 +9,7 @@ from .workout_session import WorkoutSession
 from .workout_exercise_session import WorkoutExerciseSession
 from .workout_set_session import WorkoutSetSession
 from .nutrition_goal import NutritionGoal
+from .daily_nutrition_log import DailyNutritionLog
+from .meal import Meal
+from .meal_food_entry import MealFoodEntry
 from .enums import GoalTypeEnum, ActivityLevelEnum, SexEnum, ActivityFactorEnum

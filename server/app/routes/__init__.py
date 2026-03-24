@@ -5,6 +5,7 @@ from app.routes.user_routes import user_bp
 from app.routes.workout_routes import workout_bp
 from app.routes.workout_session_routes import workout_session_bp
 from app.routes.nutrition_routes import nutrition_bp
+from app.routes.nutrition_log_routes import nutrition_log_bp
 
 def register_routes(app):
     app.register_blueprint(auth_bp)
@@ -14,3 +15,4 @@ def register_routes(app):
     app.register_blueprint(workout_bp)
     app.register_blueprint(workout_session_bp)
     app.register_blueprint(nutrition_bp)
+    app.register_blueprint(nutrition_log_bp)

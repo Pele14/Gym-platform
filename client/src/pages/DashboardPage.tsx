@@ -1,14 +1,20 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../features/auth";
 import { UsersTable, SettingsForm} from "../features/user";
 import { ExerciseList } from "../features/exercises";
 import { RoutineList } from "../features/routines";
 import { WorkoutHistory } from "../features/workout_session";
-import { FoodList } from "../features/food";  
+import { FoodList } from "../features/food";
+import { DailyLogView, DateNavigator } from "../features/nutrition_log";  
 
 export default function DashboardPage() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const [selectedDate, setSelectedDate] = useState(() => {
+    const date = new Date();
+    return date.toISOString().split("T")[0];
+  });
 
   const handleLogout = () => {
     logout();
@@ -96,12 +102,14 @@ export default function DashboardPage() {
             <FoodList />
           </>
         ) : (
-  <>
-    <RoutineList />
-    <WorkoutHistory />
-    <SettingsForm />
-  </>
-)}
+          <>
+            <DateNavigator date={selectedDate} onDateChange={setSelectedDate} />
+            <DailyLogView date={selectedDate} />
+            <RoutineList />
+            <WorkoutHistory />
+            <SettingsForm />
+          </>
+        )}
       </div>
     </div>
   );
