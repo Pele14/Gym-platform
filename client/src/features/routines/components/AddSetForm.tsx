@@ -5,8 +5,8 @@ interface AddSetFormProps {
   isSubmitting: boolean;
   onSubmit: (payload: {
     set_order: number;
-    target_reps?: number;
-    target_weight_kg?: number;
+    target_reps: number;
+    target_weight_kg: number;
   }) => Promise<void>;
 }
 
@@ -20,8 +20,8 @@ export default function AddSetForm({ isSubmitting, onSubmit }: AddSetFormProps) 
 
     await onSubmit({
       set_order: Number(setOrder),
-      target_reps: targetReps ? Number(targetReps) : undefined,
-      target_weight_kg: targetWeightKg ? Number(targetWeightKg) : undefined,
+      target_reps: Number(targetReps),
+      target_weight_kg: Number(targetWeightKg),
     });
 
     setSetOrder("");
@@ -48,6 +48,7 @@ export default function AddSetForm({ isSubmitting, onSubmit }: AddSetFormProps) 
         value={targetReps}
         onChange={(e) => setTargetReps(e.target.value)}
         disabled={isSubmitting}
+        required
       />
 
       <input
@@ -58,6 +59,7 @@ export default function AddSetForm({ isSubmitting, onSubmit }: AddSetFormProps) 
         value={targetWeightKg}
         onChange={(e) => setTargetWeightKg(e.target.value)}
         disabled={isSubmitting}
+        required
       />
 
       <button className={styles.secondaryButton} type="submit" disabled={isSubmitting}>

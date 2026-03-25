@@ -49,8 +49,10 @@ def validate_positive_int(value, field_name: str, required: bool = False):
     return True, None
 
 
-def validate_weight(value, field_name: str = "Weight"):
+def validate_weight(value, field_name: str = "Weight", required: bool = False):
     if value is None:
+        if required:
+            return False, f"{field_name} is required."
         return True, None
 
     try:

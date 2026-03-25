@@ -16,8 +16,8 @@ class WorkoutSetSession(db.Model):
 
     set_order = db.Column(db.Integer, nullable=False, default=1)
 
-    planned_reps = db.Column(db.Integer, nullable=True)
-    planned_weight_kg = db.Column(db.Float, nullable=True)
+    planned_reps = db.Column(db.Integer, nullable=False)
+    planned_weight_kg = db.Column(db.Float, nullable=False)
 
     actual_reps = db.Column(db.Integer, nullable=True)
     actual_weight_kg = db.Column(db.Float, nullable=True)

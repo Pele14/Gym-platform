@@ -48,6 +48,27 @@ def get_workout_session(session_id):
     return {"session": session_data}, 200
 
 
+@workout_session_bp.route("/<int:session_id>", methods=["DELETE"])
+@jwt_required()
+def discard_workout_session(session_id):
+    current_user_id = int(get_jwt_identity())
+
+    success, error = WorkoutSessionService.discard_workout(
+        current_user_id=current_user_id,
+        session_id=session_id
+    )
+
+    if error:
+        status = 400
+        if error == "Workout session not found.":
+            status = 404
+        elif error == "You are not allowed to discard this workout session.":
+            status = 403
+        return {"message": error}, status
+
+    return {"message": "Workout discarded successfully."}, 200
+
+
 @workout_session_bp.route("/history", methods=["GET"])
 @jwt_required()
 def get_workout_history():

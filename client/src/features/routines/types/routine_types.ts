@@ -15,8 +15,8 @@ export interface RoutineExerciseSet {
   id: number;
   workout_plan_exercise_id: number;
   set_order: number;
-  target_reps: number | null;
-  target_weight_kg: number | null;
+  target_reps: number;
+  target_weight_kg: number;
   created_at: string;
   updated_at: string;
 }
@@ -71,8 +71,8 @@ export interface AddExerciseToRoutinePayload {
 
 export interface AddSetToRoutineExercisePayload {
   set_order: number;
-  target_reps?: number;
-  target_weight_kg?: number;
+  target_reps: number;
+  target_weight_kg: number;
 }
 
 export interface RoutineExerciseResponse {

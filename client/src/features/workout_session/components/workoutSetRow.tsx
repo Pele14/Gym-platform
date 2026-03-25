@@ -23,96 +23,130 @@ export default function WorkoutSetRow({
   isSubmitting,
   onSave,
 }: WorkoutSetRowProps) {
-  const [actualReps, setActualReps] = useState<string>(
+  const [actualRepsInput, setActualRepsInput] = useState<string>(
     setItem.actual_reps != null ? String(setItem.actual_reps) : ""
   );
-  const [actualWeight, setActualWeight] = useState<string>(
+  const [actualWeightInput, setActualWeightInput] = useState<string>(
     setItem.actual_weight_kg != null ? String(setItem.actual_weight_kg) : ""
   );
   const [isCompleted, setIsCompleted] = useState<boolean>(setItem.is_completed);
 
   useEffect(() => {
-    setActualReps(setItem.actual_reps != null ? String(setItem.actual_reps) : "");
-    setActualWeight(
+    setActualRepsInput(setItem.actual_reps != null ? String(setItem.actual_reps) : "");
+    setActualWeightInput(
       setItem.actual_weight_kg != null ? String(setItem.actual_weight_kg) : ""
     );
     setIsCompleted(setItem.is_completed);
   }, [setItem]);
 
-  const handleSave = async () => {
-    await onSave(sessionId, setItem.id, {
-      actual_reps: actualReps ? Number(actualReps) : undefined,
-      actual_weight_kg: actualWeight ? Number(actualWeight) : undefined,
-      is_completed: isCompleted,
-    });
+  const parseActualReps = (): number | undefined => {
+    const trimmed = actualRepsInput.trim();
+    if (!trimmed) return undefined;
+
+    const parsed = Number(trimmed);
+    if (!Number.isInteger(parsed) || parsed <= 0) return undefined;
+    return parsed;
+  };
+
+  const parseActualWeight = (): number | undefined => {
+    const trimmed = actualWeightInput.trim();
+    if (!trimmed) return undefined;
+
+    const parsed = Number(trimmed);
+    if (!Number.isFinite(parsed) || parsed < 0 || parsed > 500) return undefined;
+    return parsed;
+  };
+
+  const hasRepsValue = actualRepsInput.trim().length > 0;
+  const hasWeightValue = actualWeightInput.trim().length > 0;
+  const parsedReps = parseActualReps();
+  const parsedWeight = parseActualWeight();
+
+  const hasInvalidReps = hasRepsValue && parsedReps == null;
+  const hasInvalidWeight = hasWeightValue && parsedWeight == null;
+
+  const buildActualsPayload = (): {
+    actual_reps?: number;
+    actual_weight_kg?: number;
+  } => {
+    const payload: { actual_reps?: number; actual_weight_kg?: number } = {};
+
+    if (parsedReps != null) payload.actual_reps = parsedReps;
+    if (parsedWeight != null) payload.actual_weight_kg = parsedWeight;
+
+    return payload;
   };
 
   const handleQuickComplete = async () => {
     const nextCompleted = !isCompleted;
+
+    if (nextCompleted && (hasInvalidReps || hasInvalidWeight)) {
+      return;
+    }
+
     setIsCompleted(nextCompleted);
 
     await onSave(sessionId, setItem.id, {
-      actual_reps: actualReps ? Number(actualReps) : undefined,
-      actual_weight_kg: actualWeight ? Number(actualWeight) : undefined,
+      ...(nextCompleted ? buildActualsPayload() : {}),
       is_completed: nextCompleted,
     });
   };
 
   return (
-    <div className={styles.setCard}>
-      <div className={styles.row}>
-        <div>
-          <p className={styles.smallText}>Set #{setItem.set_order}</p>
-          <p className={styles.smallText}>
-            Planned: {setItem.planned_reps ?? "-"} reps /{" "}
-            {setItem.planned_weight_kg ?? "-"} kg
-          </p>
-          <p className={styles.smallText}>
-            Previous: {setItem.previous?.reps ?? "-"} reps /{" "}
-            {setItem.previous?.weight_kg ?? "-"} kg
-          </p>
-          <p className={styles.smallText}>Volume: {setItem.volume ?? 0}</p>
-        </div>
+    <div
+      className={`${styles.setTableRow} ${isCompleted ? styles.setTableRowCompleted : ""}`}
+    >
+      <div className={styles.setCellMeta}>
+        <p className={styles.setIndex}>#{setItem.set_order}</p>
+        <p className={styles.smallText}>
+          Planned {setItem.planned_reps} / {setItem.planned_weight_kg}kg
+        </p>
+        <p className={styles.smallText}>
+          Prev {setItem.previous?.reps ?? "-"} / {setItem.previous?.weight_kg ?? "-"}kg
+        </p>
+      </div>
 
-        <div className={styles.grid}>
+      <div>
+        <input
+          className={`${styles.input} ${isCompleted ? styles.inputCompleted : ""}`}
+          type="number"
+          min={1}
+          step={1}
+          placeholder={String(setItem.planned_reps)}
+          value={actualRepsInput}
+          onChange={(event) => setActualRepsInput(event.target.value)}
+          disabled={isSubmitting}
+        />
+        {hasInvalidReps && <p className={styles.inputHintError}>Use a positive whole number.</p>}
+      </div>
+
+      <div>
+        <input
+          className={`${styles.input} ${isCompleted ? styles.inputCompleted : ""}`}
+          type="number"
+          min={0}
+          max={500}
+          step={0.5}
+          placeholder={String(setItem.planned_weight_kg)}
+          value={actualWeightInput}
+          onChange={(event) => setActualWeightInput(event.target.value)}
+          disabled={isSubmitting}
+        />
+        {hasInvalidWeight && <p className={styles.inputHintError}>Use a value from 0 to 500.</p>}
+      </div>
+
+      <div className={styles.setRowActions}>
+        <label
+          className={`${styles.setDoneToggleInline} ${isCompleted ? styles.setDoneToggleInlineCompleted : ""}`}
+        >
           <input
-            className={styles.input}
-            type="number"
-            placeholder="Actual reps"
-            value={actualReps}
-            onChange={(e) => setActualReps(e.target.value)}
+            type="checkbox"
+            checked={isCompleted}
+            onChange={handleQuickComplete}
             disabled={isSubmitting}
           />
-
-          <input
-            className={styles.input}
-            type="number"
-            step="0.5"
-            placeholder="Actual kg"
-            value={actualWeight}
-            onChange={(e) => setActualWeight(e.target.value)}
-            disabled={isSubmitting}
-          />
-
-          <div className={styles.checkboxRow}>
-            <input
-              type="checkbox"
-              checked={isCompleted}
-              onChange={handleQuickComplete}
-              disabled={isSubmitting}
-            />
-            <span className={styles.smallText}>Completed</span>
-          </div>
-
-          <button
-            className={styles.secondaryButton}
-            onClick={handleSave}
-            disabled={isSubmitting}
-            type="button"
-          >
-            Save set
-          </button>
-        </div>
+          <span>Done</span>
+        </label>
       </div>
     </div>
   );

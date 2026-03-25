@@ -233,6 +233,22 @@ class WorkoutSessionService:
         return updated_session.to_dict(include_exercises=True), None
 
     @staticmethod
+    def discard_workout(current_user_id: int, session_id: int):
+        session = WorkoutSessionRepository.get_session_by_id(session_id)
+
+        if not session:
+            return False, "Workout session not found."
+
+        if session.user_id != current_user_id:
+            return False, "You are not allowed to discard this workout session."
+
+        if session.finished_at is not None:
+            return False, "Only unfinished workout sessions can be discarded."
+
+        WorkoutSessionRepository.delete_session(session)
+        return True, None
+
+    @staticmethod
     def get_exercise_stats(current_user_id: int, exercise_id: int):
         sessions = WorkoutSessionRepository.get_all_sessions_for_user(current_user_id)
 

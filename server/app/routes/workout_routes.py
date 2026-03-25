@@ -227,7 +227,7 @@ def add_set(plan_id, pe_id):
     if not valid:
         return {"message": error}, 400
 
-    valid, error = validate_weight(weight)
+    valid, error = validate_weight(weight, "Weight", True)
     if not valid:
         return {"message": error}, 400
 
@@ -260,12 +260,11 @@ def update_set(plan_id, pe_id, set_id):
         if not valid:
             return {"message": error}, 400
 
-    if reps is not None:
-        valid, error = validate_positive_int(reps, "Reps")
-        if not valid:
-            return {"message": error}, 400
+    valid, error = validate_positive_int(reps, "Reps", True)
+    if not valid:
+        return {"message": error}, 400
 
-    valid, error = validate_weight(weight)
+    valid, error = validate_weight(weight, "Weight", True)
     if not valid:
         return {"message": error}, 400
 

@@ -1,5 +1,6 @@
 import { http } from "../../../services/http";
 import type {
+  DiscardWorkoutResponse,
   FinishWorkoutResponse,
   GetExerciseStatsResponse,
   GetWorkoutHistoryResponse,
@@ -49,6 +50,12 @@ export const workoutSessionService = {
         method: "POST",
       }
     );
+  },
+
+  async discardWorkout(sessionId: number): Promise<DiscardWorkoutResponse> {
+    return http<DiscardWorkoutResponse>(`/api/workout-sessions/${sessionId}`, {
+      method: "DELETE",
+    });
   },
 
   async getExerciseStats(exerciseId: number): Promise<GetExerciseStatsResponse> {

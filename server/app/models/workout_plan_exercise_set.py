@@ -15,8 +15,8 @@ class WorkoutPlanExerciseSet(db.Model):
     )
 
     set_order = db.Column(db.Integer, nullable=False, default=1)
-    target_reps = db.Column(db.Integer, nullable=True)
-    target_weight_kg = db.Column(db.Float, nullable=True)
+    target_reps = db.Column(db.Integer, nullable=False)
+    target_weight_kg = db.Column(db.Float, nullable=False)
 
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     updated_at = db.Column(

@@ -20,8 +20,8 @@ export interface WorkoutSessionSet {
   id: number;
   workout_exercise_session_id: number;
   set_order: number;
-  planned_reps: number | null;
-  planned_weight_kg: number | null;
+  planned_reps: number;
+  planned_weight_kg: number;
   actual_reps: number | null;
   actual_weight_kg: number | null;
   volume: number;
@@ -86,6 +86,10 @@ export interface UpdateWorkoutSessionSetResponse {
 export interface FinishWorkoutResponse {
   message: string;
   session: WorkoutSession;
+}
+
+export interface DiscardWorkoutResponse {
+  message: string;
 }
 
 export interface ExerciseStats {

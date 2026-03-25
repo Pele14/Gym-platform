@@ -31,7 +31,7 @@ export default function DateNavigator({ date, onDateChange }: DateNavigatorProps
 
   return (
     <div className={styles.dateNavigator}>
-      <button className={styles.button} onClick={handlePrevDay}>
+      <button className={styles.dateNavButton} onClick={handlePrevDay}>
         ← Previous
       </button>
 
@@ -44,11 +44,11 @@ export default function DateNavigator({ date, onDateChange }: DateNavigatorProps
         />
       </div>
 
-      <button className={styles.button} onClick={handleNextDay}>
+      <button className={styles.dateNavButton} onClick={handleNextDay}>
         Next →
       </button>
 
-      <button className={styles.secondaryButton} onClick={handleToday}>
+      <button className={styles.dateNavTodayButton} onClick={handleToday}>
         Today
       </button>
     </div>

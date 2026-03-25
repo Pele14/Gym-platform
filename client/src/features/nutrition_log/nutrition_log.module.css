@@ -1,7 +1,8 @@
 .container {
-  max-width: 1100px;
-  margin: 2rem auto;
-  padding: 2rem;
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 1.25rem;
   background: #ffffff;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
@@ -298,27 +299,67 @@
 }
 
 .dateNavigator {
-  display: flex;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
-  padding: 1rem;
-  background: #f9fafb;
-  border-radius: 10px;
+  display: grid;
+  grid-template-columns: auto minmax(180px, 1fr) auto auto;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.55rem;
+  background: #f5f7f6;
+  border-radius: 9px;
   border: 1px solid #e5e7eb;
   align-items: center;
-  flex-wrap: wrap;
 }
 
 .dateInputWrapper {
-  flex: 1;
-  min-width: 150px;
+  min-width: 0;
 }
 
 .dateInput {
   width: 100%;
-  padding: 0.75rem;
+  padding: 0.52rem 0.62rem;
   border: 1px solid #d1d5db;
   border-radius: 8px;
-  font-size: 1rem;
+  font-size: 0.92rem;
   cursor: pointer;
+  background: #ffffff;
+  color: #111827;
+}
+
+.dateNavButton,
+.dateNavTodayButton {
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #374151;
+  font-weight: 600;
+  font-size: 0.84rem;
+  border-radius: 8px;
+  padding: 0.52rem 0.7rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.dateNavButton:hover,
+.dateNavTodayButton:hover {
+  background: #f3f4f6;
+  border-color: #cbd5e1;
+}
+
+.dateNavTodayButton {
+  border-color: #bbf7d0;
+  background: #ecfdf3;
+  color: #166534;
+}
+
+@media (max-width: 720px) {
+  .dateNavigator {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .dateInputWrapper {
+    grid-column: 1 / -1;
+  }
+
+  .dateNavTodayButton {
+    grid-column: 1 / -1;
+  }
 }

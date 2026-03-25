@@ -6,6 +6,9 @@ import type {
   WorkoutSession,
 } from "../types/workout_session_types";
 
+const getSessionTimerKey = (sessionId: number) =>
+  `workout-session-client-start-${sessionId}`;
+
 export function useWorkoutSession() {
   const [activeSession, setActiveSession] = useState<WorkoutSession | null>(null);
   const [history, setHistory] = useState<WorkoutSession[]>([]);
@@ -22,6 +25,13 @@ export function useWorkoutSession() {
 
       const data = await workoutSessionService.startWorkout(planId);
       setActiveSession(data.session);
+
+      if (typeof window !== "undefined") {
+        window.sessionStorage.setItem(
+          getSessionTimerKey(data.session.id),
+          String(Date.now())
+        );
+      }
 
       return data.session;
     } catch (err) {
@@ -89,10 +99,35 @@ export function useWorkoutSession() {
       const data = await workoutSessionService.finishWorkout(sessionId);
       setActiveSession(data.session);
 
+      if (typeof window !== "undefined") {
+        window.sessionStorage.removeItem(getSessionTimerKey(sessionId));
+      }
+
       return data.session;
     } catch (err) {
       const message =
         err instanceof Error ? err.message : "Failed to finish workout.";
+      setError(message);
+      throw err;
+    } finally {
+      setIsSubmitting(false);
+    }
+  }, []);
+
+  const discardWorkout = useCallback(async (sessionId: number) => {
+    try {
+      setIsSubmitting(true);
+      setError(null);
+
+      await workoutSessionService.discardWorkout(sessionId);
+      setActiveSession(null);
+
+      if (typeof window !== "undefined") {
+        window.sessionStorage.removeItem(getSessionTimerKey(sessionId));
+      }
+    } catch (err) {
+      const message =
+        err instanceof Error ? err.message : "Failed to discard workout.";
       setError(message);
       throw err;
     } finally {
@@ -153,6 +188,7 @@ export function useWorkoutSession() {
     loadWorkoutSession,
     updateWorkoutSet,
     finishWorkout,
+    discardWorkout,
     loadWorkoutHistory,
     loadExerciseStats,
     clearActiveSession,
