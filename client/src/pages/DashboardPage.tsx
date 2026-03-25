@@ -12,6 +12,9 @@ import styles from "./DashboardPage.module.css";
 
 type DashboardSection = "dashboard" | "workouts" | "nutrition" | "profile";
 
+const ACTIVE_WORKOUTS_CAP = 2;
+const PAST_WORKOUTS_CAP = 4;
+
 type SectionWrapperProps = {
   title: string;
   subtitle?: string;
@@ -48,6 +51,7 @@ export default function DashboardPage() {
   const {
     history,
     isLoading: isHistoryLoading,
+    error: historyError,
     loadWorkoutHistory,
   } = useWorkoutSession();
 
@@ -92,7 +96,18 @@ export default function DashboardPage() {
   }, [dailyLog, goal, remaining]);
 
   const activeWorkout = history.find((session) => !session.finished_at) ?? null;
-  const lastWorkout = history.find((session) => !!session.finished_at) ?? null;
+
+  const activeWorkoutsPreview = useMemo(
+    () => history.filter((session) => !session.finished_at).slice(0, ACTIVE_WORKOUTS_CAP),
+    [history]
+  );
+
+  const pastWorkoutsPreview = useMemo(
+    () => history.filter((session) => !!session.finished_at).slice(0, PAST_WORKOUTS_CAP),
+    [history]
+  );
+
+  const [expandedPastId, setExpandedPastId] = useState<number | null>(null);
 
   const renderAdminSection = () => {
     switch (selectedSection) {
@@ -152,7 +167,6 @@ export default function DashboardPage() {
             title="Daily Nutrition"
             subtitle="Log meals and track progress against your goals"
           >
-            <DateNavigator date={selectedDate} onDateChange={setSelectedDate} />
             <DailyLogView date={selectedDate} />
           </SectionWrapper>
         );
@@ -172,6 +186,10 @@ export default function DashboardPage() {
             title="Dashboard Overview"
             subtitle="Quick status and actions for today"
           >
+            <div className={styles.dateNavigatorWrapper}>
+              <DateNavigator date={selectedDate} onDateChange={setSelectedDate} />
+            </div>
+
             <div className={styles.dashboardGrid}>
               <div className={styles.statCard}>
                 <p className={styles.cardLabel}>Calories</p>
@@ -234,51 +252,131 @@ export default function DashboardPage() {
                 </div>
               </div>
 
-              <div className={styles.lastWorkoutCard}>
-                <div>
-                  <p className={styles.cardLabel}>
-                    {activeWorkout ? "Active Workout" : "Last Workout"}
-                  </p>
+              <div className={styles.workoutsPreviewCard}>
+                <div className={styles.workoutSection}>
+                  <p className={styles.cardLabel}>Active Workouts</p>
+
                   {isHistoryLoading ? (
-                    <p className={styles.cardMeta}>Loading...</p>
-                  ) : activeWorkout ? (
-                    <>
-                      <p className={styles.cardValue}>{activeWorkout.name}</p>
-                      <p className={styles.cardMeta}>
-                        Started: {activeWorkout.started_at?.slice(0, 10) || "-"} • In progress
-                      </p>
-                    </>
-                  ) : lastWorkout ? (
-                    <>
-                      <p className={styles.cardValue}>{lastWorkout.name}</p>
-                      <p className={styles.cardMeta}>
-                        {lastWorkout.started_at?.slice(0, 10) || "-"} • Reps: {lastWorkout.total_reps} • Volume: {Math.round(lastWorkout.total_volume)}
-                      </p>
-                    </>
+                    <p className={styles.cardMeta}>Loading workouts...</p>
+                  ) : historyError ? (
+                    <p className={styles.cardMeta}>{historyError}</p>
+                  ) : activeWorkoutsPreview.length === 0 ? (
+                    <p className={styles.cardMeta}>No active workouts.</p>
                   ) : (
-                    <p className={styles.cardMeta}>No workouts yet.</p>
+                    <div className={styles.workoutList}>
+                      {activeWorkoutsPreview.map((session) => (
+                        <div key={session.id} className={styles.workoutItem}>
+                          <div className={styles.workoutItemRow}>
+                            <div className={styles.workoutItemInfo}>
+                              <p className={styles.workoutItemName}>{session.name}</p>
+                              <p className={styles.workoutItemMeta}>
+                                Started: {session.started_at?.slice(0, 10) || "-"} • In progress
+                              </p>
+                            </div>
+
+                            <button
+                              className={styles.secondaryAction}
+                              type="button"
+                              onClick={() => navigate(`/workout-session/${session.id}`)}
+                            >
+                              Resume
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   )}
                 </div>
 
-                <button
-                  className={styles.secondaryAction}
-                  type="button"
-                  disabled={!activeWorkout && !lastWorkout}
-                  onClick={() => {
-                    const targetSession = activeWorkout ?? lastWorkout;
-                    if (!targetSession) return;
-                    navigate(`/workout-session/${targetSession.id}`);
-                  }}
-                >
-                  {activeWorkout ? "Resume" : "View details"}
-                </button>
+                <div className={styles.workoutSection}>
+                  <p className={styles.cardLabel}>Past Workouts</p>
+
+                  {isHistoryLoading ? (
+                    <p className={styles.cardMeta}>Loading workouts...</p>
+                  ) : historyError ? (
+                    <p className={styles.cardMeta}>{historyError}</p>
+                  ) : pastWorkoutsPreview.length === 0 ? (
+                    <p className={styles.cardMeta}>No past workouts yet.</p>
+                  ) : (
+                    <div className={styles.workoutList}>
+                      {pastWorkoutsPreview.map((session) => {
+                        const isOpen = expandedPastId === session.id;
+                        return (
+                          <div key={session.id} className={styles.workoutItem}>
+                            <div className={styles.workoutItemRow}>
+                              <div className={styles.workoutItemInfo}>
+                                <p className={styles.workoutItemName}>{session.name}</p>
+                                <p className={styles.workoutItemMeta}>
+                                  {session.started_at?.slice(0, 10) || "-"} • Reps: {session.total_reps} • Volume: {Math.round(session.total_volume)}
+                                </p>
+                              </div>
+
+                              <button
+                                className={styles.secondaryAction}
+                                type="button"
+                                onClick={() => setExpandedPastId(isOpen ? null : session.id)}
+                              >
+                                {isOpen ? "Hide" : "Details"}
+                              </button>
+                            </div>
+
+                            {isOpen && (
+                              <div className={styles.workoutDropdown}>
+                                {(session.exercises ?? []).length === 0 ? (
+                                  <p className={styles.workoutDropdownEmpty}>No exercise breakdown available.</p>
+                                ) : (
+                                  <div className={styles.workoutExerciseList}>
+                                    {(session.exercises ?? []).map((exerciseItem) => (
+                                      <div key={exerciseItem.id} className={styles.workoutExerciseCard}>
+                                        <div className={styles.workoutExerciseHeader}>
+                                          <p className={styles.workoutExerciseName}>
+                                            {exerciseItem.exercise?.name || "Exercise"}
+                                          </p>
+                                          <span className={styles.workoutExerciseBadge}>
+                                            {(exerciseItem.sets ?? []).length} sets
+                                          </span>
+                                        </div>
+
+                                        {(exerciseItem.sets ?? []).length === 0 ? (
+                                          <p className={styles.workoutDropdownEmpty}>No sets logged.</p>
+                                        ) : (
+                                          <div className={styles.workoutSetsTable}>
+                                            <div className={styles.workoutSetsHead}>
+                                              <span>Set</span>
+                                              <span>Planned</span>
+                                              <span>Actual</span>
+                                              <span>Status</span>
+                                            </div>
+
+                                            {(exerciseItem.sets ?? []).map((setItem) => (
+                                              <div key={setItem.id} className={styles.workoutSetsRow}>
+                                                <span>#{setItem.set_order}</span>
+                                                <span>{setItem.planned_reps} × {setItem.planned_weight_kg}kg</span>
+                                                <span>{setItem.actual_reps ?? "-"} × {setItem.actual_weight_kg ?? "-"}kg</span>
+                                                <span className={setItem.is_completed ? styles.workoutSetDone : styles.workoutSetMissed}>
+                                                  {setItem.is_completed ? "Done" : "Skipped"}
+                                                </span>
+                                              </div>
+                                            ))}
+                                          </div>
+                                        )}
+                                      </div>
+                                    ))}
+                                  </div>
+                                )}
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
 
-            {isNutritionLoading ? (
+            {isNutritionLoading && (
               <p className={styles.cardMeta}>Updating nutrition status...</p>
-            ) : (
-              <DateNavigator date={selectedDate} onDateChange={setSelectedDate} />
             )}
           </SectionWrapper>
         );

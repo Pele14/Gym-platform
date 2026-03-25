@@ -77,7 +77,7 @@ def get_workout_history():
     sessions = WorkoutSessionService.get_history(current_user_id)
 
     return {
-        "sessions": [session.to_dict() for session in sessions]
+        "sessions": [session.to_dict(include_exercises=True) for session in sessions]
     }, 200
 
 
