@@ -91,123 +91,171 @@ export default function SettingsForm() {
       {error && <p className={styles.error}>{error}</p>}
 
       <form className={styles.form} onSubmit={handleSubmit}>
-        <h3 className={styles.subtitle}>Account</h3>
+        <section className={styles.formSectionCard}>
+          <div className={styles.sectionHeader}>
+            <h3 className={styles.subtitle}>Account</h3>
+            <p className={styles.sectionHint}>Identity and login details for your account.</p>
+          </div>
 
-        <input
-          className={styles.input}
-          name="username"
-          placeholder="Username"
-          value={formData.username ?? ""}
-          onChange={handleChange}
-          disabled={isSubmitting}
-        />
+          <div className={styles.formGrid}>
+            <div className={styles.fieldGroup}>
+              <label className={styles.label} htmlFor="settings-username">Username</label>
+              <input
+                id="settings-username"
+                className={styles.input}
+                name="username"
+                value={formData.username ?? ""}
+                onChange={handleChange}
+                disabled={isSubmitting}
+              />
+            </div>
 
-        <input
-          className={styles.input}
-          name="first_name"
-          placeholder="First name"
-          value={formData.first_name ?? ""}
-          onChange={handleChange}
-          disabled={isSubmitting}
-        />
+            <div className={styles.fieldGroup}>
+              <label className={styles.label} htmlFor="settings-email">Email</label>
+              <input
+                id="settings-email"
+                className={styles.input}
+                name="email"
+                type="email"
+                value={formData.email ?? ""}
+                onChange={handleChange}
+                disabled={isSubmitting}
+              />
+            </div>
 
-        <input
-          className={styles.input}
-          name="last_name"
-          placeholder="Last name"
-          value={formData.last_name ?? ""}
-          onChange={handleChange}
-          disabled={isSubmitting}
-        />
+            <div className={styles.fieldGroup}>
+              <label className={styles.label} htmlFor="settings-first-name">First name</label>
+              <input
+                id="settings-first-name"
+                className={styles.input}
+                name="first_name"
+                value={formData.first_name ?? ""}
+                onChange={handleChange}
+                disabled={isSubmitting}
+              />
+            </div>
 
-        <input
-          className={styles.input}
-          name="email"
-          type="email"
-          placeholder="Email"
-          value={formData.email ?? ""}
-          onChange={handleChange}
-          disabled={isSubmitting}
-        />
+            <div className={styles.fieldGroup}>
+              <label className={styles.label} htmlFor="settings-last-name">Last name</label>
+              <input
+                id="settings-last-name"
+                className={styles.input}
+                name="last_name"
+                value={formData.last_name ?? ""}
+                onChange={handleChange}
+                disabled={isSubmitting}
+              />
+            </div>
+          </div>
+        </section>
 
-        <div className={styles.section}>
-          <h3 className={styles.subtitle}>Profile</h3>
+        <section className={styles.formSectionCard}>
+          <div className={styles.sectionHeader}>
+            <h3 className={styles.subtitle}>Profile Details</h3>
+            <p className={styles.sectionHint}>Body metrics and activity profile used across workouts and nutrition.</p>
+          </div>
+
+          <div className={styles.formGrid}>
+            <div className={styles.fieldGroup}>
+              <label className={styles.label} htmlFor="settings-height">Height (cm)</label>
+              <input
+                id="settings-height"
+                className={styles.input}
+                name="height_cm"
+                type="number"
+                step="0.1"
+                value={formData.height_cm ?? ""}
+                onChange={handleChange}
+                disabled={isSubmitting}
+              />
+            </div>
+
+            <div className={styles.fieldGroup}>
+              <label className={styles.label} htmlFor="settings-weight">Weight (kg)</label>
+              <input
+                id="settings-weight"
+                className={styles.input}
+                name="weight_kg"
+                type="number"
+                step="0.1"
+                value={formData.weight_kg ?? ""}
+                onChange={handleChange}
+                disabled={isSubmitting}
+              />
+            </div>
+
+            <div className={styles.fieldGroup}>
+              <label className={styles.label} htmlFor="settings-sex">Sex</label>
+              <select
+                id="settings-sex"
+                className={styles.select}
+                name="sex"
+                value={formData.sex ?? ""}
+                onChange={handleChange}
+                disabled={isSubmitting}
+              >
+                <option value="">Select sex</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
+
+            <div className={styles.fieldGroup}>
+              <label className={styles.label} htmlFor="settings-activity">Activity level</label>
+              <select
+                id="settings-activity"
+                className={styles.select}
+                name="activity_level"
+                value={formData.activity_level ?? ""}
+                onChange={handleChange}
+                disabled={isSubmitting}
+              >
+                <option value="">Select activity level</option>
+                <option value="sedentary">Sedentary</option>
+                <option value="light">Light</option>
+                <option value="moderate">Moderate</option>
+                <option value="active">Active</option>
+                <option value="very_active">Very active</option>
+              </select>
+            </div>
+
+            <div className={styles.fieldGroup}>
+              <label className={styles.label} htmlFor="settings-goal">Goal type</label>
+              <select
+                id="settings-goal"
+                className={styles.select}
+                name="goal_type"
+                value={formData.goal_type ?? ""}
+                onChange={handleChange}
+                disabled={isSubmitting}
+              >
+                <option value="">Select goal</option>
+                <option value="lose">Lose</option>
+                <option value="maintain">Maintain</option>
+                <option value="gain">Gain</option>
+              </select>
+            </div>
+
+            <div className={styles.fieldGroup}>
+              <label className={styles.label} htmlFor="settings-dob">Date of birth</label>
+              <input
+                id="settings-dob"
+                className={styles.input}
+                name="date_of_birth"
+                type="date"
+                value={formData.date_of_birth ?? ""}
+                onChange={handleChange}
+                disabled={isSubmitting}
+              />
+            </div>
+          </div>
+        </section>
+
+        <div className={styles.actionRow}>
+          <button className={styles.button} type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Saving..." : "Save settings"}
+          </button>
         </div>
-
-        <input
-          className={styles.input}
-          name="date_of_birth"
-          type="date"
-          value={formData.date_of_birth ?? ""}
-          onChange={handleChange}
-          disabled={isSubmitting}
-        />
-
-        <input
-          className={styles.input}
-          name="height_cm"
-          type="number"
-          step="0.1"
-          placeholder="Height (cm)"
-          value={formData.height_cm ?? ""}
-          onChange={handleChange}
-          disabled={isSubmitting}
-        />
-
-        <input
-          className={styles.input}
-          name="weight_kg"
-          type="number"
-          step="0.1"
-          placeholder="Weight (kg)"
-          value={formData.weight_kg ?? ""}
-          onChange={handleChange}
-          disabled={isSubmitting}
-        />
-
-        <select
-          className={styles.select}
-          name="sex"
-          value={formData.sex ?? ""}
-          onChange={handleChange}
-          disabled={isSubmitting}
-        >
-          <option value="">Select sex</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </select>
-
-        <select
-          className={styles.select}
-          name="activity_level"
-          value={formData.activity_level ?? ""}
-          onChange={handleChange}
-          disabled={isSubmitting}
-        >
-          <option value="">Select activity level</option>
-          <option value="sedentary">Sedentary</option>
-          <option value="light">Light</option>
-          <option value="moderate">Moderate</option>
-          <option value="active">Active</option>
-          <option value="very_active">Very active</option>
-        </select>
-
-        <select
-          className={styles.select}
-          name="goal_type"
-          value={formData.goal_type ?? ""}
-          onChange={handleChange}
-          disabled={isSubmitting}
-        >
-          <option value="">Select goal</option>
-          <option value="lose">Lose</option>
-          <option value="maintain">Maintain</option>
-          <option value="gain">Gain</option>
-        </select>
-
-        <button className={styles.button} type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Saving..." : "Save settings"}
-        </button>
       </form>
 
       <NutritionGoalCard

@@ -293,6 +293,16 @@
   justify-content: space-between;
 }
 
+.nutritionLockedCard {
+  border: 1px solid #2d3933;
+  background: #1d2722;
+  border-radius: 12px;
+  padding: 0.9rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.16);
+  display: grid;
+  gap: 0.55rem;
+}
+
 .quickActions {
   margin-top: 0.75rem;
   display: grid;
@@ -369,13 +379,24 @@
   padding: 0.6rem;
   display: grid;
   gap: 0;
+  transition: border-color 0.18s ease, background 0.18s ease;
+}
+
+.workoutItem:hover {
+  border-color: #3d584b;
+  background: #1d2a23;
 }
 
 .workoutItemRow {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.6rem;
+}
+
+.detailsToggleButton {
+  margin-top: 0.05rem;
+  align-self: flex-start;
 }
 
 .workoutItemInfo {
@@ -400,27 +421,50 @@
 }
 
 .workoutDropdown {
-  margin-top: 0.6rem;
-  padding-top: 0.6rem;
-  border-top: 1px solid #2d3933;
+  margin-top: 0;
+  padding: 0 0.85rem;
+  border-top: 1px solid transparent;
   display: grid;
   gap: 0.55rem;
+  overflow: hidden;
+  opacity: 0;
+  max-height: 0;
+  transition:
+    max-height 0.25s ease,
+    opacity 0.2s ease,
+    margin-top 0.2s ease,
+    padding-top 0.2s ease,
+    padding-bottom 0.2s ease,
+    border-top-color 0.2s ease;
+}
+
+.workoutDropdownOpen {
+  margin-top: 0.65rem;
+  padding-top: 0.85rem;
+  padding-bottom: 0.65rem;
+  border-top-color: #2d3933;
+  opacity: 1;
+  max-height: 1400px;
+}
+
+.workoutDropdownClosed {
+  pointer-events: none;
 }
 
 .workoutExerciseList {
   display: grid;
-  gap: 0.55rem;
+  gap: 0.7rem;
 }
 
 .workoutExerciseCard {
   border: 1px solid #2a3630;
   border-radius: 9px;
-  background: #16201b;
+  background: #17231d;
   overflow: hidden;
 }
 
 .workoutExerciseHeader {
-  padding: 0.55rem 0.7rem;
+  padding: 0.65rem 0.8rem;
   border-bottom: 1px solid #27342d;
   display: flex;
   justify-content: space-between;
@@ -431,8 +475,8 @@
 .workoutExerciseName {
   margin: 0;
   color: #edf2ef;
-  font-size: 0.84rem;
-  font-weight: 700;
+  font-size: 0.91rem;
+  font-weight: 800;
 }
 
 .workoutExerciseBadge {
@@ -447,6 +491,7 @@
 
 .workoutSetsTable {
   display: grid;
+  margin-top: 0.45rem;
 }
 
 .workoutSetsHead,
@@ -477,12 +522,32 @@
 }
 
 .workoutSetDone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(74, 222, 128, 0.35);
+  background: rgba(34, 197, 94, 0.16);
   color: #86efac;
+  font-size: 0.72rem;
+  line-height: 1;
   font-weight: 700;
 }
 
 .workoutSetMissed {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(248, 113, 113, 0.35);
+  background: rgba(239, 68, 68, 0.14);
   color: #fca5a5;
+  font-size: 0.72rem;
+  line-height: 1;
   font-weight: 700;
 }
 

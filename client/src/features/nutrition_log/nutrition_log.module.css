@@ -3,10 +3,12 @@
   width: 100%;
   margin: 0;
   padding: 1.25rem;
-  background: #ffffff;
+  background: #1d2722;
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.16);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  border: 1px solid #2a3d32;
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
 
 .header {
@@ -15,65 +17,488 @@
 
 .title {
   margin: 0;
-  color: #111827;
-  font-size: 1.5rem;
+  color: #f3f4f6;
+  font-size: 1.4rem;
   font-weight: 700;
+  transition: color 0.15s ease;
 }
 
 .date {
   margin: 0.5rem 0 0 0;
-  color: #6b7280;
+  color: #97a29d;
   font-size: 0.95rem;
+  transition: color 0.15s ease;
 }
 
 .error {
-  color: #dc2626;
+  color: #fca5a5;
   margin-bottom: 1rem;
   padding: 0.75rem;
-  background: #fee2e2;
+  background: rgba(239, 68, 68, 0.1);
   border-radius: 8px;
-  border: 1px solid #fecaca;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
 .message {
-  color: #4b5563;
+  color: #97a29d;
   text-align: center;
   padding: 1rem;
+  transition: color 0.15s ease;
+}
+
+/* ── Section Container Styling ──────────────────────────────── */
+
+.sectionTitle {
+  margin: 0 0 1rem 0;
+  color: #97a29d;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: color 0.15s ease;
+}
+
+.sectionContent {
+  background: #19251f;
+  border: 1px solid #2a3d32;
+  border-radius: 12px;
+  padding: 1rem;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.summarySection {
+  margin-bottom: 2.5rem;
+}
+
+.addMealSection {
+  margin-bottom: 2.5rem;
+}
+
+.mealsListSection {
+  margin-bottom: 1rem;
+}
+
+.foodSearchSection {
+  margin-top: 1rem;
+  background: #19251f;
+  border: 1px solid #2a3d32;
+  border-radius: 12px;
+  padding: 1rem;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.addMealSection .sectionTitle {
+  margin-bottom: 0.85rem;
+}
+
+.addMealSection .sectionContent {
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.addMealCard {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(160deg, #213328 0%, #19231d 100%);
+  border: 1px solid rgba(47, 125, 77, 0.65);
+  border-radius: 16px;
+  padding: 1.2rem;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.24);
+}
+
+.addMealCard::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(110, 231, 162, 0.55) 0%, rgba(31, 138, 80, 0) 100%);
+}
+
+.addMealCardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.addMealEyebrow {
+  margin: 0 0 0.35rem;
+  color: #6ee7a2;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.addMealTitle {
+  margin: 0;
+  color: #f3f4f6;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.addMealDescription {
+  margin: 0.42rem 0 0;
+  color: #9fb0a8;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  max-width: 42rem;
+}
+
+.addMealFormRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.9rem;
+  align-items: center;
+}
+
+.addMealInput {
+  width: 100%;
+  min-height: 54px;
+  padding: 0.95rem 1rem;
+  border: 1px solid rgba(47, 125, 77, 0.75);
+  border-radius: 12px;
+  background: #152019;
+  color: #f3f4f6;
+  font-size: 1rem;
+  font-weight: 500;
+  box-sizing: border-box;
+  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.addMealInput::placeholder {
+  color: #7a9088;
+}
+
+.addMealInput:focus {
+  outline: none;
+  border-color: #6ee7a2;
+  box-shadow: 0 0 0 3px rgba(31, 138, 80, 0.18);
+}
+
+.addMealActions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.addMealPrimaryButton,
+.addMealSecondaryButton {
+  min-height: 50px;
+  padding: 0.85rem 1.15rem;
+  border-radius: 11px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.addMealPrimaryButton {
+  background: linear-gradient(180deg, #27a35d 0%, #1f8a50 100%);
+  color: #effdf4;
+  border: 1px solid #2f7d4d;
+  box-shadow: 0 10px 22px rgba(31, 138, 80, 0.22);
+}
+
+.addMealPrimaryButton:hover:not(:disabled) {
+  background: linear-gradient(180deg, #2daf65 0%, #238a4b 100%);
+  transform: translateY(-1px);
+}
+
+.addMealPrimaryButton:disabled {
+  background: #374b3e;
+  color: #7a9088;
+  border-color: #2a3d32;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.addMealSecondaryButton {
+  background: #1e2a23;
+  color: #d8e0db;
+  border: 1px solid #344b3c;
+}
+
+.addMealSecondaryButton:hover:not(:disabled) {
+  background: #243329;
+  border-color: #496152;
+}
+
+.addMealSecondaryButton:disabled {
+  background: #1a251f;
+  color: #7a9088;
+  border-color: #2a3d32;
+  cursor: not-allowed;
+}
+
+@keyframes overlayFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalScaleIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+  animation: overlayFadeIn 0.18s ease-out;
+}
+
+.modal {
+  width: 100%;
+  max-width: 560px;
+  background: #1d2722;
+  border: 1px solid #2a3d32;
+  border-radius: 16px;
+  padding: 1.25rem;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+  transform-origin: center;
+  animation: modalScaleIn 0.2s ease-out;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.modalTitle {
+  margin: 0;
+  color: #f3f4f6;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.modalSubtitle {
+  margin: 0.3rem 0 0;
+  color: #97a29d;
+  font-size: 0.88rem;
+}
+
+.modalClose {
+  width: 30px;
+  height: 30px;
+  background: #243329;
+  border: 1px solid #344b3c;
+  border-radius: 8px;
+  color: #97a29d;
+  cursor: pointer;
+  font-size: 0.82rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.modalClose:hover {
+  background: #344b3c;
+  color: #f3f4f6;
+  border-color: #1f8a50;
+}
+
+.modalLabel {
+  display: block;
+  color: #97a29d;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.45rem;
+}
+
+.modalSearchRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.65rem;
+  margin-top: 1rem;
+}
+
+.foodOptionInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.foodOptionName {
+  color: #f3f4f6;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.selectedFoodCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  background: linear-gradient(180deg, rgba(31, 138, 80, 0.14) 0%, rgba(25, 37, 31, 0.96) 100%);
+  border: 1px solid rgba(31, 138, 80, 0.45);
+  border-radius: 10px;
+  padding: 0.85rem 0.95rem;
+  margin-bottom: 1rem;
+  box-shadow: inset 0 0 0 1px rgba(110, 231, 162, 0.08);
+}
+
+.selectedBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32rem;
+  width: fit-content;
+  margin-bottom: 0.2rem;
+  padding: 0.18rem 0.48rem;
+  border-radius: 999px;
+  background: rgba(31, 138, 80, 0.18);
+  border: 1px solid rgba(31, 138, 80, 0.38);
+  color: #6ee7a2;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.selectedBadge::before {
+  content: "✓";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 999px;
+  background: rgba(31, 138, 80, 0.28);
+  border: 1px solid rgba(110, 231, 162, 0.28);
+  color: #bbf7d0;
+  font-size: 0.58rem;
+  line-height: 1;
+  box-shadow: inset 0 0 0 1px rgba(110, 231, 162, 0.08);
+  flex-shrink: 0;
 }
 
 .summary {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   margin-bottom: 2rem;
-  padding: 1rem;
-  background: #f9fafb;
-  border-radius: 10px;
-  border: 1px solid #e5e7eb;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  border: none;
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
 
 .macroItem {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.7rem;
+  min-height: 138px;
+  padding: 1rem;
+  background: linear-gradient(180deg, #1d2a22 0%, #18221d 100%);
+  border: 1px solid #2a3d32;
+  border-radius: 14px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+}
+
+.macroHeaderRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .macroLabel {
-  color: #6b7280;
-  font-size: 0.85rem;
-  font-weight: 500;
+  color: #97a29d;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  transition: color 0.15s ease;
 }
 
-.macroItem strong {
-  font-size: 1.25rem;
-  color: #111827;
+.macroTarget {
+  color: #7f9289;
+  font-size: 0.74rem;
+  font-weight: 600;
+}
+
+.macroValueRow {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+
+.macroValue {
+  font-size: 1.7rem;
+  color: #f3f4f6;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  transition: color 0.15s ease;
+}
+
+.macroUnit {
+  margin-left: 0.28rem;
+  color: #9fb0a8;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.progressTrack {
+  position: relative;
+  width: 100%;
+  height: 7px;
+  overflow: hidden;
+  background: #111916;
+  border: 1px solid #24322b;
+  border-radius: 999px;
+}
+
+.progressFill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #1f8a50 0%, #6ee7a2 100%);
+  box-shadow: 0 0 12px rgba(31, 138, 80, 0.3);
+  transition: width 0.25s ease;
 }
 
 .remaining {
-  color: #6b7280;
-  font-size: 0.8rem;
+  color: #97a29d;
+  font-size: 0.78rem;
   display: block;
-  margin-top: 0.25rem;
+  margin-top: auto;
+  transition: color 0.15s ease;
 }
 
 .mealSection {
@@ -89,71 +514,93 @@
 .input {
   flex: 1;
   padding: 0.75rem;
-  border: 1px solid #d1d5db;
+  border: 1px solid #2a3d32;
   border-radius: 8px;
   font-size: 1rem;
+  background: #19251f;
+  color: #f3f4f6;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.input::placeholder {
+  color: #7a9088;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #1f8a50;
+  box-shadow: 0 0 0 2px rgba(31, 138, 80, 0.15);
 }
 
 .button {
   padding: 0.75rem 1rem;
-  background: #3b82f6;
-  color: white;
-  border: none;
+  background: #1f8a50;
+  color: #effdf4;
+  border: 1px solid #2f7d4d;
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
 
 .button:hover:not(:disabled) {
-  background: #2563eb;
+  background: #238a4b;
+  border-color: #1f8a50;
 }
 
 .button:disabled {
-  background: #9ca3af;
+  background: #374b3e;
+  color: #7a9088;
   cursor: not-allowed;
+  border-color: #2a3d32;
 }
 
 .secondaryButton {
   padding: 0.75rem 1rem;
-  background: #e5e7eb;
-  color: #111827;
-  border: none;
+  background: #232f2a;
+  color: #f3f4f6;
+  border: 1px solid #2a3d32;
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
 .secondaryButton:hover:not(:disabled) {
-  background: #d1d5db;
+  background: #2a3d32;
+  border-color: #1f8a50;
 }
 
 .secondaryButton:disabled {
-  background: #f3f4f6;
+  background: #1a251f;
   cursor: not-allowed;
-  color: #9ca3af;
+  color: #7a9088;
+  border-color: #232f2a;
 }
 
 .deleteButton {
   padding: 0.5rem 0.75rem;
-  background: #ef4444;
-  color: white;
-  border: none;
+  background: transparent;
+  color: #f87171;
+  border: 1px solid #7f1d1d;
   border-radius: 6px;
   font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
 .deleteButton:hover:not(:disabled) {
-  background: #dc2626;
+  background: #ef4444;
+  border-color: #ef4444;
+  color: #fff;
 }
 
 .deleteButton:disabled {
-  background: #fecaca;
+  background: transparent;
   cursor: not-allowed;
+  color: #7a9088;
+  border-color: #2a3d32;
 }
 
 .mealsList {
@@ -163,20 +610,33 @@
 }
 
 .mealCard {
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
+  border: 1px solid #31463a;
+  border-radius: 16px;
   overflow: hidden;
-  background: #ffffff;
+  background: linear-gradient(180deg, #1f2a24 0%, #18211c 100%);
+  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.mealCard:hover {
+  border-color: #1f8a50;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.24);
+  transform: translateY(-1px);
 }
 
 .mealHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
-  background: #f3f4f6;
+  padding: 1.15rem 1.2rem;
+  background: rgba(21, 32, 25, 0.9);
   cursor: pointer;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid #30443a;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.mealHeader:hover {
+  background: rgba(29, 44, 35, 0.96);
+  border-bottom-color: #3c5748;
 }
 
 .mealTitle {
@@ -186,29 +646,33 @@
 
 .mealTitle h4 {
   margin: 0;
-  color: #111827;
+  color: #f3f4f6;
   font-size: 1.1rem;
   font-weight: 600;
+  transition: color 0.15s ease;
 }
 
 .mealMacros {
   display: block;
-  color: #6b7280;
+  color: #97a29d;
   font-size: 0.85rem;
-  margin-top: 0.25rem;
+  margin-top: 0.38rem;
+  transition: color 0.15s ease;
 }
 
 .mealDetail {
-  padding: 1rem;
+  padding: 1.15rem 1.2rem 1.2rem;
+  background: rgba(25, 37, 31, 0.7);
+  transition: background 0.15s ease;
 }
 
 .entriesList {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
-  border-bottom: 1px solid #e5e7eb;
-  padding-bottom: 1rem;
+  gap: 0.85rem;
+  margin-bottom: 1.15rem;
+  border-bottom: 1px solid #30443a;
+  padding-bottom: 1.15rem;
 }
 
 .entryItem {
@@ -217,9 +681,15 @@
   align-items: flex-start;
   gap: 1rem;
   padding: 0.75rem;
-  background: #f9fafb;
+  background: #19251f;
   border-radius: 8px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid #2a3d32;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.entryItem:hover {
+  background: #1f2e26;
+  border-color: #1f8a50;
 }
 
 .entryInfo {
@@ -230,51 +700,62 @@
 }
 
 .foodName {
-  color: #111827;
+  color: #f3f4f6;
   font-weight: 500;
   font-size: 0.95rem;
+  transition: color 0.15s ease;
 }
 
 .entryGrams {
-  color: #6b7280;
+  color: #97a29d;
   font-size: 0.85rem;
+  transition: color 0.15s ease;
 }
 
 .entryMacros {
-  color: #6b7280;
+  color: #97a29d;
   font-size: 0.8rem;
+  transition: color 0.15s ease;
 }
 
 .entryForm {
   padding: 1rem;
-  border: 1px solid #d1d5db;
+  border: 1px solid #2a3d32;
   border-radius: 8px;
-  background: #f9fafb;
+  background: #19251f;
   margin-bottom: 1rem;
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
 
 .foodList {
   max-height: 200px;
   overflow-y: auto;
-  border: 1px solid #e5e7eb;
+  border: 1px solid #2a3d32;
   border-radius: 8px;
   margin: 0.75rem 0;
-  background: white;
+  background: #1d2722;
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
 
 .foodOption {
   padding: 0.75rem;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid #2a3d32;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
+  color: #f3f4f6;
 }
 
 .foodOption:hover {
-  background: #f3f4f6;
+  background: #1f2e26;
+  transform: translateY(-1px);
+}
+
+.foodOption:active {
+  transform: translateY(0) scale(0.995);
 }
 
 .foodOption:last-child {
@@ -282,20 +763,23 @@
 }
 
 .foodBrand {
-  color: #6b7280;
+  color: #97a29d;
   font-size: 0.85rem;
+  transition: color 0.15s ease;
 }
 
 .foodMacros {
-  color: #6b7280;
+  color: #97a29d;
   font-size: 0.8rem;
   white-space: nowrap;
+  transition: color 0.15s ease;
 }
 
 .selectedFood {
   margin: 0 0 0.75rem 0;
-  color: #111827;
+  color: #f3f4f6;
   font-weight: 500;
+  transition: color 0.15s ease;
 }
 
 .dateNavigator {
@@ -304,10 +788,11 @@
   gap: 0.5rem;
   margin-bottom: 1rem;
   padding: 0.6rem;
-  background: #eefaf2;
+  background: #19251f;
   border-radius: 10px;
-  border: 1px solid #bbf7d0;
+  border: 1px solid #2a3d32;
   align-items: center;
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
 
 .dateInputWrapper {
@@ -317,46 +802,94 @@
 .dateInput {
   width: 100%;
   padding: 0.52rem 0.62rem;
-  border: 1px solid #86efac;
+  border: 1px solid #2a3d32;
   border-radius: 8px;
   font-size: 0.92rem;
   cursor: pointer;
-  background: #ffffff;
-  color: #14532d;
+  background: #1d2722;
+  color: #f3f4f6;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
 .dateInput:focus {
   outline: none;
-  border-color: #22c55e;
-  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.15);
+  border-color: #1f8a50;
+  box-shadow: 0 0 0 2px rgba(31, 138, 80, 0.15);
 }
 
 .dateNavButton,
 .dateNavTodayButton {
-  border: 1px solid #86efac;
-  background: #ffffff;
-  color: #166534;
+  border: 1px solid #2a3d32;
+  background: #232f2a;
+  color: #f3f4f6;
   font-weight: 600;
   font-size: 0.84rem;
   border-radius: 8px;
   padding: 0.52rem 0.7rem;
   cursor: pointer;
-  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
 .dateNavButton:hover,
 .dateNavTodayButton:hover {
-  background: #dcfce7;
-  border-color: #4ade80;
+  background: #2a3d32;
+  border-color: #1f8a50;
 }
 
 .dateNavTodayButton {
-  border-color: #22c55e;
-  background: #22c55e;
-  color: #f0fdf4;
+  border-color: #1f8a50;
+  background: #1f8a50;
+  color: #effdf4;
 }
 
 @media (max-width: 720px) {
+  .addMealCard {
+    padding: 1rem;
+  }
+
+  .addMealCardHeader {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .addMealFormRow {
+    grid-template-columns: 1fr;
+  }
+
+  .addMealActions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .addMealPrimaryButton,
+  .addMealSecondaryButton {
+    width: 100%;
+  }
+
+  .modal {
+    padding: 1rem;
+  }
+
+  .modalHeader {
+    align-items: center;
+  }
+
+  .modalSearchRow {
+    grid-template-columns: 1fr;
+  }
+
+  .modalActions {
+    flex-direction: column-reverse;
+  }
+
+  .modalActions button {
+    width: 100%;
+  }
+
+  .selectedFoodCard {
+    flex-direction: column;
+  }
+
   .dateNavigator {
     grid-template-columns: 1fr 1fr;
   }

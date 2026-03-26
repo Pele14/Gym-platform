@@ -67,7 +67,15 @@ export default function RoutineList() {
 
           <div className={styles.quickSummaryList}>
             {routines.map((routine) => (
-              <div key={routine.id} className={styles.summaryCard}>
+              <button
+                key={routine.id}
+                className={styles.summaryCard}
+                type="button"
+                onClick={async () => {
+                  await selectRoutine(routine.id);
+                  setView("detail");
+                }}
+              >
                 <div className={styles.summaryInfo}>
                   <h4>{routine.name}</h4>
                   <p className={styles.smallText}>
@@ -77,18 +85,7 @@ export default function RoutineList() {
                     Exercises: {routine.exercises?.length ?? "Open to view"}
                   </p>
                 </div>
-
-                <button
-                  className={styles.button}
-                  onClick={async () => {
-                    await selectRoutine(routine.id);
-                    setView("detail");
-                  }}
-                  type="button"
-                >
-                  Open
-                </button>
-              </div>
+              </button>
             ))}
 
             {routines.length === 0 && (
@@ -129,15 +126,15 @@ export default function RoutineList() {
 
       {view === "detail" && (
         <div className={styles.sectionCard}>
-          <div className={styles.detailHeader}>
-            <div>
-              <h3 className={styles.subtitle}>Routine detail</h3>
+          <div className={`${styles.detailHeader} ${styles.detailPageHeader}`}>
+            <div className={styles.detailHeadingBlock}>
+              <h3 className={`${styles.subtitle} ${styles.detailPageTitle}`}>Routine detail</h3>
               {selectedRoutine && (
-                <p className={styles.detailMeta}>{selectedRoutine.name}</p>
+                <p className={`${styles.detailMeta} ${styles.detailRoutineName}`}>{selectedRoutine.name}</p>
               )}
             </div>
 
-            <div className={styles.detailActions}>
+            <div className={`${styles.detailActions} ${styles.detailPageActions}`}>
               <button
                 className={styles.secondaryButton}
                 type="button"

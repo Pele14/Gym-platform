@@ -2,12 +2,13 @@ import { type ReactNode, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../features/auth";
 import { useDailyNutritionLog } from "../features/nutrition_log";
-import { UsersTable, SettingsForm} from "../features/user";
+import { UsersTable, SettingsForm, useCurrentUser } from "../features/user";
 import { ExerciseList } from "../features/exercises";
 import { RoutineList } from "../features/routines";
 import { useWorkoutSession } from "../features/workout_session";
 import { FoodList } from "../features/food";
 import { DailyLogView, DateNavigator } from "../features/nutrition_log";
+import { DashboardNutritionGoalCard, nutritionService } from "../features/nutrition";
 import styles from "./DashboardPage.module.css";
 
 type DashboardSection = "dashboard" | "workouts" | "nutrition" | "profile";
@@ -47,13 +48,20 @@ export default function DashboardPage() {
     goal,
     remaining,
     isLoading: isNutritionLoading,
+    refetch: refetchDailyLog,
   } = useDailyNutritionLog(selectedDate);
+  const {
+    currentUser,
+    isLoading: isCurrentUserLoading,
+  } = useCurrentUser();
   const {
     history,
     isLoading: isHistoryLoading,
     error: historyError,
     loadWorkoutHistory,
   } = useWorkoutSession();
+  const [isCalculatingGoal, setIsCalculatingGoal] = useState(false);
+  const [nutritionGoalError, setNutritionGoalError] = useState<string | null>(null);
 
   const handleLogout = () => {
     logout();
@@ -94,6 +102,32 @@ export default function DashboardPage() {
       proteinProgress: toPercent(proteinCurrent, proteinGoal),
     };
   }, [dailyLog, goal, remaining]);
+
+  const hasNutritionGoal = !!goal;
+  const hasRequiredNutritionFields =
+    !!currentUser?.profile?.date_of_birth &&
+    currentUser?.profile?.height_cm != null &&
+    (currentUser.profile.height_cm ?? 0) > 0 &&
+    currentUser?.profile?.weight_kg != null &&
+    (currentUser.profile.weight_kg ?? 0) > 0 &&
+    !!currentUser?.profile?.sex &&
+    !!currentUser?.profile?.activity_level &&
+    !!currentUser?.profile?.goal_type;
+
+  const handleCalculateNutritionGoal = async () => {
+    try {
+      setIsCalculatingGoal(true);
+      setNutritionGoalError(null);
+      await nutritionService.calculateNutritionGoal();
+      await refetchDailyLog();
+    } catch (err) {
+      setNutritionGoalError(
+        err instanceof Error ? err.message : "Failed to calculate nutrition goal."
+      );
+    } finally {
+      setIsCalculatingGoal(false);
+    }
+  };
 
   const activeWorkout = history.find((session) => !session.finished_at) ?? null;
 
@@ -167,7 +201,19 @@ export default function DashboardPage() {
             title="Daily Nutrition"
             subtitle="Log meals and track progress against your goals"
           >
-            <DailyLogView date={selectedDate} />
+            {!hasNutritionGoal ? (
+              <DashboardNutritionGoalCard
+                hasGoal={false}
+                canCalculate={hasRequiredNutritionFields}
+                isCalculating={isCalculatingGoal}
+                isLoadingProfile={isCurrentUserLoading}
+                error={nutritionGoalError}
+                onCalculate={handleCalculateNutritionGoal}
+                onGoToProfile={() => handleSelectSection("profile")}
+              />
+            ) : (
+              <DailyLogView date={selectedDate} />
+            )}
           </SectionWrapper>
         );
       case "profile":
@@ -191,38 +237,6 @@ export default function DashboardPage() {
             </div>
 
             <div className={styles.dashboardGrid}>
-              <div className={styles.statCard}>
-                <p className={styles.cardLabel}>Calories</p>
-                <p className={styles.cardValue}>
-                  {Math.round(nutritionStats.caloriesCurrent)} / {Math.round(nutritionStats.caloriesGoal)}
-                </p>
-                <p className={styles.cardMeta}>
-                  {Math.round(nutritionStats.caloriesRemaining)} remaining
-                </p>
-                <div className={styles.progressTrack}>
-                  <div
-                    className={styles.progressFill}
-                    style={{ width: `${nutritionStats.caloriesProgress}%` }}
-                  />
-                </div>
-              </div>
-
-              <div className={styles.statCard}>
-                <p className={styles.cardLabel}>Protein</p>
-                <p className={styles.cardValue}>
-                  {Math.round(nutritionStats.proteinCurrent)}g / {Math.round(nutritionStats.proteinGoal)}g
-                </p>
-                <p className={styles.cardMeta}>
-                  {Math.round(nutritionStats.proteinRemaining)}g remaining
-                </p>
-                <div className={styles.progressTrack}>
-                  <div
-                    className={styles.progressFill}
-                    style={{ width: `${nutritionStats.proteinProgress}%` }}
-                  />
-                </div>
-              </div>
-
               <div className={styles.quickCard}>
                 <p className={styles.cardLabel}>Quick Start</p>
                 <div className={styles.quickActions}>
@@ -245,12 +259,59 @@ export default function DashboardPage() {
                   <button
                     className={styles.secondaryAction}
                     type="button"
+                    disabled={!hasNutritionGoal}
                     onClick={() => handleSelectSection("nutrition")}
                   >
                     Add Meal
                   </button>
+                  {!hasNutritionGoal && (
+                    <p className={styles.cardMeta}>Calculate nutrition goal first.</p>
+                  )}
                 </div>
               </div>
+
+              {hasNutritionGoal ? (
+                <>
+                  <div className={styles.statCard}>
+                    <p className={styles.cardLabel}>Calories</p>
+                    <p className={styles.cardValue}>
+                      {Math.round(nutritionStats.caloriesCurrent)} / {Math.round(nutritionStats.caloriesGoal)}
+                    </p>
+                    <p className={styles.cardMeta}>
+                      {Math.round(nutritionStats.caloriesRemaining)} remaining
+                    </p>
+                    <div className={styles.progressTrack}>
+                      <div
+                        className={styles.progressFill}
+                        style={{ width: `${nutritionStats.caloriesProgress}%` }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className={styles.statCard}>
+                    <p className={styles.cardLabel}>Protein</p>
+                    <p className={styles.cardValue}>
+                      {Math.round(nutritionStats.proteinCurrent)}g / {Math.round(nutritionStats.proteinGoal)}g
+                    </p>
+                    <p className={styles.cardMeta}>
+                      {Math.round(nutritionStats.proteinRemaining)}g remaining
+                    </p>
+                    <div className={styles.progressTrack}>
+                      <div
+                        className={styles.progressFill}
+                        style={{ width: `${nutritionStats.proteinProgress}%` }}
+                      />
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <div className={styles.nutritionLockedCard}>
+                  <p className={styles.cardLabel}>Nutrition</p>
+                  <p className={styles.cardMeta}>
+                    Calculate your nutrition goal to unlock meal logging and macro tracking.
+                  </p>
+                </div>
+              )}
 
               <div className={styles.workoutsPreviewCard}>
                 <div className={styles.workoutSection}>
@@ -312,60 +373,62 @@ export default function DashboardPage() {
                               </div>
 
                               <button
-                                className={styles.secondaryAction}
+                                className={`${styles.secondaryAction} ${styles.detailsToggleButton}`}
                                 type="button"
                                 onClick={() => setExpandedPastId(isOpen ? null : session.id)}
+                                aria-expanded={isOpen}
                               >
                                 {isOpen ? "Hide" : "Details"}
                               </button>
                             </div>
 
-                            {isOpen && (
-                              <div className={styles.workoutDropdown}>
-                                {(session.exercises ?? []).length === 0 ? (
-                                  <p className={styles.workoutDropdownEmpty}>No exercise breakdown available.</p>
-                                ) : (
-                                  <div className={styles.workoutExerciseList}>
-                                    {(session.exercises ?? []).map((exerciseItem) => (
-                                      <div key={exerciseItem.id} className={styles.workoutExerciseCard}>
-                                        <div className={styles.workoutExerciseHeader}>
-                                          <p className={styles.workoutExerciseName}>
-                                            {exerciseItem.exercise?.name || "Exercise"}
-                                          </p>
-                                          <span className={styles.workoutExerciseBadge}>
-                                            {(exerciseItem.sets ?? []).length} sets
-                                          </span>
-                                        </div>
-
-                                        {(exerciseItem.sets ?? []).length === 0 ? (
-                                          <p className={styles.workoutDropdownEmpty}>No sets logged.</p>
-                                        ) : (
-                                          <div className={styles.workoutSetsTable}>
-                                            <div className={styles.workoutSetsHead}>
-                                              <span>Set</span>
-                                              <span>Planned</span>
-                                              <span>Actual</span>
-                                              <span>Status</span>
-                                            </div>
-
-                                            {(exerciseItem.sets ?? []).map((setItem) => (
-                                              <div key={setItem.id} className={styles.workoutSetsRow}>
-                                                <span>#{setItem.set_order}</span>
-                                                <span>{setItem.planned_reps} × {setItem.planned_weight_kg}kg</span>
-                                                <span>{setItem.actual_reps ?? "-"} × {setItem.actual_weight_kg ?? "-"}kg</span>
-                                                <span className={setItem.is_completed ? styles.workoutSetDone : styles.workoutSetMissed}>
-                                                  {setItem.is_completed ? "Done" : "Skipped"}
-                                                </span>
-                                              </div>
-                                            ))}
-                                          </div>
-                                        )}
+                            <div
+                              className={`${styles.workoutDropdown} ${isOpen ? styles.workoutDropdownOpen : styles.workoutDropdownClosed}`}
+                              aria-hidden={!isOpen}
+                            >
+                              {(session.exercises ?? []).length === 0 ? (
+                                <p className={styles.workoutDropdownEmpty}>No exercise breakdown available.</p>
+                              ) : (
+                                <div className={styles.workoutExerciseList}>
+                                  {(session.exercises ?? []).map((exerciseItem) => (
+                                    <div key={exerciseItem.id} className={styles.workoutExerciseCard}>
+                                      <div className={styles.workoutExerciseHeader}>
+                                        <p className={styles.workoutExerciseName}>
+                                          {exerciseItem.exercise?.name || "Exercise"}
+                                        </p>
+                                        <span className={styles.workoutExerciseBadge}>
+                                          {(exerciseItem.sets ?? []).length} sets
+                                        </span>
                                       </div>
-                                    ))}
-                                  </div>
-                                )}
-                              </div>
-                            )}
+
+                                      {(exerciseItem.sets ?? []).length === 0 ? (
+                                        <p className={styles.workoutDropdownEmpty}>No sets logged.</p>
+                                      ) : (
+                                        <div className={styles.workoutSetsTable}>
+                                          <div className={styles.workoutSetsHead}>
+                                            <span>Set</span>
+                                            <span>Planned</span>
+                                            <span>Actual</span>
+                                            <span>Status</span>
+                                          </div>
+
+                                          {(exerciseItem.sets ?? []).map((setItem) => (
+                                            <div key={setItem.id} className={styles.workoutSetsRow}>
+                                              <span>#{setItem.set_order}</span>
+                                              <span>{setItem.planned_reps} × {setItem.planned_weight_kg}kg</span>
+                                              <span>{setItem.actual_reps ?? "-"} × {setItem.actual_weight_kg ?? "-"}kg</span>
+                                              <span className={setItem.is_completed ? styles.workoutSetDone : styles.workoutSetMissed}>
+                                                {setItem.is_completed ? "Done" : "Skipped"}
+                                              </span>
+                                            </div>
+                                          ))}
+                                        </div>
+                                      )}
+                                    </div>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
                           </div>
                         );
                       })}
