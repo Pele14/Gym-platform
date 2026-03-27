@@ -1,5 +1,5 @@
 import { type ReactNode, useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../features/auth";
 import { useDailyNutritionLog } from "../features/nutrition_log";
 import { UsersTable, SettingsForm, useCurrentUser } from "../features/user";
@@ -10,8 +10,7 @@ import { FoodList } from "../features/food";
 import { DailyLogView, DateNavigator } from "../features/nutrition_log";
 import { DashboardNutritionGoalCard, nutritionService } from "../features/nutrition";
 import styles from "./DashboardPage.module.css";
-
-type DashboardSection = "dashboard" | "workouts" | "nutrition" | "profile";
+import AppLayout, { type AppSection } from "../common/components/AppLayout";
 
 const ACTIVE_WORKOUTS_CAP = 2;
 const PAST_WORKOUTS_CAP = 4;
@@ -35,10 +34,11 @@ function SectionWrapper({ title, subtitle, children }: SectionWrapperProps) {
 }
 
 export default function DashboardPage() {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
-  const [selectedSection, setSelectedSection] = useState<DashboardSection>("dashboard");
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [searchParams] = useSearchParams();
+  const initialSection = (searchParams.get("section") as AppSection) || "dashboard";
+  const [selectedSection, setSelectedSection] = useState<AppSection>(initialSection);
   const [selectedDate, setSelectedDate] = useState(() => {
     const date = new Date();
     return date.toISOString().split("T")[0];
@@ -63,18 +63,9 @@ export default function DashboardPage() {
   const [isCalculatingGoal, setIsCalculatingGoal] = useState(false);
   const [nutritionGoalError, setNutritionGoalError] = useState<string | null>(null);
 
-  const handleLogout = () => {
-    logout();
-    navigate("/");
-  };
-
-  const handleSelectSection = (section: DashboardSection) => {
+  const handleSelectSection = (section: AppSection) => {
     setSelectedSection(section);
-    setIsSidebarOpen(false);
   };
-
-  const profileInitials = `${user?.first_name?.[0] ?? ""}${user?.last_name?.[0] ?? ""}`
-    .toUpperCase() || "U";
 
   useEffect(() => {
     void loadWorkoutHistory();
@@ -264,6 +255,13 @@ export default function DashboardPage() {
                   >
                     Add Meal
                   </button>
+                  <button
+                    className={styles.secondaryAction}
+                    type="button"
+                    onClick={() => navigate("/gyms")}
+                  >
+                    Find Gyms
+                  </button>
                   {!hasNutritionGoal && (
                     <p className={styles.cardMeta}>Calculate nutrition goal first.</p>
                   )}
@@ -447,90 +445,12 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className={styles.layout}>
-      {isSidebarOpen && <div className={styles.overlay} onClick={() => setIsSidebarOpen(false)} />}
-
-      <aside className={`${styles.sidebar} ${isSidebarOpen ? styles.sidebarOpen : ""}`}>
-        <div className={styles.brand}>Fitness OS</div>
-
-        <nav className={styles.nav}>
-          <button
-            className={`${styles.navButton} ${selectedSection === "dashboard" ? styles.navButtonActive : ""}`}
-            onClick={() => handleSelectSection("dashboard")}
-            type="button"
-          >
-            Dashboard
-          </button>
-          <button
-            className={`${styles.navButton} ${selectedSection === "workouts" ? styles.navButtonActive : ""}`}
-            onClick={() => handleSelectSection("workouts")}
-            type="button"
-          >
-            Workouts
-          </button>
-          <button
-            className={`${styles.navButton} ${selectedSection === "nutrition" ? styles.navButtonActive : ""}`}
-            onClick={() => handleSelectSection("nutrition")}
-            type="button"
-          >
-            Nutrition
-          </button>
-          <button
-            className={`${styles.navButton} ${selectedSection === "profile" ? styles.navButtonActive : ""}`}
-            onClick={() => handleSelectSection("profile")}
-            type="button"
-          >
-            Profile
-          </button>
-        </nav>
-      </aside>
-
-      <div className={styles.mainArea}>
-        <header className={styles.topbar}>
-          <div className={styles.topbarInner}>
-            <div className={styles.topbarLeft}>
-              <button
-                className={styles.mobileMenuButton}
-                onClick={() => setIsSidebarOpen((prev) => !prev)}
-                type="button"
-              >
-                Menu
-              </button>
-
-              <div className={styles.titleGroup}>
-                <h1 className={styles.pageTitle}>Dashboard</h1>
-                <p className={styles.welcome}>
-                  Welcome, {user?.first_name} {user?.last_name}
-                </p>
-              </div>
-            </div>
-
-            <div className={styles.topbarRight}>
-              {user?.role === "admin" ? (
-                <span className={styles.rolePill}>Role: {user?.role}</span>
-              ) : (
-                <button
-                  className={styles.profileButton}
-                  type="button"
-                  onClick={() => handleSelectSection("profile")}
-                >
-                  <span className={styles.profileAvatar}>{profileInitials}</span>
-                  <span className={styles.profileLabel}>Profile</span>
-                </button>
-              )}
-              <button className={styles.logoutButton} onClick={handleLogout} type="button">
-                Logout
-              </button>
-            </div>
-          </div>
-        </header>
-
-        <main className={styles.content}>
-          <div className={styles.contentInner}>
-            {user?.role === "admin" ? renderAdminSection() : renderUserSection()}
-          </div>
-        </main>
-      </div>
-    </div>
+    <AppLayout
+      pageTitle="Dashboard"
+      activeSection={selectedSection}
+      onSectionChange={handleSelectSection}
+    >
+      {user?.role === "admin" ? renderAdminSection() : renderUserSection()}
+    </AppLayout>
   );
 }

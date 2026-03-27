@@ -4,6 +4,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import DashboardPage from "./pages/DashboardPage";
 import ActiveWorkoutPage from "./pages/ActiveWorkoutPage";
+import GymsPage from "./pages/GymsPage";
 import { ProtectedRoute } from "./features/auth";
 
 export default function App() {
@@ -27,6 +28,15 @@ export default function App() {
         element={
           <ProtectedRoute>
             <ActiveWorkoutPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/gyms"
+        element={
+          <ProtectedRoute>
+            <GymsPage />
           </ProtectedRoute>
         }
       />
