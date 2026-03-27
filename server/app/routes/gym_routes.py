@@ -28,14 +28,11 @@ def get_nearby_gyms():
     if error:
         if error == "User not found.":
             status = 404
-        elif error in [
-            "Gym provider unavailable.",
-            "Gym provider rejected request.",
-            "Gym provider invalid response.",
-        ]:
+        elif error.startswith("Gym provider"):
             status = 502
         else:
             status = 400
+
         return {"message": error}, status
 
     return {"gyms": gyms}, 200

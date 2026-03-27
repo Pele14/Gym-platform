@@ -75,7 +75,8 @@ class GymService:
         try:
             with urlopen(request, timeout=10) as response:
                 parsed_response = json.loads(response.read().decode("utf-8"))
-        except HTTPError:
+        except HTTPError as e:
+            e.read()
             return None, "Gym provider rejected request."
         except (URLError, TimeoutError, json.JSONDecodeError):
             return None, "Gym provider unavailable."

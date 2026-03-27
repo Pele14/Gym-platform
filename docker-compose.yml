@@ -10,8 +10,8 @@ services:
     environment:
       DATABASE_URL: mysql+pymysql://root:root@db:3306/gym_platform
       REDIS_URL: redis://cache:6379
-      JWT_SECRET_KEY: this_is_a_super_long_jwt_secret_key_1234567890
-      GOOGLE_MAPS_API_KEY: AIzaSyDKFMOxdyLa07oXiiJZ3fa3jwxdIFHzzzo
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+      GOOGLE_MAPS_API_KEY: ${GOOGLE_MAPS_API_KEY}
   client:
     build: ./client
     ports:
