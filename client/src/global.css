@@ -1,3 +1,301 @@
+:root[data-theme="dark"] {
+  /* Primary backgrounds */
+  --bg-page: #121815;
+  --bg-layout: #151d18;
+  --bg-sidebar: #161d19;
+  --bg-topbar: #18211c;
+  --bg-card: #1d2722;
+  --bg-section-bg: #19251f;
+  --bg-hover: #202923;
+  --bg-sub-hover: #293630;
+
+  /* Borders & dividers */
+  --border-primary: #2a3630;
+  --border-light: #28332d;
+  --border-subtle: #1f2937;
+  --border-card: #2d3933;
+
+  /* Text colors */
+  --text-primary: #f3f4f6;
+  --text-secondary: #e5e7eb;
+  --text-muted: #a7b0ab;
+  --text-dim: #97a29d;
+  --text-light: #95a19b;
+
+  /* UI elements */
+  --color-success: #1f8a50;
+  --color-success-hover: #238a4b;
+  --color-success-light: #ecfdf3;
+  --color-success-accent: #6ee7a2;
+  --color-error: #ef4444;
+  --color-error-light: #fca5a5;
+  --color-info: #3b82f6;
+
+  /* Accent colors */
+  --accent-green: #238a4b;
+  --accent-green-border: #2f7d4d;
+  --accent-green-light: #effdf4;
+  /* Extended theme tones */
+  --tone-111827: #111827;
+  --tone-111916: #111916;
+  --tone-141c18: #141c18;
+  --tone-152019: #152019;
+  --tone-166534: #166534;
+  --tone-17211c: #17211c;
+  --tone-17231d: #17231d;
+  --tone-18221d: #18221d;
+  --tone-192319: #192319;
+  --tone-19231d: #19231d;
+  --tone-1a1a1a: #1a1a1a;
+  --tone-1a231e: #1a231e;
+  --tone-1a241f: #1a241f;
+  --tone-1a251f: #1a251f;
+  --tone-1a2520: #1a2520;
+  --tone-1a2820: #1a2820;
+  --tone-1b251f: #1b251f;
+  --tone-1b2821: #1b2821;
+  --tone-1d2a22: #1d2a22;
+  --tone-1d2a23: #1d2a23;
+  --tone-1d2d24: #1d2d24;
+  --tone-1d2e24: #1d2e24;
+  --tone-1d4ed8: #1d4ed8;
+  --tone-1e2a23: #1e2a23;
+  --tone-1e2c24: #1e2c24;
+  --tone-1f2a24: #1f2a24;
+  --tone-1f2c25: #1f2c25;
+  --tone-1f2d25: #1f2d25;
+  --tone-1f2e26: #1f2e26;
+  --tone-202c26: #202c26;
+  --tone-213328: #213328;
+  --tone-232f2a: #232f2a;
+  --tone-233229: #233229;
+  --tone-243129: #243129;
+  --tone-24322b: #24322b;
+  --tone-243329: #243329;
+  --tone-24372d: #24372d;
+  --tone-2563eb: #2563eb;
+  --tone-27342d: #27342d;
+  --tone-27382f: #27382f;
+  --tone-27a35d: #27a35d;
+  --tone-2a3a33: #2a3a33;
+  --tone-2a3d32: #2a3d32;
+  --tone-2aa75d: #2aa75d;
+  --tone-2c3d34: #2c3d34;
+  --tone-2c3f35: #2c3f35;
+  --tone-2daf65: #2daf65;
+  --tone-30443a: #30443a;
+  --tone-31453a: #31453a;
+  --tone-31463a: #31463a;
+  --tone-33483d: #33483d;
+  --tone-34413a: #34413a;
+  --tone-344b3c: #344b3c;
+  --tone-355346: #355346;
+  --tone-374151: #374151;
+  --tone-374b3e: #374b3e;
+  --tone-3a5045: #3a5045;
+  --tone-3c5748: #3c5748;
+  --tone-3d584a: #3d584a;
+  --tone-3d584b: #3d584b;
+  --tone-3f5a4b: #3f5a4b;
+  --tone-496152: #496152;
+  --tone-4ade80: #4ade80;
+  --tone-4b5563: #4b5563;
+  --tone-52df90: #52df90;
+  --tone-6b7280: #6b7280;
+  --tone-6b7f74: #6b7f74;
+  --tone-6d28d9: #6d28d9;
+  --tone-7a8f87: #7a8f87;
+  --tone-7a9088: #7a9088;
+  --tone-7cf4af: #7cf4af;
+  --tone-7f1d1d: #7f1d1d;
+  --tone-7f9189: #7f9189;
+  --tone-7f9289: #7f9289;
+  --tone-86efac: #86efac;
+  --tone-8a968f: #8a968f;
+  --tone-8ea29a: #8ea29a;
+  --tone-8fa09a: #8fa09a;
+  --tone-93d2aa: #93d2aa;
+  --tone-991b1b: #991b1b;
+  --tone-9aa7a1: #9aa7a1;
+  --tone-9ca3af: #9ca3af;
+  --tone-9fb0a8: #9fb0a8;
+  --tone-a5b0aa: #a5b0aa;
+  --tone-a5b3ad: #a5b3ad;
+  --tone-a8b3ad: #a8b3ad;
+  --tone-a9b6b1: #a9b6b1;
+  --tone-a9bab2: #a9bab2;
+  --tone-b9f6cf: #b9f6cf;
+  --tone-bbf7d0: #bbf7d0;
+  --tone-c7d2cc: #c7d2cc;
+  --tone-c8d4cf: #c8d4cf;
+  --tone-cde7d7: #cde7d7;
+  --tone-cdebd8: #cdebd8;
+  --tone-d1d5db: #d1d5db;
+  --tone-d8dfdc: #d8dfdc;
+  --tone-d8e0db: #d8e0db;
+  --tone-dbeafe: #dbeafe;
+  --tone-dc2626: #dc2626;
+  --tone-dce5df: #dce5df;
+  --tone-dcfce7: #dcfce7;
+  --tone-ecf2ee: #ecf2ee;
+  --tone-ede9fe: #ede9fe;
+  --tone-edf2ef: #edf2ef;
+  --tone-f2f4f3: #f2f4f3;
+  --tone-f87171: #f87171;
+  --tone-f9fafb: #f9fafb;
+  --tone-fee2e2: #fee2e2;
+
+}
+
+:root[data-theme="light"] {
+  /* Primary backgrounds */
+  --bg-page: #fafbf9;
+  --bg-layout: #f8f9f7;
+  --bg-sidebar: #f0f2f1;
+  --bg-topbar: #ffffff;
+  --bg-card: #ffffff;
+  --bg-section-bg: #f5f7f6;
+  --bg-hover: #f0f2f1;
+  --bg-sub-hover: #e5e7e7;
+
+  /* Borders & dividers */
+  --border-primary: #e5e7e7;
+  --border-light: #e0e2e1;
+  --border-subtle: #d5d7d6;
+  --border-card: #e5e7e7;
+
+  /* Text colors */
+  --text-primary: #1f2937;
+  --text-secondary: #374151;
+  --text-muted: #6b7280;
+  --text-dim: #9ca3af;
+  --text-light: #6b7280;
+
+  /* UI elements */
+  --color-success: #059669;
+  --color-success-hover: #047857;
+  --color-success-light: #d1fae5;
+  --color-success-accent: #10b981;
+  --color-error: #dc2626;
+  --color-error-light: #fee2e2;
+  --color-info: #0284c7;
+
+  /* Accent colors */
+  --accent-green: #059669;
+  --accent-green-border: #047857;
+  --accent-green-light: #ecfdf3;
+  /* Extended theme tones */
+  --tone-111827: #d8dfee;
+  --tone-111916: #e6eeeb;
+  --tone-141c18: #e3ebe7;
+  --tone-152019: #dfeae3;
+  --tone-166534: #9ae9b8;
+  --tone-17211c: #dee8e3;
+  --tone-17231d: #dce8e2;
+  --tone-18221d: #dde7e2;
+  --tone-192319: #dce6dc;
+  --tone-19231d: #dce6e0;
+  --tone-1a1a1a: #e5e5e5;
+  --tone-1a231e: #dce5e0;
+  --tone-1a241f: #dbe5e0;
+  --tone-1a251f: #dae5df;
+  --tone-1a2520: #dae5e0;
+  --tone-1a2820: #d7e5dd;
+  --tone-1b251f: #dae4de;
+  --tone-1b2821: #d7e4dd;
+  --tone-1d2a22: #d5e2da;
+  --tone-1d2a23: #d5e2db;
+  --tone-1d2d24: #d2e2d9;
+  --tone-1d2e24: #d1e2d8;
+  --tone-1d4ed8: #2758e2;
+  --tone-1e2a23: #d5e1da;
+  --tone-1e2c24: #d3e1d9;
+  --tone-1f2a24: #d5e0da;
+  --tone-1f2c25: #d3e0d9;
+  --tone-1f2d25: #d2e0d8;
+  --tone-1f2e26: #d1e0d8;
+  --tone-202c26: #d3dfd9;
+  --tone-213328: #ccded3;
+  --tone-232f2a: #d0dcd7;
+  --tone-233229: #cddcd3;
+  --tone-243129: #cedbd3;
+  --tone-24322b: #cddbd4;
+  --tone-243329: #ccdbd1;
+  --tone-24372d: #c8dbd1;
+  --tone-2563eb: #1452da;
+  --tone-27342d: #cbd8d1;
+  --tone-27382f: #c7d8cf;
+  --tone-27a35d: #5cd892;
+  --tone-2a3a33: #c5d5ce;
+  --tone-2a3d32: #c2d5ca;
+  --tone-2aa75d: #58d58b;
+  --tone-2c3d34: #c2d3ca;
+  --tone-2c3f35: #c0d3c9;
+  --tone-2daf65: #50d288;
+  --tone-30443a: #bbcfc5;
+  --tone-31453a: #bacec3;
+  --tone-31463a: #b9cec2;
+  --tone-33483d: #b7ccc1;
+  --tone-34413a: #becbc4;
+  --tone-344b3c: #b4cbbc;
+  --tone-355346: #accabd;
+  --tone-374151: #aeb8c8;
+  --tone-374b3e: #b4c8bb;
+  --tone-3a5045: #afc5ba;
+  --tone-3c5748: #a8c3b4;
+  --tone-3d584a: #a7c2b4;
+  --tone-3d584b: #a7c2b5;
+  --tone-3f5a4b: #a5c0b1;
+  --tone-496152: #9eb6a7;
+  --tone-4ade80: #21b557;
+  --tone-4b5563: #9ca6b4;
+  --tone-52df90: #20ad5e;
+  --tone-6b7280: #7f8694;
+  --tone-6b7f74: #809489;
+  --tone-6d28d9: #6b26d7;
+  --tone-7a8f87: #70857d;
+  --tone-7a9088: #6f857d;
+  --tone-7cf4af: #0b833e;
+  --tone-7f1d1d: #e28080;
+  --tone-7f9189: #6e8078;
+  --tone-7f9289: #6d8077;
+  --tone-86efac: #107936;
+  --tone-8a968f: #69756e;
+  --tone-8ea29a: #5d7169;
+  --tone-8fa09a: #5f706a;
+  --tone-93d2aa: #2d6c44;
+  --tone-991b1b: #e46666;
+  --tone-9aa7a1: #58655f;
+  --tone-9ca3af: #505763;
+  --tone-9fb0a8: #4f6058;
+  --tone-a5b0aa: #4f5a54;
+  --tone-a5b3ad: #4c5a54;
+  --tone-a8b3ad: #4c5751;
+  --tone-a9b6b1: #495651;
+  --tone-a9bab2: #45564e;
+  --tone-b9f6cf: #09461f;
+  --tone-bbf7d0: #08441d;
+  --tone-c7d2cc: #2d3832;
+  --tone-c8d4cf: #2b3732;
+  --tone-cde7d7: #183222;
+  --tone-cdebd8: #14321f;
+  --tone-d1d5db: #24282e;
+  --tone-d8dfdc: #202724;
+  --tone-d8e0db: #1f2722;
+  --tone-dbeafe: #021a3c;
+  --tone-dc2626: #d92323;
+  --tone-dce5df: #1a231d;
+  --tone-dcfce7: #053817;
+  --tone-ecf2ee: #19241d;
+  --tone-ede9fe: #0d033b;
+  --tone-edf2ef: #1a241e;
+  --tone-f2f4f3: #1c211f;
+  --tone-f87171: #8e0707;
+  --tone-f9fafb: #181f25;
+  --tone-fee2e2: #3b0202;
+
+}
+
 * {
   box-sizing: border-box;
 }
@@ -12,5 +310,7 @@ body,
 }
 
 body {
-  background: #121815;
+  background: var(--bg-page);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }

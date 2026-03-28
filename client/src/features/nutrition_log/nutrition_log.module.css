@@ -3,11 +3,11 @@
   width: 100%;
   margin: 0;
   padding: 1.25rem;
-  background: #1d2722;
+  background: var(--bg-card);
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.16);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  border: 1px solid #2a3d32;
+  border: 1px solid var(--tone-2a3d32);
   transition: background 0.15s ease, border-color 0.15s ease;
 }
 
@@ -17,7 +17,7 @@
 
 .title {
   margin: 0;
-  color: #f3f4f6;
+  color: var(--text-primary);
   font-size: 1.4rem;
   font-weight: 700;
   transition: color 0.15s ease;
@@ -25,13 +25,13 @@
 
 .date {
   margin: 0.5rem 0 0 0;
-  color: #97a29d;
+  color: var(--text-dim);
   font-size: 0.95rem;
   transition: color 0.15s ease;
 }
 
 .error {
-  color: #fca5a5;
+  color: var(--color-error-light);
   margin-bottom: 1rem;
   padding: 0.75rem;
   background: rgba(239, 68, 68, 0.1);
@@ -41,7 +41,7 @@
 }
 
 .message {
-  color: #97a29d;
+  color: var(--text-dim);
   text-align: center;
   padding: 1rem;
   transition: color 0.15s ease;
@@ -51,7 +51,7 @@
 
 .sectionTitle {
   margin: 0 0 1rem 0;
-  color: #97a29d;
+  color: var(--text-dim);
   font-size: 0.95rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -60,8 +60,8 @@
 }
 
 .sectionContent {
-  background: #19251f;
-  border: 1px solid #2a3d32;
+  background: var(--bg-section-bg);
+  border: 1px solid var(--tone-2a3d32);
   border-radius: 12px;
   padding: 1rem;
   transition: background 0.15s ease, border-color 0.15s ease;
@@ -81,8 +81,8 @@
 
 .foodSearchSection {
   margin-top: 1rem;
-  background: #19251f;
-  border: 1px solid #2a3d32;
+  background: var(--bg-section-bg);
+  border: 1px solid var(--tone-2a3d32);
   border-radius: 12px;
   padding: 1rem;
   transition: background 0.15s ease, border-color 0.15s ease;
@@ -101,7 +101,7 @@
 .addMealCard {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(160deg, #213328 0%, #19231d 100%);
+  background: linear-gradient(160deg, var(--tone-213328) 0%, var(--tone-19231d) 100%);
   border: 1px solid rgba(47, 125, 77, 0.65);
   border-radius: 16px;
   padding: 1.2rem;
@@ -127,7 +127,7 @@
 
 .addMealEyebrow {
   margin: 0 0 0.35rem;
-  color: #6ee7a2;
+  color: var(--color-success-accent);
   font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -136,14 +136,14 @@
 
 .addMealTitle {
   margin: 0;
-  color: #f3f4f6;
+  color: var(--text-primary);
   font-size: 1.1rem;
   font-weight: 700;
 }
 
 .addMealDescription {
   margin: 0.42rem 0 0;
-  color: #9fb0a8;
+  color: var(--tone-9fb0a8);
   font-size: 0.9rem;
   line-height: 1.45;
   max-width: 42rem;
@@ -162,8 +162,8 @@
   padding: 0.95rem 1rem;
   border: 1px solid rgba(47, 125, 77, 0.75);
   border-radius: 12px;
-  background: #152019;
-  color: #f3f4f6;
+  background: var(--tone-152019);
+  color: var(--text-primary);
   font-size: 1rem;
   font-weight: 500;
   box-sizing: border-box;
@@ -171,12 +171,12 @@
 }
 
 .addMealInput::placeholder {
-  color: #7a9088;
+  color: var(--tone-7a9088);
 }
 
 .addMealInput:focus {
   outline: none;
-  border-color: #6ee7a2;
+  border-color: var(--color-success-accent);
   box-shadow: 0 0 0 3px rgba(31, 138, 80, 0.18);
 }
 
@@ -198,40 +198,40 @@
 }
 
 .addMealPrimaryButton {
-  background: linear-gradient(180deg, #27a35d 0%, #1f8a50 100%);
-  color: #effdf4;
-  border: 1px solid #2f7d4d;
+  background: linear-gradient(180deg, var(--tone-27a35d) 0%, var(--color-success) 100%);
+  color: var(--accent-green-light);
+  border: 1px solid var(--accent-green-border);
   box-shadow: 0 10px 22px rgba(31, 138, 80, 0.22);
 }
 
 .addMealPrimaryButton:hover:not(:disabled) {
-  background: linear-gradient(180deg, #2daf65 0%, #238a4b 100%);
+  background: linear-gradient(180deg, var(--tone-2daf65) 0%, var(--color-success-hover) 100%);
   transform: translateY(-1px);
 }
 
 .addMealPrimaryButton:disabled {
-  background: #374b3e;
-  color: #7a9088;
-  border-color: #2a3d32;
+  background: var(--tone-374b3e);
+  color: var(--tone-7a9088);
+  border-color: var(--tone-2a3d32);
   box-shadow: none;
   cursor: not-allowed;
 }
 
 .addMealSecondaryButton {
-  background: #1e2a23;
-  color: #d8e0db;
-  border: 1px solid #344b3c;
+  background: var(--tone-1e2a23);
+  color: var(--tone-d8e0db);
+  border: 1px solid var(--tone-344b3c);
 }
 
 .addMealSecondaryButton:hover:not(:disabled) {
-  background: #243329;
-  border-color: #496152;
+  background: var(--tone-243329);
+  border-color: var(--tone-496152);
 }
 
 .addMealSecondaryButton:disabled {
-  background: #1a251f;
-  color: #7a9088;
-  border-color: #2a3d32;
+  background: var(--tone-1a251f);
+  color: var(--tone-7a9088);
+  border-color: var(--tone-2a3d32);
   cursor: not-allowed;
 }
 
@@ -272,8 +272,8 @@
 .modal {
   width: 100%;
   max-width: 560px;
-  background: #1d2722;
-  border: 1px solid #2a3d32;
+  background: var(--bg-card);
+  border: 1px solid var(--tone-2a3d32);
   border-radius: 16px;
   padding: 1.25rem;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
@@ -291,24 +291,24 @@
 
 .modalTitle {
   margin: 0;
-  color: #f3f4f6;
+  color: var(--text-primary);
   font-size: 1rem;
   font-weight: 700;
 }
 
 .modalSubtitle {
   margin: 0.3rem 0 0;
-  color: #97a29d;
+  color: var(--text-dim);
   font-size: 0.88rem;
 }
 
 .modalClose {
   width: 30px;
   height: 30px;
-  background: #243329;
-  border: 1px solid #344b3c;
+  background: var(--tone-243329);
+  border: 1px solid var(--tone-344b3c);
   border-radius: 8px;
-  color: #97a29d;
+  color: var(--text-dim);
   cursor: pointer;
   font-size: 0.82rem;
   display: flex;
@@ -318,14 +318,14 @@
 }
 
 .modalClose:hover {
-  background: #344b3c;
-  color: #f3f4f6;
-  border-color: #1f8a50;
+  background: var(--tone-344b3c);
+  color: var(--text-primary);
+  border-color: var(--color-success);
 }
 
 .modalLabel {
   display: block;
-  color: #97a29d;
+  color: var(--text-dim);
   font-size: 0.78rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -355,7 +355,7 @@
 }
 
 .foodOptionName {
-  color: #f3f4f6;
+  color: var(--text-primary);
   font-size: 0.95rem;
   font-weight: 600;
 }
@@ -383,7 +383,7 @@
   border-radius: 999px;
   background: rgba(31, 138, 80, 0.18);
   border: 1px solid rgba(31, 138, 80, 0.38);
-  color: #6ee7a2;
+  color: var(--color-success-accent);
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -400,7 +400,7 @@
   border-radius: 999px;
   background: rgba(31, 138, 80, 0.28);
   border: 1px solid rgba(110, 231, 162, 0.28);
-  color: #bbf7d0;
+  color: var(--tone-bbf7d0);
   font-size: 0.58rem;
   line-height: 1;
   box-shadow: inset 0 0 0 1px rgba(110, 231, 162, 0.08);
@@ -425,8 +425,8 @@
   gap: 0.7rem;
   min-height: 138px;
   padding: 1rem;
-  background: linear-gradient(180deg, #1d2a22 0%, #18221d 100%);
-  border: 1px solid #2a3d32;
+  background: linear-gradient(180deg, var(--tone-1d2a22) 0%, var(--tone-18221d) 100%);
+  border: 1px solid var(--tone-2a3d32);
   border-radius: 14px;
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
 }
@@ -439,7 +439,7 @@
 }
 
 .macroLabel {
-  color: #97a29d;
+  color: var(--text-dim);
   font-size: 0.76rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -448,7 +448,7 @@
 }
 
 .macroTarget {
-  color: #7f9289;
+  color: var(--tone-7f9289);
   font-size: 0.74rem;
   font-weight: 600;
 }
@@ -461,7 +461,7 @@
 
 .macroValue {
   font-size: 1.7rem;
-  color: #f3f4f6;
+  color: var(--text-primary);
   line-height: 1;
   letter-spacing: -0.03em;
   transition: color 0.15s ease;
@@ -469,7 +469,7 @@
 
 .macroUnit {
   margin-left: 0.28rem;
-  color: #9fb0a8;
+  color: var(--tone-9fb0a8);
   font-size: 0.92rem;
   font-weight: 600;
 }
@@ -479,8 +479,8 @@
   width: 100%;
   height: 7px;
   overflow: hidden;
-  background: #111916;
-  border: 1px solid #24322b;
+  background: var(--tone-111916);
+  border: 1px solid var(--tone-24322b);
   border-radius: 999px;
 }
 
@@ -488,13 +488,13 @@
   display: block;
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, #1f8a50 0%, #6ee7a2 100%);
+  background: linear-gradient(90deg, var(--color-success) 0%, var(--color-success-accent) 100%);
   box-shadow: 0 0 12px rgba(31, 138, 80, 0.3);
   transition: width 0.25s ease;
 }
 
 .remaining {
-  color: #97a29d;
+  color: var(--text-dim);
   font-size: 0.78rem;
   display: block;
   margin-top: auto;
@@ -514,29 +514,29 @@
 .input {
   flex: 1;
   padding: 0.75rem;
-  border: 1px solid #2a3d32;
+  border: 1px solid var(--tone-2a3d32);
   border-radius: 8px;
   font-size: 1rem;
-  background: #19251f;
-  color: #f3f4f6;
+  background: var(--bg-section-bg);
+  color: var(--text-primary);
   transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
 .input::placeholder {
-  color: #7a9088;
+  color: var(--tone-7a9088);
 }
 
 .input:focus {
   outline: none;
-  border-color: #1f8a50;
+  border-color: var(--color-success);
   box-shadow: 0 0 0 2px rgba(31, 138, 80, 0.15);
 }
 
 .button {
   padding: 0.75rem 1rem;
-  background: #1f8a50;
-  color: #effdf4;
-  border: 1px solid #2f7d4d;
+  background: var(--color-success);
+  color: var(--accent-green-light);
+  border: 1px solid var(--accent-green-border);
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
@@ -544,22 +544,22 @@
 }
 
 .button:hover:not(:disabled) {
-  background: #238a4b;
-  border-color: #1f8a50;
+  background: var(--color-success-hover);
+  border-color: var(--color-success);
 }
 
 .button:disabled {
-  background: #374b3e;
-  color: #7a9088;
+  background: var(--tone-374b3e);
+  color: var(--tone-7a9088);
   cursor: not-allowed;
-  border-color: #2a3d32;
+  border-color: var(--tone-2a3d32);
 }
 
 .secondaryButton {
   padding: 0.75rem 1rem;
-  background: #232f2a;
-  color: #f3f4f6;
-  border: 1px solid #2a3d32;
+  background: var(--tone-232f2a);
+  color: var(--text-primary);
+  border: 1px solid var(--tone-2a3d32);
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
@@ -567,22 +567,22 @@
 }
 
 .secondaryButton:hover:not(:disabled) {
-  background: #2a3d32;
-  border-color: #1f8a50;
+  background: var(--tone-2a3d32);
+  border-color: var(--color-success);
 }
 
 .secondaryButton:disabled {
-  background: #1a251f;
+  background: var(--tone-1a251f);
   cursor: not-allowed;
-  color: #7a9088;
-  border-color: #232f2a;
+  color: var(--tone-7a9088);
+  border-color: var(--tone-232f2a);
 }
 
 .deleteButton {
   padding: 0.5rem 0.75rem;
   background: transparent;
-  color: #f87171;
-  border: 1px solid #7f1d1d;
+  color: var(--tone-f87171);
+  border: 1px solid var(--tone-7f1d1d);
   border-radius: 6px;
   font-size: 0.85rem;
   font-weight: 600;
@@ -591,16 +591,16 @@
 }
 
 .deleteButton:hover:not(:disabled) {
-  background: #ef4444;
-  border-color: #ef4444;
-  color: #fff;
+  background: var(--color-error);
+  border-color: var(--color-error);
+  color: var(--bg-card);
 }
 
 .deleteButton:disabled {
   background: transparent;
   cursor: not-allowed;
-  color: #7a9088;
-  border-color: #2a3d32;
+  color: var(--tone-7a9088);
+  border-color: var(--tone-2a3d32);
 }
 
 .mealsList {
@@ -610,15 +610,15 @@
 }
 
 .mealCard {
-  border: 1px solid #31463a;
+  border: 1px solid var(--tone-31463a);
   border-radius: 16px;
   overflow: hidden;
-  background: linear-gradient(180deg, #1f2a24 0%, #18211c 100%);
+  background: linear-gradient(180deg, var(--tone-1f2a24) 0%, var(--bg-topbar) 100%);
   transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
 }
 
 .mealCard:hover {
-  border-color: #1f8a50;
+  border-color: var(--color-success);
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.24);
   transform: translateY(-1px);
 }
@@ -630,13 +630,13 @@
   padding: 1.15rem 1.2rem;
   background: rgba(21, 32, 25, 0.9);
   cursor: pointer;
-  border-bottom: 1px solid #30443a;
+  border-bottom: 1px solid var(--tone-30443a);
   transition: background 0.15s ease, border-color 0.15s ease;
 }
 
 .mealHeader:hover {
   background: rgba(29, 44, 35, 0.96);
-  border-bottom-color: #3c5748;
+  border-bottom-color: var(--tone-3c5748);
 }
 
 .mealTitle {
@@ -646,7 +646,7 @@
 
 .mealTitle h4 {
   margin: 0;
-  color: #f3f4f6;
+  color: var(--text-primary);
   font-size: 1.1rem;
   font-weight: 600;
   transition: color 0.15s ease;
@@ -654,7 +654,7 @@
 
 .mealMacros {
   display: block;
-  color: #97a29d;
+  color: var(--text-dim);
   font-size: 0.85rem;
   margin-top: 0.38rem;
   transition: color 0.15s ease;
@@ -671,7 +671,7 @@
   flex-direction: column;
   gap: 0.85rem;
   margin-bottom: 1.15rem;
-  border-bottom: 1px solid #30443a;
+  border-bottom: 1px solid var(--tone-30443a);
   padding-bottom: 1.15rem;
 }
 
@@ -681,15 +681,15 @@
   align-items: flex-start;
   gap: 1rem;
   padding: 0.75rem;
-  background: #19251f;
+  background: var(--bg-section-bg);
   border-radius: 8px;
-  border: 1px solid #2a3d32;
+  border: 1px solid var(--tone-2a3d32);
   transition: background 0.15s ease, border-color 0.15s ease;
 }
 
 .entryItem:hover {
-  background: #1f2e26;
-  border-color: #1f8a50;
+  background: var(--tone-1f2e26);
+  border-color: var(--color-success);
 }
 
 .entryInfo {
@@ -700,29 +700,29 @@
 }
 
 .foodName {
-  color: #f3f4f6;
+  color: var(--text-primary);
   font-weight: 500;
   font-size: 0.95rem;
   transition: color 0.15s ease;
 }
 
 .entryGrams {
-  color: #97a29d;
+  color: var(--text-dim);
   font-size: 0.85rem;
   transition: color 0.15s ease;
 }
 
 .entryMacros {
-  color: #97a29d;
+  color: var(--text-dim);
   font-size: 0.8rem;
   transition: color 0.15s ease;
 }
 
 .entryForm {
   padding: 1rem;
-  border: 1px solid #2a3d32;
+  border: 1px solid var(--tone-2a3d32);
   border-radius: 8px;
-  background: #19251f;
+  background: var(--bg-section-bg);
   margin-bottom: 1rem;
   transition: background 0.15s ease, border-color 0.15s ease;
 }
@@ -730,27 +730,27 @@
 .foodList {
   max-height: 200px;
   overflow-y: auto;
-  border: 1px solid #2a3d32;
+  border: 1px solid var(--tone-2a3d32);
   border-radius: 8px;
   margin: 0.75rem 0;
-  background: #1d2722;
+  background: var(--bg-card);
   transition: background 0.15s ease, border-color 0.15s ease;
 }
 
 .foodOption {
   padding: 0.75rem;
-  border-bottom: 1px solid #2a3d32;
+  border-bottom: 1px solid var(--tone-2a3d32);
   cursor: pointer;
   transition: background 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  color: #f3f4f6;
+  color: var(--text-primary);
 }
 
 .foodOption:hover {
-  background: #1f2e26;
+  background: var(--tone-1f2e26);
   transform: translateY(-1px);
 }
 
@@ -763,13 +763,13 @@
 }
 
 .foodBrand {
-  color: #97a29d;
+  color: var(--text-dim);
   font-size: 0.85rem;
   transition: color 0.15s ease;
 }
 
 .foodMacros {
-  color: #97a29d;
+  color: var(--text-dim);
   font-size: 0.8rem;
   white-space: nowrap;
   transition: color 0.15s ease;
@@ -777,7 +777,7 @@
 
 .selectedFood {
   margin: 0 0 0.75rem 0;
-  color: #f3f4f6;
+  color: var(--text-primary);
   font-weight: 500;
   transition: color 0.15s ease;
 }
@@ -788,9 +788,9 @@
   gap: 0.5rem;
   margin-bottom: 1rem;
   padding: 0.6rem;
-  background: #19251f;
+  background: var(--bg-section-bg);
   border-radius: 10px;
-  border: 1px solid #2a3d32;
+  border: 1px solid var(--tone-2a3d32);
   align-items: center;
   transition: background 0.15s ease, border-color 0.15s ease;
 }
@@ -802,26 +802,26 @@
 .dateInput {
   width: 100%;
   padding: 0.52rem 0.62rem;
-  border: 1px solid #2a3d32;
+  border: 1px solid var(--tone-2a3d32);
   border-radius: 8px;
   font-size: 0.92rem;
   cursor: pointer;
-  background: #1d2722;
-  color: #f3f4f6;
+  background: var(--bg-card);
+  color: var(--text-primary);
   transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
 .dateInput:focus {
   outline: none;
-  border-color: #1f8a50;
+  border-color: var(--color-success);
   box-shadow: 0 0 0 2px rgba(31, 138, 80, 0.15);
 }
 
 .dateNavButton,
 .dateNavTodayButton {
-  border: 1px solid #2a3d32;
-  background: #232f2a;
-  color: #f3f4f6;
+  border: 1px solid var(--tone-2a3d32);
+  background: var(--tone-232f2a);
+  color: var(--text-primary);
   font-weight: 600;
   font-size: 0.84rem;
   border-radius: 8px;
@@ -832,14 +832,14 @@
 
 .dateNavButton:hover,
 .dateNavTodayButton:hover {
-  background: #2a3d32;
-  border-color: #1f8a50;
+  background: var(--tone-2a3d32);
+  border-color: var(--color-success);
 }
 
 .dateNavTodayButton {
-  border-color: #1f8a50;
-  background: #1f8a50;
-  color: #effdf4;
+  border-color: var(--color-success);
+  background: var(--color-success);
+  color: var(--accent-green-light);
 }
 
 @media (max-width: 720px) {

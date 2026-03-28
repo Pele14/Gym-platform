@@ -3,7 +3,7 @@
   width: 100%;
   margin: 0;
   padding: 1.25rem;
-  background: #ffffff;
+  background: var(--bg-card);
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -20,31 +20,31 @@
 
 .title {
   margin: 0;
-  color: #1a1a1a;
+  color: var(--tone-1a1a1a);
   font-size: 1.5rem;
   font-weight: 600;
 }
 
 .message {
   font-size: 0.95rem;
-  color: #4b5563;
+  color: var(--tone-4b5563);
 }
 
 .error {
-  color: #dc2626;
+  color: var(--tone-dc2626);
   font-size: 0.95rem;
   font-weight: 500;
   margin-bottom: 1rem;
 }
 
 .empty {
-  color: #6b7280;
+  color: var(--tone-6b7280);
   font-size: 0.95rem;
 }
 
 .button {
   padding: 0.75rem 1rem;
-  background: #3b82f6;
+  background: var(--color-info);
   color: white;
   border: none;
   border-radius: 8px;
@@ -54,7 +54,7 @@
 }
 
 .button:disabled {
-  background: #9ca3af;
+  background: var(--tone-9ca3af);
   cursor: not-allowed;
 }
 
@@ -67,7 +67,7 @@
 .input,
 .select {
   padding: 0.75rem;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--tone-d1d5db);
   border-radius: 8px;
   font-size: 1rem;
 }
@@ -78,10 +78,10 @@
 }
 
 .card {
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--text-secondary);
   border-radius: 12px;
   padding: 1rem;
-  background: #f9fafb;
+  background: var(--tone-f9fafb);
 }
 
 .cardTop {
@@ -94,11 +94,11 @@
 .cardTitle {
   margin: 0 0 0.25rem 0;
   font-size: 1.1rem;
-  color: #111827;
+  color: var(--tone-111827);
 }
 
 .meta {
-  color: #6b7280;
+  color: var(--tone-6b7280);
   font-size: 0.9rem;
 }
 
@@ -118,13 +118,13 @@
 }
 
 .system {
-  background: #dbeafe;
-  color: #1d4ed8;
+  background: var(--tone-dbeafe);
+  color: var(--tone-1d4ed8);
 }
 
 .custom {
-  background: #ede9fe;
-  color: #6d28d9;
+  background: var(--tone-ede9fe);
+  color: var(--tone-6d28d9);
 }
 
 .actions {
@@ -135,7 +135,7 @@
 
 .deleteButton {
   padding: 0.6rem 0.9rem;
-  background: #ef4444;
+  background: var(--color-error);
   color: white;
   border: none;
   border-radius: 8px;
@@ -144,7 +144,7 @@
 
 .editButton {
   padding: 0.6rem 0.9rem;
-  background: #111827;
+  background: var(--tone-111827);
   color: white;
   border: none;
   border-radius: 8px;
@@ -161,8 +161,8 @@
 .spinner {
   width: 20px;
   height: 20px;
-  border: 2px solid #e5e7eb;
-  border-top: 2px solid #3b82f6;
+  border: 2px solid var(--text-secondary);
+  border-top: 2px solid var(--color-info);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -172,7 +172,7 @@
   gap: 1rem;
   flex-wrap: wrap;
   margin-top: 0.75rem;
-  color: #374151;
+  color: var(--tone-374151);
   font-size: 0.92rem;
 }
 

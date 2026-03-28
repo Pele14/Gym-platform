@@ -8,26 +8,26 @@
 
 .title {
   margin: 0 0 1rem 0;
-  color: #f3f4f6;
+  color: var(--text-primary);
   font-size: 1.4rem;
   font-weight: 700;
 }
 
 .subtitle {
   margin: 0 0 0.5rem 0;
-  color: #f3f4f6;
+  color: var(--text-primary);
   font-size: 1.1rem;
   font-weight: 600;
 }
 
 .error {
-  color: #f87171;
+  color: var(--tone-f87171);
   margin-bottom: 1rem;
   font-size: 0.9rem;
 }
 
 .message {
-  color: #97a29d;
+  color: var(--text-dim);
   font-size: 0.92rem;
 }
 
@@ -45,30 +45,30 @@
 .textarea,
 .select {
   padding: 0.7rem 0.85rem;
-  border: 1px solid #2a3d32;
+  border: 1px solid var(--tone-2a3d32);
   border-radius: 8px;
   font-size: 0.95rem;
-  background: #19251f;
-  color: #f3f4f6;
+  background: var(--bg-section-bg);
+  color: var(--text-primary);
   width: 100%;
   box-sizing: border-box;
 }
 
 .input::placeholder,
 .textarea::placeholder {
-  color: #7a9088;
+  color: var(--tone-7a9088);
 }
 
 .input:focus,
 .textarea:focus,
 .select:focus {
   outline: none;
-  border-color: #1f8a50;
+  border-color: var(--color-success);
 }
 
 .select option {
-  background: #19251f;
-  color: #f3f4f6;
+  background: var(--bg-section-bg);
+  color: var(--text-primary);
 }
 
 .textarea {
@@ -78,9 +78,9 @@
 
 .button {
   padding: 0.65rem 1.1rem;
-  background: #1f8a50;
-  color: #effdf4;
-  border: 1px solid #2f7d4d;
+  background: var(--color-success);
+  color: var(--accent-green-light);
+  border: 1px solid var(--accent-green-border);
   border-radius: 9px;
   font-size: 0.9rem;
   font-weight: 600;
@@ -89,20 +89,20 @@
 }
 
 .button:hover {
-  background: #238a4b;
+  background: var(--color-success-hover);
 }
 
 .button:disabled {
-  background: #374b3e;
-  color: #7a9088;
+  background: var(--tone-374b3e);
+  color: var(--tone-7a9088);
   cursor: not-allowed;
 }
 
 .secondaryButton {
   padding: 0.6rem 1rem;
-  background: #1f2937;
-  color: #f3f4f6;
-  border: 1px solid #374151;
+  background: var(--border-subtle);
+  color: var(--text-primary);
+  border: 1px solid var(--tone-374151);
   border-radius: 9px;
   font-size: 0.9rem;
   cursor: pointer;
@@ -110,14 +110,14 @@
 }
 
 .secondaryButton:hover {
-  background: #111827;
+  background: var(--tone-111827);
 }
 
 .deleteButton {
   padding: 0.6rem 0.9rem;
   background: transparent;
-  color: #f87171;
-  border: 1px solid #7f1d1d;
+  color: var(--tone-f87171);
+  border: 1px solid var(--tone-7f1d1d);
   border-radius: 9px;
   font-size: 0.9rem;
   cursor: pointer;
@@ -125,9 +125,9 @@
 }
 
 .deleteButton:hover {
-  background: #ef4444;
-  color: #fff;
-  border-color: #ef4444;
+  background: var(--color-error);
+  color: var(--bg-card);
+  border-color: var(--color-error);
 }
 
 .row {
@@ -139,7 +139,7 @@
 }
 
 .smallText {
-  color: #97a29d;
+  color: var(--text-dim);
   font-size: 0.88rem;
 }
 
@@ -156,9 +156,9 @@
 }
 
 .launcherCard {
-  border: 1px solid #2a3d32;
+  border: 1px solid var(--tone-2a3d32);
   border-radius: 14px;
-  background: linear-gradient(160deg, #1d2e24 0%, #192319 100%);
+  background: linear-gradient(160deg, var(--tone-1d2e24) 0%, var(--tone-192319) 100%);
   text-align: left;
   padding: 1rem 1.15rem;
   cursor: pointer;
@@ -166,21 +166,21 @@
 }
 
 .launcherCard:hover {
-  border-color: #1f8a50;
+  border-color: var(--color-success);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
   transform: translateY(-1px);
 }
 
 .launcherTitle {
   margin: 0;
-  color: #f3f4f6;
+  color: var(--text-primary);
   font-size: 1.05rem;
   font-weight: 700;
 }
 
 .launcherText {
   margin: 0.4rem 0 0;
-  color: #97a29d;
+  color: var(--text-dim);
   font-size: 0.88rem;
 }
 
@@ -194,9 +194,9 @@
 
 .summaryCard {
   width: 100%;
-  border: 1px solid #2a3d32;
+  border: 1px solid var(--tone-2a3d32);
   border-radius: 12px;
-  background: #1d2722;
+  background: var(--bg-card);
   padding: 0.85rem 1rem;
   display: flex;
   justify-content: space-between;
@@ -210,35 +210,35 @@
 }
 
 .summaryCard:hover {
-  border-color: #1f8a50;
-  background: #1f2d25;
+  border-color: var(--color-success);
+  background: var(--tone-1f2d25);
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
   transform: translateY(-1px);
 }
 
 .summaryCard:focus-visible {
   outline: none;
-  border-color: #6ee7a2;
+  border-color: var(--color-success-accent);
   box-shadow: 0 0 0 3px rgba(31, 138, 80, 0.22), 0 10px 24px rgba(0, 0, 0, 0.24);
 }
 
 .summaryCard:active {
   transform: translateY(0);
-  background: #1b2821;
+  background: var(--tone-1b2821);
 }
 
 .summaryInfo h4 {
   margin: 0;
-  color: #f3f4f6;
+  color: var(--text-primary);
   font-size: 0.97rem;
   font-weight: 700;
 }
 
 .sectionCard {
   margin-top: 1rem;
-  border: 1px solid #2a3d32;
+  border: 1px solid var(--tone-2a3d32);
   border-radius: 12px;
-  background: #1d2722;
+  background: var(--bg-card);
   padding: 1rem;
 }
 
@@ -253,7 +253,7 @@
 
 .detailMeta {
   margin: 0;
-  color: #97a29d;
+  color: var(--text-dim);
   font-size: 0.86rem;
 }
 
@@ -268,7 +268,7 @@
 .detailPageHeader {
   margin-bottom: 1.15rem;
   padding-bottom: 0.95rem;
-  border-bottom: 1px solid #31453a;
+  border-bottom: 1px solid var(--tone-31453a);
 }
 
 .detailHeadingBlock {
@@ -282,14 +282,14 @@
   font-size: 1.26rem;
   font-weight: 750;
   letter-spacing: 0.01em;
-  color: #f3f4f6;
+  color: var(--text-primary);
 }
 
 .detailRoutineName {
   margin: 0;
   font-size: 0.96rem;
   font-weight: 600;
-  color: #a9bab2;
+  color: var(--tone-a9bab2);
 }
 
 .detailPageActions {
@@ -315,22 +315,22 @@
 }
 
 .routineInfoCard {
-  background: #1d2722;
-  border: 1px solid #2a3d32;
+  background: var(--bg-card);
+  border: 1px solid var(--tone-2a3d32);
   border-radius: 12px;
   padding: 0.9rem 1.1rem;
 }
 
 .routineInfoName {
   margin: 0;
-  color: #f3f4f6;
+  color: var(--text-primary);
   font-size: 1.05rem;
   font-weight: 700;
 }
 
 .routineInfoDesc {
   margin: 0.3rem 0 0;
-  color: #97a29d;
+  color: var(--text-dim);
   font-size: 0.88rem;
 }
 
@@ -342,8 +342,8 @@
 }
 
 .exerciseCard {
-  background: linear-gradient(180deg, #1f2c25 0%, #1b251f 100%);
-  border: 1px solid #33483d;
+  background: linear-gradient(180deg, var(--tone-1f2c25) 0%, var(--tone-1b251f) 100%);
+  border: 1px solid var(--tone-33483d);
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
@@ -351,7 +351,7 @@
 }
 
 .exerciseCard:hover {
-  border-color: #2f7d4d;
+  border-color: var(--accent-green-border);
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.26);
   transform: translateY(-1px);
 }
@@ -365,13 +365,13 @@
   user-select: none;
   gap: 0.5rem;
   background: rgba(24, 36, 29, 0.75);
-  border-bottom: 1px solid #33483d;
+  border-bottom: 1px solid var(--tone-33483d);
   transition: background 0.15s ease, border-color 0.15s ease;
 }
 
 .exerciseHeader:hover {
-  background: #24372d;
-  border-bottom-color: #3d584a;
+  background: var(--tone-24372d);
+  border-bottom-color: var(--tone-3d584a);
 }
 
 .exerciseHeaderLeft {
@@ -383,14 +383,14 @@
 }
 
 .chevron {
-  color: #1f8a50;
+  color: var(--color-success);
   font-size: 1rem;
   flex-shrink: 0;
   width: 14px;
 }
 
 .exerciseName {
-  color: #f3f4f6;
+  color: var(--text-primary);
   font-size: 1.02rem;
   font-weight: 750;
   letter-spacing: 0.01em;
@@ -403,7 +403,7 @@
   display: inline-flex;
   align-items: center;
   background: rgba(31, 138, 80, 0.2);
-  color: #86efac;
+  color: var(--tone-86efac);
   border: 1px solid rgba(31, 138, 80, 0.45);
   border-radius: 999px;
   padding: 0.16rem 0.62rem;
@@ -423,7 +423,7 @@
 }
 
 .setCount {
-  color: #7a9088;
+  color: var(--tone-7a9088);
   font-size: 0.8rem;
   margin-right: 0.2rem;
 }
@@ -434,9 +434,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #243329;
-  color: #97a29d;
-  border: 1px solid #344b3c;
+  background: var(--tone-243329);
+  color: var(--text-dim);
+  border: 1px solid var(--tone-344b3c);
   border-radius: 7px;
   cursor: pointer;
   font-size: 0.82rem;
@@ -444,23 +444,23 @@
 }
 
 .iconButton:hover {
-  background: #1f8a50;
-  color: #ffffff;
-  border-color: #1f8a50;
+  background: var(--color-success);
+  color: var(--bg-card);
+  border-color: var(--color-success);
 }
 
 .iconButton:disabled {
   opacity: 0.45;
   cursor: not-allowed;
-  background: #243329;
-  color: #6b7f74;
-  border-color: #344b3c;
+  background: var(--tone-243329);
+  color: var(--tone-6b7f74);
+  border-color: var(--tone-344b3c);
 }
 
 .iconButton:disabled:hover {
-  background: #243329;
-  color: #6b7f74;
-  border-color: #344b3c;
+  background: var(--tone-243329);
+  color: var(--tone-6b7f74);
+  border-color: var(--tone-344b3c);
 }
 
 .iconButtonDanger {
@@ -469,9 +469,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #243329;
-  color: #97a29d;
-  border: 1px solid #344b3c;
+  background: var(--tone-243329);
+  color: var(--text-dim);
+  border: 1px solid var(--tone-344b3c);
   border-radius: 7px;
   cursor: pointer;
   font-size: 0.82rem;
@@ -479,9 +479,9 @@
 }
 
 .iconButtonDanger:hover {
-  background: #ef4444;
-  color: #ffffff;
-  border-color: #ef4444;
+  background: var(--color-error);
+  color: var(--bg-card);
+  border-color: var(--color-error);
 }
 
 .iconButtonDanger:disabled {
@@ -495,7 +495,7 @@
 }
 
 .exerciseNotes {
-  color: #97a29d;
+  color: var(--text-dim);
   font-size: 0.85rem;
   font-style: italic;
   margin: 0 0 0.95rem;
@@ -504,7 +504,7 @@
 /* ── Sets table ──────────────────────────────────────────────── */
 
 .setsTable {
-  border: 1px solid #2a3d32;
+  border: 1px solid var(--tone-2a3d32);
   border-radius: 9px;
   overflow: hidden;
   margin-top: 0.55rem;
@@ -514,29 +514,29 @@
 .setsTableHeader {
   display: grid;
   grid-template-columns: 44px 72px 1fr 64px;
-  background: #19251f;
+  background: var(--bg-section-bg);
   padding: 0.5rem 0.8rem;
-  color: #8ea29a;
+  color: var(--tone-8ea29a);
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  border-bottom: 1px solid #30443a;
+  border-bottom: 1px solid var(--tone-30443a);
 }
 
 .setRow {
   display: grid;
   grid-template-columns: 44px 72px 1fr 64px;
   padding: 0.62rem 0.8rem;
-  color: #d1d5db;
+  color: var(--tone-d1d5db);
   font-size: 0.88rem;
   align-items: center;
-  border-top: 1px solid #2a3d32;
+  border-top: 1px solid var(--tone-2a3d32);
   transition: background 0.12s ease;
 }
 
 .setRow:hover {
-  background: #1a2820;
+  background: var(--tone-1a2820);
 }
 
 .setRowActions {
@@ -554,31 +554,31 @@
 }
 
 .setRowActions .iconButton {
-  background: #1f2c25;
-  color: #8ea29a;
-  border-color: #31453a;
+  background: var(--tone-1f2c25);
+  color: var(--tone-8ea29a);
+  border-color: var(--tone-31453a);
 }
 
 .setRowActions .iconButton:hover:not(:disabled) {
-  background: #27382f;
-  color: #ecf2ee;
-  border-color: #3f5a4b;
+  background: var(--tone-27382f);
+  color: var(--tone-ecf2ee);
+  border-color: var(--tone-3f5a4b);
 }
 
 .setRowActions .iconButtonDanger {
-  background: #1f2c25;
-  color: #97a29d;
-  border-color: #31453a;
+  background: var(--tone-1f2c25);
+  color: var(--text-dim);
+  border-color: var(--tone-31453a);
 }
 
 .setRowActions .iconButtonDanger:hover:not(:disabled) {
   background: rgba(239, 68, 68, 0.15);
-  color: #fca5a5;
+  color: var(--color-error-light);
   border-color: rgba(239, 68, 68, 0.38);
 }
 
 .noSetsText {
-  color: #7a9088;
+  color: var(--tone-7a9088);
   font-size: 0.85rem;
   margin: 0 0 0.65rem;
 }
@@ -587,9 +587,9 @@
 
 .addRowButton {
   background: transparent;
-  border: 1px dashed #2a3d32;
+  border: 1px dashed var(--tone-2a3d32);
   border-radius: 8px;
-  color: #4ade80;
+  color: var(--tone-4ade80);
   font-size: 0.85rem;
   font-weight: 600;
   padding: 0.45rem 0.85rem;
@@ -601,12 +601,12 @@
 
 .addRowButton:hover {
   background: rgba(31, 138, 80, 0.07);
-  border-color: #1f8a50;
+  border-color: var(--color-success);
 }
 
 .addSetPanel {
-  background: #19251f;
-  border: 1px solid #2a3d32;
+  background: var(--bg-section-bg);
+  border: 1px solid var(--tone-2a3d32);
   border-radius: 10px;
   padding: 0.85rem;
   margin-top: 0.5rem;
@@ -615,7 +615,7 @@
 .cancelLink {
   background: transparent;
   border: none;
-  color: #7a9088;
+  color: var(--tone-7a9088);
   font-size: 0.83rem;
   cursor: pointer;
   padding: 0.3rem 0;
@@ -624,16 +624,16 @@
 }
 
 .cancelLink:hover {
-  color: #f3f4f6;
+  color: var(--text-primary);
 }
 
 /* ── Add exercise panel ──────────────────────────────────────── */
 
 .addExerciseButton {
   background: transparent;
-  border: 1px dashed #2a3d32;
+  border: 1px dashed var(--tone-2a3d32);
   border-radius: 10px;
-  color: #4ade80;
+  color: var(--tone-4ade80);
   font-size: 0.92rem;
   font-weight: 600;
   padding: 0.7rem 1rem;
@@ -645,12 +645,12 @@
 
 .addExerciseButton:hover {
   background: rgba(31, 138, 80, 0.07);
-  border-color: #1f8a50;
+  border-color: var(--color-success);
 }
 
 .addExercisePanel {
-  background: #1d2722;
-  border: 1px solid #2a3d32;
+  background: var(--bg-card);
+  border: 1px solid var(--tone-2a3d32);
   border-radius: 12px;
   padding: 1rem;
 }
@@ -663,7 +663,7 @@
 }
 
 .addExercisePanelTitle {
-  color: #f3f4f6;
+  color: var(--text-primary);
   font-size: 0.95rem;
   font-weight: 600;
 }
@@ -682,8 +682,8 @@
 }
 
 .modal {
-  background: #1d2722;
-  border: 1px solid #2a3d32;
+  background: var(--bg-card);
+  border: 1px solid var(--tone-2a3d32);
   border-radius: 16px;
   padding: 1.5rem;
   width: 100%;
@@ -700,7 +700,7 @@
 
 .modalTitle {
   margin: 0;
-  color: #f3f4f6;
+  color: var(--text-primary);
   font-size: 1rem;
   font-weight: 700;
 }
@@ -708,10 +708,10 @@
 .modalClose {
   width: 30px;
   height: 30px;
-  background: #243329;
-  border: 1px solid #344b3c;
+  background: var(--tone-243329);
+  border: 1px solid var(--tone-344b3c);
   border-radius: 8px;
-  color: #97a29d;
+  color: var(--text-dim);
   cursor: pointer;
   font-size: 0.82rem;
   display: flex;
@@ -721,13 +721,13 @@
 }
 
 .modalClose:hover {
-  background: #344b3c;
-  color: #f3f4f6;
+  background: var(--tone-344b3c);
+  color: var(--text-primary);
 }
 
 .modalLabel {
   display: block;
-  color: #97a29d;
+  color: var(--text-dim);
   font-size: 0.78rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -746,16 +746,16 @@
 /* ── Card (legacy, used in list view) ───────────────────────── */
 
 .card {
-  border: 1px solid #2a3d32;
+  border: 1px solid var(--tone-2a3d32);
   border-radius: 12px;
   padding: 1rem;
-  background: #1d2722;
-  color: #f3f4f6;
+  background: var(--bg-card);
+  color: var(--text-primary);
 }
 
 .setCard {
-  border: 1px solid #2a3d32;
+  border: 1px solid var(--tone-2a3d32);
   border-radius: 10px;
   padding: 0.75rem;
-  background: #19251f;
+  background: var(--bg-section-bg);
 }

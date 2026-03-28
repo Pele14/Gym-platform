@@ -3,33 +3,33 @@
   width: 100%;
   margin: 0;
   padding: 1.1rem;
-  background: #1d2722;
+  background: var(--bg-card);
   border-radius: 14px;
-  border: 1px solid #2a3d32;
+  border: 1px solid var(--tone-2a3d32);
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.24);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 .title {
   margin: 0 0 1rem 0;
-  color: #f3f4f6;
+  color: var(--text-primary);
   font-size: 1.5rem;
   font-weight: 700;
 }
 
 .subtitle {
   margin: 0 0 1rem 0;
-  color: #f3f4f6;
+  color: var(--text-primary);
   font-size: 1.2rem;
   font-weight: 600;
 }
 
 .message {
-  color: #97a29d;
+  color: var(--text-dim);
 }
 
 .error {
-  color: #dc2626;
+  color: var(--tone-dc2626);
   margin-bottom: 1rem;
 }
 
@@ -39,24 +39,24 @@
 }
 
 .card {
-  border: 1px solid #2a3d32;
+  border: 1px solid var(--tone-2a3d32);
   border-radius: 12px;
   padding: 1rem;
-  background: #1a2520;
+  background: var(--tone-1a2520);
 }
 
 .setCard {
-  border: 1px solid #2a3d32;
+  border: 1px solid var(--tone-2a3d32);
   border-radius: 10px;
   padding: 0.6rem;
-  background: #1a2820;
+  background: var(--tone-1a2820);
 }
 
 .setCardFinished {
-  border: 1px solid #2a3d32;
+  border: 1px solid var(--tone-2a3d32);
   border-radius: 10px;
   padding: 0.75rem;
-  background: #17231d;
+  background: var(--tone-17231d);
 }
 
 .row {
@@ -68,12 +68,12 @@
 }
 
 .smallText {
-  color: #97a29d;
+  color: var(--text-dim);
   font-size: 0.82rem;
 }
 
 .timerText {
-  color: #4ade80;
+  color: var(--tone-4ade80);
   font-size: 1.06rem;
   font-weight: 700;
   margin: 0.25rem 0 0.55rem;
@@ -112,7 +112,7 @@
 
 .statPill {
   font-size: 0.8rem;
-  color: #cdebd8;
+  color: var(--tone-cdebd8);
   background: rgba(31, 138, 80, 0.14);
   border: 1px solid rgba(31, 138, 80, 0.28);
   border-radius: 999px;
@@ -121,23 +121,23 @@
 
 .input {
   padding: 0.48rem 0.55rem;
-  border: 1px solid #2a3d32;
+  border: 1px solid var(--tone-2a3d32);
   border-radius: 8px;
   font-size: 0.9rem;
-  color: #f3f4f6;
-  background: #19251f;
+  color: var(--text-primary);
+  background: var(--bg-section-bg);
   width: 100%;
   box-sizing: border-box;
 }
 
 .input:focus {
   outline: none;
-  border-color: #1f8a50;
+  border-color: var(--color-success);
 }
 
 .button {
   padding: 0.75rem 1rem;
-  background: #3b82f6;
+  background: var(--color-info);
   color: white;
   border: none;
   border-radius: 8px;
@@ -146,52 +146,52 @@
 }
 
 .button:disabled {
-  background: #9ca3af;
+  background: var(--tone-9ca3af);
   cursor: not-allowed;
 }
 
 .successButton {
   padding: 0.75rem 1rem;
-  background: #1f8a50;
-  color: #effdf4;
-  border: 1px solid #2f7d4d;
+  background: var(--color-success);
+  color: var(--accent-green-light);
+  border: 1px solid var(--accent-green-border);
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
 }
 
 .successButton:hover {
-  background: #238a4b;
+  background: var(--color-success-hover);
 }
 
 .deleteButton {
   padding: 0.75rem 1rem;
   background: transparent;
-  color: #f87171;
-  border: 1px solid #7f1d1d;
+  color: var(--tone-f87171);
+  border: 1px solid var(--tone-7f1d1d);
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
 }
 
 .deleteButton:hover {
-  background: #ef4444;
-  color: #fff;
-  border-color: #ef4444;
+  background: var(--color-error);
+  color: var(--bg-card);
+  border-color: var(--color-error);
 }
 
 .secondaryButton {
   padding: 0.5rem 0.8rem;
-  background: #1f2937;
-  color: #f3f4f6;
-  border: 1px solid #374151;
+  background: var(--border-subtle);
+  color: var(--text-primary);
+  border: 1px solid var(--tone-374151);
   border-radius: 8px;
   font-size: 0.82rem;
   cursor: pointer;
 }
 
 .secondaryButton:hover {
-  background: #111827;
+  background: var(--tone-111827);
 }
 
 .checkboxRow {
@@ -214,7 +214,7 @@
 
 .exerciseTitle {
   margin: 0;
-  color: #f3f4f6;
+  color: var(--text-primary);
   font-size: 1.03rem;
 }
 
@@ -226,16 +226,16 @@
 
 .badgeMuted {
   font-size: 0.74rem;
-  color: #a8b3ad;
-  border: 1px solid #2c3f35;
-  background: #1e2c24;
+  color: var(--tone-a8b3ad);
+  border: 1px solid var(--tone-2c3f35);
+  background: var(--tone-1e2c24);
   border-radius: 999px;
   padding: 0.18rem 0.5rem;
 }
 
 .badgeSuccess {
   font-size: 0.74rem;
-  color: #b9f6cf;
+  color: var(--tone-b9f6cf);
   border: 1px solid rgba(31, 138, 80, 0.35);
   background: rgba(31, 138, 80, 0.2);
   border-radius: 999px;
@@ -249,18 +249,18 @@
 }
 
 .setsTable {
-  border: 1px solid #2a3d32;
+  border: 1px solid var(--tone-2a3d32);
   border-radius: 10px;
   overflow: hidden;
-  background: #17231d;
+  background: var(--tone-17231d);
 }
 
 .setsTableHeader {
   display: grid;
   grid-template-columns: 132px minmax(120px, 1fr) minmax(140px, 1fr) 96px;
-  background: #19251f;
+  background: var(--bg-section-bg);
   padding: 0.45rem 0.75rem;
-  color: #7a9088;
+  color: var(--tone-7a9088);
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -273,12 +273,12 @@
   gap: 0.55rem;
   align-items: center;
   padding: 0.55rem 0.75rem;
-  border-top: 1px solid #2a3d32;
-  background: #1a2820;
+  border-top: 1px solid var(--tone-2a3d32);
+  background: var(--tone-1a2820);
 }
 
 .setTableRow:hover {
-  background: #1d2d24;
+  background: var(--tone-1d2d24);
 }
 
 .setTableRowCompleted {
@@ -296,7 +296,7 @@
 
 .setIndex {
   margin: 0;
-  color: #d1d5db;
+  color: var(--tone-d1d5db);
   font-size: 0.88rem;
   font-weight: 700;
 }
@@ -313,18 +313,18 @@
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  border: 1px solid #344b3c;
-  background: #243329;
-  color: #d1d5db;
+  border: 1px solid var(--tone-344b3c);
+  background: var(--tone-243329);
+  color: var(--tone-d1d5db);
   border-radius: 8px;
   padding: 0.32rem 0.5rem;
   font-size: 0.82rem;
 }
 
 .setDoneToggleInlineCompleted {
-  background: #1f8a50;
-  border-color: #2f7d4d;
-  color: #effdf4;
+  background: var(--color-success);
+  border-color: var(--accent-green-border);
+  color: var(--accent-green-light);
 }
 
 .setDoneToggleInline input {
@@ -334,41 +334,41 @@
 
 .inputCompleted {
   background: rgba(31, 138, 80, 0.16);
-  border-color: #2f7d4d;
-  color: #effdf4;
+  border-color: var(--accent-green-border);
+  color: var(--accent-green-light);
 }
 
 .inputCompleted::placeholder {
-  color: #cdebd8;
+  color: var(--tone-cdebd8);
 }
 
 .inputCompleted:focus {
-  border-color: #4ade80;
+  border-color: var(--tone-4ade80);
 }
 
 .inputHintError {
   margin: 0.22rem 0 0;
-  color: #f87171;
+  color: var(--tone-f87171);
   font-size: 0.72rem;
 }
 
 .noSetsText {
   margin: 0;
-  color: #7a9088;
+  color: var(--tone-7a9088);
   font-size: 0.85rem;
   padding: 0.65rem 0.75rem;
 }
 
 .pageLayout {
   min-height: 100vh;
-  background: #121815;
+  background: var(--bg-page);
   display: flex;
 }
 
 .pageSidebar {
   width: 240px;
-  background: #161d19;
-  border-right: 1px solid #233229;
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--tone-233229);
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -376,7 +376,7 @@
 }
 
 .brand {
-  color: #f3f4f6;
+  color: var(--text-primary);
   font-size: 1.1rem;
   font-weight: 700;
 }
@@ -388,7 +388,7 @@
 
 .sidebarHint {
   margin-top: auto;
-  color: #8a968f;
+  color: var(--tone-8a968f);
   font-size: 0.8rem;
   line-height: 1.35;
 }
@@ -398,16 +398,16 @@
   text-align: left;
   padding: 0.7rem 0.8rem;
   border-radius: 8px;
-  border: 1px solid #2a3d32;
-  background: #1d2722;
-  color: #d1d5db;
+  border: 1px solid var(--tone-2a3d32);
+  background: var(--bg-card);
+  color: var(--tone-d1d5db);
   cursor: pointer;
 }
 
 .navButtonActive {
-  background: #1f8a50;
-  color: #effdf4;
-  border-color: #2f7d4d;
+  background: var(--color-success);
+  color: var(--accent-green-light);
+  border-color: var(--accent-green-border);
 }
 
 .pageMain {
@@ -421,8 +421,8 @@
   align-items: center;
   justify-content: center;
   padding: 0 1rem;
-  border-bottom: 1px solid #233229;
-  background: #18211c;
+  border-bottom: 1px solid var(--tone-233229);
+  background: var(--bg-topbar);
 }
 
 .pageTopbarInner {
@@ -432,16 +432,21 @@
 
 .pageTitle {
   margin: 0;
-  color: #f3f4f6;
+  color: var(--text-primary);
   font-size: 1.1rem;
 }
 
 .pageContent {
   padding: 1.1rem;
+  display: flex;
+  justify-content: center;
 }
 
 .pageContentInner {
+  width: 100%;
   max-width: 1160px;
+  padding: 0 1rem;
+  box-sizing: border-box;
 }
 
 @media (max-width: 980px) {
@@ -452,7 +457,7 @@
   .pageSidebar {
     width: 100%;
     border-right: none;
-    border-bottom: 1px solid #233229;
+    border-bottom: 1px solid var(--tone-233229);
     padding: 0.9rem 1rem;
   }
 

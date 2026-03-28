@@ -10,7 +10,7 @@
 
 .title {
   margin: 0 0 1rem 0;
-  color: #f3f4f6;
+  color: var(--text-primary);
   font-size: 1.35rem;
   font-weight: 750;
   letter-spacing: 0.01em;
@@ -18,13 +18,13 @@
 
 .subtitle {
   margin: 0;
-  color: #f3f4f6;
+  color: var(--text-primary);
   font-size: 1.02rem;
   font-weight: 700;
 }
 
 .error {
-  color: #fca5a5;
+  color: var(--color-error-light);
   margin-bottom: 1rem;
   padding: 0.75rem;
   border-radius: 10px;
@@ -33,7 +33,7 @@
 }
 
 .message {
-  color: #97a29d;
+  color: var(--text-dim);
   font-size: 0.92rem;
 }
 
@@ -43,8 +43,8 @@
 }
 
 .formSectionCard {
-  background: #1d2722;
-  border: 1px solid #2a3d32;
+  background: var(--bg-card);
+  border: 1px solid var(--tone-2a3d32);
   border-radius: 14px;
   padding: 1rem;
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
@@ -56,7 +56,7 @@
 
 .sectionHint {
   margin: 0.38rem 0 0;
-  color: #97a29d;
+  color: var(--text-dim);
   font-size: 0.88rem;
 }
 
@@ -72,7 +72,7 @@
 }
 
 .label {
-  color: #a5b3ad;
+  color: var(--tone-a5b3ad);
   font-size: 0.78rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -84,11 +84,11 @@
   width: 100%;
   min-height: 44px;
   padding: 0.7rem 0.85rem;
-  border: 1px solid #2a3d32;
+  border: 1px solid var(--tone-2a3d32);
   border-radius: 10px;
   font-size: 0.95rem;
-  background: #19251f;
-  color: #f3f4f6;
+  background: var(--bg-section-bg);
+  color: var(--text-primary);
   box-sizing: border-box;
   transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
 }
@@ -97,7 +97,7 @@
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background-image: linear-gradient(45deg, transparent 50%, #7a9088 50%), linear-gradient(135deg, #7a9088 50%, transparent 50%);
+  background-image: linear-gradient(45deg, transparent 50%, var(--tone-7a9088) 50%), linear-gradient(135deg, var(--tone-7a9088) 50%, transparent 50%);
   background-position: calc(100% - 16px) calc(50% - 3px), calc(100% - 11px) calc(50% - 3px);
   background-size: 5px 5px, 5px 5px;
   background-repeat: no-repeat;
@@ -105,23 +105,23 @@
 }
 
 .select option {
-  background: #19251f;
-  color: #f3f4f6;
+  background: var(--bg-section-bg);
+  color: var(--text-primary);
 }
 
 .input:focus,
 .select:focus {
   outline: none;
-  border-color: #1f8a50;
+  border-color: var(--color-success);
   box-shadow: 0 0 0 3px rgba(31, 138, 80, 0.2);
 }
 
 .input:disabled,
 .select:disabled {
   opacity: 1;
-  color: #a9b6b1;
-  background: #1a241f;
-  border-color: #2c3d34;
+  color: var(--tone-a9b6b1);
+  background: var(--tone-1a241f);
+  border-color: var(--tone-2c3d34);
   cursor: not-allowed;
 }
 
@@ -131,15 +131,15 @@
   align-items: center;
   margin-top: 1.5rem;
   padding-top: 1.25rem;
-  border-top: 1px solid #2a3d32;
+  border-top: 1px solid var(--tone-2a3d32);
 }
 
 .button {
   min-height: 42px;
   padding: 0.7rem 1.2rem;
-  background: #1f8a50;
-  color: #effdf4;
-  border: 1px solid #2f7d4d;
+  background: var(--color-success);
+  color: var(--accent-green-light);
+  border: 1px solid var(--accent-green-border);
   border-radius: 10px;
   font-size: 0.92rem;
   font-weight: 700;
@@ -148,15 +148,15 @@
 }
 
 .button:hover:not(:disabled) {
-  background: #238a4b;
-  border-color: #1f8a50;
+  background: var(--color-success-hover);
+  border-color: var(--color-success);
   transform: translateY(-1px);
 }
 
 .button:disabled {
-  background: #374b3e;
-  color: #7a9088;
-  border-color: #2a3d32;
+  background: var(--tone-374b3e);
+  color: var(--tone-7a9088);
+  border-color: var(--tone-2a3d32);
   cursor: not-allowed;
   transform: none;
 }
@@ -164,9 +164,9 @@
 .nutritionCard {
   margin-top: 1rem;
   padding: 1rem;
-  border: 1px solid #2a3d32;
+  border: 1px solid var(--tone-2a3d32);
   border-radius: 12px;
-  background: #19251f;
+  background: var(--bg-section-bg);
 }
 
 .goalGrid {
@@ -179,18 +179,18 @@
 .goalItem {
   padding: 0.85rem;
   border-radius: 10px;
-  background: #1d2722;
-  border: 1px solid #3a5045;
+  background: var(--bg-card);
+  border: 1px solid var(--tone-3a5045);
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
-  color: #f3f4f6;
+  color: var(--text-primary);
   font-weight: 600;
   font-size: 0.98rem;
 }
 
 .goalLabel {
-  color: #7a9088;
+  color: var(--tone-7a9088);
   font-size: 0.78rem;
   font-weight: 500;
   text-transform: uppercase;

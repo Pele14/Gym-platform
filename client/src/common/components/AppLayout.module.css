@@ -1,15 +1,15 @@
 .layout {
   min-height: 100vh;
   display: flex;
-  background: #121815;
-  color: #f5f5f5;
+  background: var(--bg-page);
+  color: var(--text-primary);
 }
 
 .sidebar {
   width: 248px;
   flex: 0 0 248px;
-  background: #161d19;
-  border-right: 1px solid #28332d;
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border-light);
   padding: 1.4rem 1rem;
   display: flex;
   flex-direction: column;
@@ -20,9 +20,9 @@
   font-size: 1.02rem;
   font-weight: 700;
   letter-spacing: 0.01em;
-  color: #f3f4f6;
+  color: var(--text-primary);
   padding: 0.5rem 0.6rem 1rem;
-  border-bottom: 1px solid #2a3630;
+  border-bottom: 1px solid var(--border-primary);
 }
 
 .nav {
@@ -36,7 +36,7 @@
   text-align: left;
   border: 1px solid transparent;
   background: transparent;
-  color: #cbd5d1;
+  color: var(--text-muted);
   padding: 0.7rem 0.78rem;
   border-radius: 8px;
   cursor: pointer;
@@ -45,15 +45,15 @@
 }
 
 .navButton:hover {
-  background: #202923;
-  border-color: #2f3b34;
-  color: #e5e7eb;
+  background: var(--bg-hover);
+  border-color: var(--border-primary);
+  color: var(--text-secondary);
 }
 
 .navButtonActive {
-  background: #1a3b2a;
-  border-color: #238a4b;
-  color: #ecfdf3;
+  background: rgba(35, 138, 75, 0.15);
+  border-color: var(--accent-green);
+  color: var(--text-secondary);
   box-shadow: inset 0 0 0 1px rgba(35, 138, 75, 0.25);
 }
 
@@ -62,13 +62,13 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  background: #151d18;
+  background: var(--bg-layout);
 }
 
 .topbar {
   min-height: 76px;
-  border-bottom: 1px solid #2a3630;
-  background: #18211c;
+  border-bottom: 1px solid var(--border-primary);
+  background: var(--bg-topbar);
   display: flex;
   align-items: center;
   padding: 0 1.35rem;
@@ -101,12 +101,12 @@
 .pageTitle {
   margin: 0;
   font-size: 1.08rem;
-  color: #f3f4f6;
+  color: var(--text-primary);
 }
 
 .welcome {
   margin: 0;
-  color: #a7b0ab;
+  color: var(--text-muted);
   font-size: 0.87rem;
   line-height: 1.25;
 }
@@ -120,17 +120,17 @@
 
 .rolePill {
   font-size: 0.82rem;
-  color: #d1d5db;
-  border: 1px solid #3a4740;
-  background: #202a25;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-card);
+  background: var(--bg-card);
   padding: 0.3rem 0.65rem;
   border-radius: 999px;
 }
 
 .logoutButton {
-  border: 1px solid #2f7d4d;
-  background: #1f8a50;
-  color: #f0fdf4;
+  border: 1px solid var(--accent-green-border);
+  background: var(--color-success);
+  color: var(--color-success-light);
   padding: 0.5rem 0.9rem;
   border-radius: 8px;
   font-weight: 600;
@@ -139,7 +139,27 @@
 }
 
 .logoutButton:hover {
-  background: #238a4b;
+  background: var(--color-success-hover);
+}
+
+.themeToggleButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border: 1px solid var(--border-card);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background-color 0.18s ease, border-color 0.18s ease;
+}
+
+.themeToggleButton:hover {
+  background: var(--bg-hover);
+  border-color: var(--border-primary);
 }
 
 .content {
@@ -160,9 +180,9 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  border: 1px solid #3a4740;
-  background: #202a25;
-  color: #e5e7eb;
+  border: 1px solid var(--border-card);
+  background: var(--bg-card);
+  color: var(--text-secondary);
   border-radius: 999px;
   padding: 0.2rem 0.45rem 0.2rem 0.25rem;
   cursor: pointer;
@@ -170,8 +190,8 @@
 }
 
 .profileButton:hover {
-  border-color: #4b5c53;
-  background: #26332d;
+  border-color: var(--border-primary);
+  background: var(--bg-hover);
 }
 
 .profileAvatar {
@@ -181,8 +201,8 @@
   width: 1.7rem;
   height: 1.7rem;
   border-radius: 999px;
-  background: #1f8a50;
-  color: #ecfdf3;
+  background: var(--color-success);
+  color: var(--color-success-light);
   font-size: 0.72rem;
   font-weight: 700;
 }
@@ -195,9 +215,9 @@
 
 .mobileMenuButton {
   display: none;
-  border: 1px solid #334155;
-  background: #232e28;
-  color: #f9fafb;
+  border: 1px solid var(--border-primary);
+  background: var(--bg-card);
+  color: var(--text-primary);
   padding: 0.35rem 0.6rem;
   border-radius: 8px;
   cursor: pointer;

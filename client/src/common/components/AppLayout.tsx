@@ -1,6 +1,7 @@
 import { type ReactNode, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../features/auth";
+import { useTheme } from "../../hooks/useTheme";
 import styles from "./AppLayout.module.css";
 
 export type AppSection = "dashboard" | "workouts" | "nutrition" | "profile";
@@ -8,23 +9,17 @@ export type AppSection = "dashboard" | "workouts" | "nutrition" | "profile";
 type AppLayoutProps = {
   children: ReactNode;
   pageTitle: string;
-  activeSection?: AppSection;
-  onSectionChange?: (section: AppSection) => void;
 };
 
 export default function AppLayout({
   children,
   pageTitle,
-  activeSection,
-  onSectionChange,
 }: AppLayoutProps) {
   const { user, logout } = useAuth();
+  const { toggleTheme, theme } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-  const isOnDashboard = location.pathname === "/dashboard";
-  const isOnGyms = location.pathname === "/gyms";
 
   const profileInitials =
     `${user?.first_name?.[0] ?? ""}${user?.last_name?.[0] ?? ""}`.toUpperCase() || "U";
@@ -34,21 +29,9 @@ export default function AppLayout({
     navigate("/");
   };
 
-  const handleSectionClick = (section: AppSection) => {
+  const handleNavClick = (path: string) => {
     setIsSidebarOpen(false);
-    if (!isOnDashboard) {
-      navigate(`/dashboard?section=${section}`);
-      return;
-    }
-    onSectionChange?.(section);
-  };
-
-  const handleProfileClick = () => {
-    if (!isOnDashboard) {
-      navigate("/dashboard?section=profile");
-      return;
-    }
-    onSectionChange?.("profile");
+    navigate(path);
   };
 
   return (
@@ -62,40 +45,37 @@ export default function AppLayout({
 
         <nav className={styles.nav}>
           <button
-            className={`${styles.navButton} ${isOnDashboard && activeSection === "dashboard" ? styles.navButtonActive : ""}`}
-            onClick={() => handleSectionClick("dashboard")}
+            className={`${styles.navButton} ${location.pathname === "/dashboard" ? styles.navButtonActive : ""}`}
+            onClick={() => handleNavClick("/dashboard")}
             type="button"
           >
             Dashboard
           </button>
           <button
-            className={`${styles.navButton} ${isOnDashboard && activeSection === "workouts" ? styles.navButtonActive : ""}`}
-            onClick={() => handleSectionClick("workouts")}
+            className={`${styles.navButton} ${location.pathname === "/workouts" ? styles.navButtonActive : ""}`}
+            onClick={() => handleNavClick("/workouts")}
             type="button"
           >
             Workouts
           </button>
           <button
-            className={`${styles.navButton} ${isOnDashboard && activeSection === "nutrition" ? styles.navButtonActive : ""}`}
-            onClick={() => handleSectionClick("nutrition")}
+            className={`${styles.navButton} ${location.pathname === "/nutrition" ? styles.navButtonActive : ""}`}
+            onClick={() => handleNavClick("/nutrition")}
             type="button"
           >
             Nutrition
           </button>
           <button
-            className={`${styles.navButton} ${isOnDashboard && activeSection === "profile" ? styles.navButtonActive : ""}`}
-            onClick={() => handleSectionClick("profile")}
+            className={`${styles.navButton} ${location.pathname === "/profile" ? styles.navButtonActive : ""}`}
+            onClick={() => handleNavClick("/profile")}
             type="button"
           >
             Profile
           </button>
           {user?.role !== "admin" && (
             <button
-              className={`${styles.navButton} ${isOnGyms ? styles.navButtonActive : ""}`}
-              onClick={() => {
-                setIsSidebarOpen(false);
-                navigate("/gyms");
-              }}
+              className={`${styles.navButton} ${location.pathname === "/gyms" ? styles.navButtonActive : ""}`}
+              onClick={() => handleNavClick("/gyms")}
               type="button"
             >
               Gyms
@@ -130,12 +110,20 @@ export default function AppLayout({
                 <button
                   className={styles.profileButton}
                   type="button"
-                  onClick={handleProfileClick}
+                  onClick={() => handleNavClick("/profile")}
                 >
                   <span className={styles.profileAvatar}>{profileInitials}</span>
                   <span className={styles.profileLabel}>Profile</span>
                 </button>
               )}
+              <button
+                className={styles.themeToggleButton}
+                onClick={toggleTheme}
+                type="button"
+                title={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+              >
+                {theme === "dark" ? "☀️" : "🌙"}
+              </button>
               <button className={styles.logoutButton} onClick={handleLogout} type="button">
                 Logout
               </button>

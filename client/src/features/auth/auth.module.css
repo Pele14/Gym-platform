@@ -3,7 +3,7 @@
   max-width: 400px;
   margin: 2rem auto;
   padding: 2rem;
-  background: #ffffff;
+  background: var(--bg-card);
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -12,7 +12,7 @@
 .title {
   text-align: center;
   margin-bottom: 1.5rem;
-  color: #1a1a1a;
+  color: var(--tone-1a1a1a);
   font-size: 1.5rem;
   font-weight: 600;
 }
@@ -32,12 +32,12 @@
 .label {
   font-size: 0.875rem;
   font-weight: 500;
-  color: #374151;
+  color: var(--tone-374151);
 }
 
 .input {
   padding: 0.75rem;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--tone-d1d5db);
   border-radius: 8px;
   font-size: 1rem;
   transition: border-color 0.2s, box-shadow 0.2s;
@@ -45,13 +45,13 @@
 
 .input:focus {
   outline: none;
-  border-color: #3b82f6;
+  border-color: var(--color-info);
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 .button {
   padding: 0.75rem 1rem;
-  background: #3b82f6;
+  background: var(--color-info);
   color: white;
   border: none;
   border-radius: 8px;
@@ -62,16 +62,16 @@
 }
 
 .button:hover {
-  background: #2563eb;
+  background: var(--tone-2563eb);
 }
 
 .button:disabled {
-  background: #9ca3af;
+  background: var(--tone-9ca3af);
   cursor: not-allowed;
 }
 
 .error {
-  color: #dc2626;
+  color: var(--tone-dc2626);
   font-size: 0.875rem;
   text-align: center;
   margin-top: 0.5rem;
@@ -81,11 +81,11 @@
   text-align: center;
   margin-top: 1rem;
   font-size: 0.875rem;
-  color: #6b7280;
+  color: var(--tone-6b7280);
 }
 
 .link a {
-  color: #3b82f6;
+  color: var(--color-info);
   text-decoration: none;
 }
 
@@ -103,8 +103,8 @@
 .spinner {
   width: 20px;
   height: 20px;
-  border: 2px solid #e5e7eb;
-  border-top: 2px solid #3b82f6;
+  border: 2px solid var(--text-secondary);
+  border-top: 2px solid var(--color-info);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }

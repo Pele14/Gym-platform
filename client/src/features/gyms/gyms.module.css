@@ -1,14 +1,14 @@
 .pageShell {
   display: grid;
   gap: 1.25rem;
-  color: #f3f4f6;
+  color: var(--text-primary);
 }
 
 .searchCard,
 .mapCard,
 .resultsCard {
-  background: #1d2722;
-  border: 1px solid #2a3d32;
+  background: var(--bg-card);
+  border: 1px solid var(--tone-2a3d32);
   border-radius: 16px;
   box-shadow: 0 14px 32px rgba(0, 0, 0, 0.18);
 }
@@ -16,7 +16,7 @@
 .eyebrow,
 .cardEyebrow {
   margin: 0 0 0.35rem;
-  color: #7a9088;
+  color: var(--tone-7a9088);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-size: 0.74rem;
@@ -27,7 +27,7 @@
 .featuredTitle,
 .gymName {
   margin: 0;
-  color: #f3f4f6;
+  color: var(--text-primary);
 }
 
 .searchHint,
@@ -39,7 +39,7 @@
 .emptyState,
 .hoursItem,
 .metricLabel {
-  color: #97a29d;
+  color: var(--text-dim);
 }
 
 .searchActions,
@@ -71,7 +71,7 @@
 }
 
 .label {
-  color: #a5b3ad;
+  color: var(--tone-a5b3ad);
   font-size: 0.78rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -83,15 +83,15 @@
   min-height: 44px;
   padding: 0.72rem 0.85rem;
   border-radius: 10px;
-  border: 1px solid #2a3d32;
-  background: #19251f;
-  color: #f3f4f6;
+  border: 1px solid var(--tone-2a3d32);
+  background: var(--bg-section-bg);
+  color: var(--text-primary);
   box-sizing: border-box;
 }
 
 .input:focus {
   outline: none;
-  border-color: #1f8a50;
+  border-color: var(--color-success);
   box-shadow: 0 0 0 3px rgba(31, 138, 80, 0.18);
 }
 
@@ -112,15 +112,15 @@
 }
 
 .primaryButton {
-  background: #1f8a50;
-  color: #effdf4;
-  border-color: #2f7d4d;
+  background: var(--color-success);
+  color: var(--accent-green-light);
+  border-color: var(--accent-green-border);
 }
 
 .secondaryButton {
-  background: #19251f;
-  color: #dce5df;
-  border-color: #2a3d32;
+  background: var(--bg-section-bg);
+  color: var(--tone-dce5df);
+  border-color: var(--tone-2a3d32);
 }
 
 .primaryButton:hover:not(:disabled),
@@ -146,7 +146,7 @@
   border-radius: 12px;
   border: 1px solid rgba(239, 68, 68, 0.34);
   background: rgba(239, 68, 68, 0.12);
-  color: #fca5a5;
+  color: var(--color-error-light);
 }
 
 .contentGrid {
@@ -163,11 +163,11 @@
   height: 420px;
   overflow: hidden;
   border-radius: 14px;
-  border: 1px solid #31453a;
+  border: 1px solid var(--tone-31453a);
 }
 
 .gymCardActive {
-  border-color: #1f8a50;
+  border-color: var(--color-success);
   box-shadow: 0 0 0 3px rgba(31, 138, 80, 0.16);
 }
 
@@ -176,16 +176,16 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  background: linear-gradient(180deg, #1a241f 0%, #141c18 100%);
-  color: #97a29d;
+  background: linear-gradient(180deg, var(--tone-1a241f) 0%, var(--tone-141c18) 100%);
+  color: var(--text-dim);
   font-size: 0.92rem;
 }
 
 .featuredGymCard {
   padding: 0.95rem;
   border-radius: 14px;
-  border: 1px solid #31453a;
-  background: #19251f;
+  border: 1px solid var(--tone-31453a);
+  background: var(--bg-section-bg);
 }
 
 .statusBadge,
@@ -196,9 +196,9 @@
   min-height: 28px;
   padding: 0.2rem 0.65rem;
   border-radius: 999px;
-  border: 1px solid #355346;
+  border: 1px solid var(--tone-355346);
   background: rgba(31, 138, 80, 0.12);
-  color: #cde7d7;
+  color: var(--tone-cde7d7);
   font-size: 0.78rem;
   font-weight: 700;
 }
@@ -218,7 +218,7 @@
 }
 
 .metricValue {
-  color: #f3f4f6;
+  color: var(--text-primary);
   font-size: 0.95rem;
 }
 
@@ -230,8 +230,8 @@
 .hoursItem {
   padding: 0.55rem 0.7rem;
   border-radius: 10px;
-  background: #1d2722;
-  border: 1px solid #2a3d32;
+  background: var(--bg-card);
+  border: 1px solid var(--tone-2a3d32);
   font-size: 0.88rem;
 }
 
@@ -246,8 +246,8 @@
   text-align: left;
   padding: 0.9rem;
   border-radius: 12px;
-  border: 1px solid #2a3d32;
-  background: #19251f;
+  border: 1px solid var(--tone-2a3d32);
+  background: var(--bg-section-bg);
   cursor: pointer;
   transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
 }
@@ -269,7 +269,7 @@
 .emptyState {
   padding: 1rem;
   border-radius: 12px;
-  border: 1px dashed #355346;
+  border: 1px dashed var(--tone-355346);
   text-align: center;
 }
 

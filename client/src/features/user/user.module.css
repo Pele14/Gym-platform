@@ -3,7 +3,7 @@
   width: 100%;
   margin: 0;
   padding: 1.25rem;
-  background: #ffffff;
+  background: var(--bg-card);
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -11,18 +11,18 @@
 
 .title {
   margin-bottom: 1.5rem;
-  color: #1a1a1a;
+  color: var(--tone-1a1a1a);
   font-size: 1.5rem;
   font-weight: 600;
 }
 
 .message {
   font-size: 0.95rem;
-  color: #4b5563;
+  color: var(--tone-4b5563);
 }
 
 .error {
-  color: #dc2626;
+  color: var(--tone-dc2626);
   font-size: 0.95rem;
   font-weight: 500;
 }
@@ -41,18 +41,18 @@
 .table td {
   padding: 0.9rem 1rem;
   text-align: left;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--text-secondary);
 }
 
 .table th {
-  background: #f9fafb;
-  color: #374151;
+  background: var(--tone-f9fafb);
+  color: var(--tone-374151);
   font-size: 0.9rem;
   font-weight: 600;
 }
 
 .table td {
-  color: #1f2937;
+  color: var(--border-subtle);
   font-size: 0.95rem;
 }
 
@@ -65,23 +65,23 @@
 }
 
 .admin {
-  background: #dbeafe;
-  color: #1d4ed8;
+  background: var(--tone-dbeafe);
+  color: var(--tone-1d4ed8);
 }
 
 .user {
-  background: #f3f4f6;
-  color: #374151;
+  background: var(--text-primary);
+  color: var(--tone-374151);
 }
 
 .active {
-  background: #dcfce7;
-  color: #166534;
+  background: var(--tone-dcfce7);
+  color: var(--tone-166534);
 }
 
 .inactive {
-  background: #fee2e2;
-  color: #991b1b;
+  background: var(--tone-fee2e2);
+  color: var(--tone-991b1b);
 }
 
 .loading {
@@ -94,14 +94,14 @@
 .spinner {
   width: 20px;
   height: 20px;
-  border: 2px solid #e5e7eb;
-  border-top: 2px solid #3b82f6;
+  border: 2px solid var(--text-secondary);
+  border-top: 2px solid var(--color-info);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
 
 .empty {
-  color: #6b7280;
+  color: var(--tone-6b7280);
   font-size: 0.95rem;
 }
 

@@ -1,6 +1,6 @@
 .card {
-  border: 1px solid #2d3933;
-  background: #1d2722;
+  border: 1px solid var(--border-card);
+  background: var(--bg-card);
   border-radius: 12px;
   padding: 0.95rem;
   display: grid;
@@ -9,20 +9,20 @@
 
 .title {
   margin: 0;
-  color: #edf2ef;
+  color: var(--tone-edf2ef);
   font-size: 0.9rem;
   font-weight: 700;
 }
 
 .message {
   margin: 0;
-  color: #9aa7a1;
+  color: var(--tone-9aa7a1);
   font-size: 0.82rem;
 }
 
 .error {
   margin: 0;
-  color: #fca5a5;
+  color: var(--color-error-light);
   font-size: 0.82rem;
 }
 
@@ -43,13 +43,13 @@
 }
 
 .primaryButton {
-  background: #1f8a50;
-  border-color: #2f7d4d;
-  color: #effdf4;
+  background: var(--color-success);
+  border-color: var(--accent-green-border);
+  color: var(--accent-green-light);
 }
 
 .primaryButton:hover {
-  background: #238a4b;
+  background: var(--color-success-hover);
 }
 
 .primaryButton:disabled {
@@ -58,11 +58,11 @@
 }
 
 .secondaryButton {
-  background: #232f2a;
-  border-color: #34413a;
-  color: #d8dfdc;
+  background: var(--tone-232f2a);
+  border-color: var(--tone-34413a);
+  color: var(--tone-d8dfdc);
 }
 
 .secondaryButton:hover {
-  background: #293630;
+  background: var(--bg-sub-hover);
 }

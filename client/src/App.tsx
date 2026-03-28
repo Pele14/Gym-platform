@@ -2,7 +2,10 @@ import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
-import DashboardPage from "./pages/DashboardPage";
+import DashboardOverviewPage from "./pages/DashboardOverviewPage";
+import WorkoutsPage from "./pages/WorkoutsPage";
+import NutritionPage from "./pages/NutritionPage";
+import ProfilePage from "./pages/ProfilePage";
 import ActiveWorkoutPage from "./pages/ActiveWorkoutPage";
 import GymsPage from "./pages/GymsPage";
 import { ProtectedRoute } from "./features/auth";
@@ -18,7 +21,34 @@ export default function App() {
         path="/dashboard"
         element={
           <ProtectedRoute>
-            <DashboardPage />
+            <DashboardOverviewPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/workouts"
+        element={
+          <ProtectedRoute>
+            <WorkoutsPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/nutrition"
+        element={
+          <ProtectedRoute>
+            <NutritionPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/profile"
+        element={
+          <ProtectedRoute>
+            <ProfilePage />
           </ProtectedRoute>
         }
       />
