@@ -44,35 +44,60 @@ export default function AppLayout({
         <div className={styles.brand}>Fitness OS</div>
 
         <nav className={styles.nav}>
-          <button
-            className={`${styles.navButton} ${location.pathname === "/dashboard" ? styles.navButtonActive : ""}`}
-            onClick={() => handleNavClick("/dashboard")}
-            type="button"
-          >
-            Dashboard
-          </button>
-          <button
-            className={`${styles.navButton} ${location.pathname === "/workouts" ? styles.navButtonActive : ""}`}
-            onClick={() => handleNavClick("/workouts")}
-            type="button"
-          >
-            Workouts
-          </button>
-          <button
-            className={`${styles.navButton} ${location.pathname === "/nutrition" ? styles.navButtonActive : ""}`}
-            onClick={() => handleNavClick("/nutrition")}
-            type="button"
-          >
-            Nutrition
-          </button>
-          <button
-            className={`${styles.navButton} ${location.pathname === "/profile" ? styles.navButtonActive : ""}`}
-            onClick={() => handleNavClick("/profile")}
-            type="button"
-          >
-            Profile
-          </button>
-          {user?.role !== "admin" && (
+          {user?.role === "admin" ? (
+            <>
+              <button
+                className={`${styles.navButton} ${location.pathname === "/admin/users" || location.pathname === "/admin" ? styles.navButtonActive : ""}`}
+                onClick={() => handleNavClick("/admin/users")}
+                type="button"
+              >
+                Users
+              </button>
+              <button
+                className={`${styles.navButton} ${location.pathname === "/admin/exercises" ? styles.navButtonActive : ""}`}
+                onClick={() => handleNavClick("/admin/exercises")}
+                type="button"
+              >
+                Exercises
+              </button>
+              <button
+                className={`${styles.navButton} ${location.pathname === "/admin/foods" ? styles.navButtonActive : ""}`}
+                onClick={() => handleNavClick("/admin/foods")}
+                type="button"
+              >
+                Food
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                className={`${styles.navButton} ${location.pathname === "/dashboard" ? styles.navButtonActive : ""}`}
+                onClick={() => handleNavClick("/dashboard")}
+                type="button"
+              >
+                Dashboard
+              </button>
+              <button
+                className={`${styles.navButton} ${location.pathname === "/workouts" ? styles.navButtonActive : ""}`}
+                onClick={() => handleNavClick("/workouts")}
+                type="button"
+              >
+                Workouts
+              </button>
+              <button
+                className={`${styles.navButton} ${location.pathname === "/nutrition" ? styles.navButtonActive : ""}`}
+                onClick={() => handleNavClick("/nutrition")}
+                type="button"
+              >
+                Nutrition
+              </button>
+              <button
+                className={`${styles.navButton} ${location.pathname === "/profile" ? styles.navButtonActive : ""}`}
+                onClick={() => handleNavClick("/profile")}
+                type="button"
+              >
+                Profile
+              </button>
             <button
               className={`${styles.navButton} ${location.pathname === "/gyms" ? styles.navButtonActive : ""}`}
               onClick={() => handleNavClick("/gyms")}
@@ -80,6 +105,7 @@ export default function AppLayout({
             >
               Gyms
             </button>
+            </>
           )}
         </nav>
       </aside>

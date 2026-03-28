@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -8,7 +8,22 @@ import NutritionPage from "./pages/NutritionPage";
 import ProfilePage from "./pages/ProfilePage";
 import ActiveWorkoutPage from "./pages/ActiveWorkoutPage";
 import GymsPage from "./pages/GymsPage";
-import { ProtectedRoute } from "./features/auth";
+import {
+  AdminUsersPage,
+  AdminExercisesPage,
+  AdminFoodsPage,
+} from "./pages";
+import { ProtectedRoute, useAuth } from "./features/auth";
+
+function DashboardEntryRoute() {
+  const { user } = useAuth();
+
+  if (user?.role === "admin") {
+    return <Navigate to="/admin/users" replace />;
+  }
+
+  return <DashboardOverviewPage />;
+}
 
 export default function App() {
   return (
@@ -21,7 +36,52 @@ export default function App() {
         path="/dashboard"
         element={
           <ProtectedRoute>
-            <DashboardOverviewPage />
+            <DashboardEntryRoute />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin"
+        element={
+          <ProtectedRoute allowedRoles={["admin"]} redirectTo="/dashboard">
+            <Navigate to="/admin/users" replace />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/users"
+        element={
+          <ProtectedRoute allowedRoles={["admin"]} redirectTo="/dashboard">
+            <AdminUsersPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/exercises"
+        element={
+          <ProtectedRoute allowedRoles={["admin"]} redirectTo="/dashboard">
+            <AdminExercisesPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/foods"
+        element={
+          <ProtectedRoute allowedRoles={["admin"]} redirectTo="/dashboard">
+            <AdminFoodsPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/*"
+        element={
+          <ProtectedRoute allowedRoles={["admin"]} redirectTo="/dashboard">
+            <Navigate to="/admin/users" replace />
           </ProtectedRoute>
         }
       />

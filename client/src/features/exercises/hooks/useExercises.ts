@@ -1,6 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 import { exerciseService } from "../services/exerciseService";
-import type { CreateExercisePayload, Exercise } from "../types/exercise_types";
+import type {
+  CreateExercisePayload,
+  Exercise,
+  UpdateExercisePayload,
+} from "../types/exercise_types";
 
 export function useExercises() {
   const [exercises, setExercises] = useState<Exercise[]>([]);
@@ -73,6 +77,36 @@ export function useExercises() {
     }
   };
 
+  const updateExercise = async (
+    exerciseId: number,
+    payload: UpdateExercisePayload,
+    isSystem: boolean
+  ) => {
+    try {
+      setIsSubmitting(true);
+      setError(null);
+
+      const data = isSystem
+        ? await exerciseService.updateSystemExercise(exerciseId, payload)
+        : await exerciseService.updateCustomExercise(exerciseId, payload);
+
+      setExercises((prev) =>
+        prev.map((exercise) =>
+          exercise.id === exerciseId ? data.exercise : exercise
+        )
+      );
+
+      return data.exercise;
+    } catch (err) {
+      const message =
+        err instanceof Error ? err.message : "Failed to update exercise.";
+      setError(message);
+      throw err;
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return {
     exercises,
     isLoading,
@@ -80,6 +114,7 @@ export function useExercises() {
     error,
     refetch: fetchExercises,
     createExercise,
+    updateExercise,
     deleteExercise,
   };
 }

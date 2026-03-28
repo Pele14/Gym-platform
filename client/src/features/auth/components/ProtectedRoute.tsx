@@ -5,10 +5,16 @@ import styles from '../auth.module.css'
 
 interface ProtectedRouteProps {
   children: ReactNode
+  allowedRoles?: string[]
+  redirectTo?: string
 }
 
-export function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const { isAuthenticated, isLoading } = useAuth()
+export function ProtectedRoute({
+  children,
+  allowedRoles,
+  redirectTo = '/dashboard',
+}: ProtectedRouteProps) {
+  const { isAuthenticated, isLoading, user } = useAuth()
 
   if (isLoading) {
     return (
@@ -20,6 +26,10 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
 
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />
+  }
+
+  if (allowedRoles && user && !allowedRoles.includes(user.role)) {
+    return <Navigate to={redirectTo} replace />
   }
 
   return <>{children}</>

@@ -240,7 +240,7 @@ export default function DailyLogView({ date }: DailyLogViewProps) {
                       <div className={styles.mealDetail}>
                         <div className={styles.entriesList}>
                           {meal.entries.length === 0 ? (
-                            <p className={styles.message}>No foods added yet.</p>
+                            <p className={styles.message}>No food added yet.</p>
                           ) : (
                             meal.entries.map((entry) => (
                               <div key={entry.id} className={styles.entryItem}>
@@ -349,7 +349,7 @@ export default function DailyLogView({ date }: DailyLogViewProps) {
                       ) : (
                         <p className={styles.message}>
                           {searchQuery.trim()
-                            ? "No matching foods yet. Try another search."
+                            ? "No matching food yet. Try another search."
                             : "Search to pick a food for this meal."}
                         </p>
                       )}

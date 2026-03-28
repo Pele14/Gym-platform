@@ -5,8 +5,12 @@ import FoodForm from "./foodForm";
 import styles from "../foods.module.css";
 import type { CreateFoodPayload, Food } from "../types/food_types";
 
+type FoodAdminView = "add" | "list";
+
 export default function FoodList() {
   const { user } = useAuth();
+  const [activeView, setActiveView] = useState<FoodAdminView>("add");
+  const [searchQuery, setSearchQuery] = useState("");
   const { foods, isLoading, isSubmitting, error, createFood, updateFood, deleteFood } =
     useFoods();
 
@@ -31,12 +35,33 @@ export default function FoodList() {
     await deleteFood(foodId, isSystem);
   };
 
+  const filteredFoods = foods.filter((food) => {
+    const query = searchQuery.trim().toLowerCase();
+
+    if (!query) {
+      return true;
+    }
+
+    return [
+      food.name,
+      food.brand ?? "",
+      food.is_system ? "system" : "custom",
+      String(food.calories_per_100g),
+      String(food.protein_per_100g),
+      String(food.carbs_per_100g),
+      String(food.fat_per_100g),
+    ]
+      .join(" ")
+      .toLowerCase()
+      .includes(query);
+  });
+
   if (isLoading) {
     return (
       <div className={styles.container}>
         <div className={styles.loading}>
           <div className={styles.spinner}></div>
-          <p className={styles.message}>Loading foods...</p>
+          <p className={styles.message}>Loading food...</p>
         </div>
       </div>
     );
@@ -45,93 +70,193 @@ export default function FoodList() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h2 className={styles.title}>Foods</h2>
+        <div>
+          <h2 className={styles.title}>Food Library</h2>
+          <p className={styles.subtitle}>
+            Manage nutrition entries and quickly edit system or custom food.
+          </p>
+        </div>
+
+        <div className={styles.viewToggle} role="tablist" aria-label="Food management views">
+          <button
+            className={`${styles.viewToggleButton} ${
+              activeView === "add" ? styles.viewToggleButtonActive : ""
+            }`}
+            type="button"
+            onClick={() => setActiveView("add")}
+            role="tab"
+            aria-selected={activeView === "add"}
+          >
+            Add Food
+          </button>
+          <button
+            className={`${styles.viewToggleButton} ${
+              activeView === "list" ? styles.viewToggleButtonActive : ""
+            }`}
+            type="button"
+            onClick={() => setActiveView("list")}
+            role="tab"
+            aria-selected={activeView === "list"}
+          >
+            Food
+          </button>
+        </div>
       </div>
 
       {error && <p className={styles.error}>{error}</p>}
 
-      <FoodForm
-        isAdmin={isAdmin}
-        isSubmitting={isSubmitting}
-        onSubmit={handleCreate}
-      />
+      {activeView === "add" ? (
+        <section className={styles.formSectionCard}>
+          <header className={styles.sectionHeader}>
+            <h3 className={styles.sectionTitle}>Create Food</h3>
+          </header>
 
-      {foods.length === 0 ? (
-        <p className={styles.empty}>No foods found.</p>
+          <FoodForm
+            isAdmin={isAdmin}
+            isSubmitting={isSubmitting}
+            onSubmit={handleCreate}
+          />
+        </section>
       ) : (
-        <div className={styles.grid}>
-          {foods.map((food) => {
-            const canEdit =
-              (food.is_system && isAdmin) ||
-              (!food.is_system && food.created_by_user_id === user?.id);
+        <section className={styles.listSection}>
+          <header className={styles.sectionHeader}>
+            <div>
+              <h3 className={styles.sectionTitle}>Existing Food</h3>
+              <p className={styles.sectionSubtitle}>{foods.length} total</p>
+            </div>
 
-            const canDelete =
-              (food.is_system && isAdmin) ||
-              (!food.is_system && food.created_by_user_id === user?.id);
+            <div className={styles.searchGroup}>
+              <input
+                className={styles.searchInput}
+                type="search"
+                placeholder="Search food..."
+                value={searchQuery}
+                onChange={(event) => setSearchQuery(event.target.value)}
+                aria-label="Search food"
+              />
+            </div>
+          </header>
 
-            return (
-              <div key={food.id} className={styles.card}>
-                <div className={styles.cardTop}>
-                  <div>
-                    <h3 className={styles.cardTitle}>{food.name}</h3>
-                    <p className={styles.meta}>{food.brand || "No brand"}</p>
-                  </div>
+          {foods.length === 0 ? (
+            <p className={styles.empty}>No food found.</p>
+          ) : filteredFoods.length === 0 ? (
+            <p className={styles.empty}>No food match your search.</p>
+          ) : (
+            <div className={styles.grid}>
+              {filteredFoods.map((food) => {
+                const canEdit =
+                  (food.is_system && isAdmin) ||
+                  (!food.is_system && food.created_by_user_id === user?.id);
 
-                  <div className={styles.actions}>
-                    {canEdit && (
-                      <button
-                        className={styles.editButton}
-                        onClick={() => setEditingFood(food)}
-                        type="button"
-                      >
-                        Edit
-                      </button>
-                    )}
+                const canDelete =
+                  (food.is_system && isAdmin) ||
+                  (!food.is_system && food.created_by_user_id === user?.id);
 
-                    {canDelete && (
-                      <button
-                        className={styles.deleteButton}
-                        onClick={() => handleDelete(food.id, food.is_system)}
-                        type="button"
-                      >
-                        Delete
-                      </button>
-                    )}
-                  </div>
-                </div>
+                return (
+                  <div
+                    key={food.id}
+                    className={`${styles.card} ${canEdit ? styles.cardClickable : ""}`}
+                    onClick={() => {
+                      if (canEdit) {
+                        setEditingFood(food);
+                      }
+                    }}
+                    role={canEdit ? "button" : undefined}
+                    tabIndex={canEdit ? 0 : -1}
+                    onKeyDown={(event) => {
+                      if (!canEdit) {
+                        return;
+                      }
 
-                <div className={styles.badges}>
-                  <span
-                    className={`${styles.badge} ${
-                      food.is_system ? styles.system : styles.custom
-                    }`}
+                      if (event.key === "Enter" || event.key === " ") {
+                        event.preventDefault();
+                        setEditingFood(food);
+                      }
+                    }}
+                    aria-label={canEdit ? `Edit ${food.name}` : undefined}
                   >
-                    {food.is_system ? "System" : "Custom"}
-                  </span>
-                </div>
+                    <div className={styles.cardTop}>
+                      <div>
+                        <h3 className={styles.cardTitle}>{food.name}</h3>
+                        <p className={styles.meta}>{food.brand || "No brand"}</p>
+                      </div>
 
-                <div className={styles.macroRow}>
-                  <span>Calories: {food.calories_per_100g}</span>
-                  <span>Protein: {food.protein_per_100g}</span>
-                  <span>Carbs: {food.carbs_per_100g}</span>
-                  <span>Fat: {food.fat_per_100g}</span>
-                </div>
+                      <div className={styles.actions}>
+                        {canDelete && (
+                          <button
+                            className={styles.deleteButton}
+                            type="button"
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              void handleDelete(food.id, food.is_system);
+                            }}
+                          >
+                            Delete
+                          </button>
+                        )}
+                      </div>
+                    </div>
 
-                {editingFood?.id === food.id && (
-                  <div style={{ marginTop: "1rem" }}>
-                    <FoodForm
-                      isAdmin={isAdmin}
-                      isSubmitting={isSubmitting}
-                      onSubmit={handleCreate}
-                      editingFood={editingFood}
-                      onUpdate={handleUpdate}
-                      onCancelEdit={() => setEditingFood(null)}
-                    />
+                    <div className={styles.badges}>
+                      <span
+                        className={`${styles.badge} ${
+                          food.is_system ? styles.system : styles.custom
+                        }`}
+                      >
+                        {food.is_system ? "System" : "Custom"}
+                      </span>
+                    </div>
+
+                    <div className={styles.macroRow}>
+                      <span>Calories: {food.calories_per_100g}</span>
+                      <span>Protein: {food.protein_per_100g}</span>
+                      <span>Carbs: {food.carbs_per_100g}</span>
+                      <span>Fat: {food.fat_per_100g}</span>
+                    </div>
                   </div>
-                )}
+                );
+              })}
+            </div>
+          )}
+        </section>
+      )}
+
+      {editingFood && (
+        <div
+          className={styles.editOverlay}
+          onClick={() => setEditingFood(null)}
+          role="presentation"
+        >
+          <section
+            className={styles.editModal}
+            onClick={(event) => event.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-label={`Edit ${editingFood.name}`}
+          >
+            <header className={styles.editModalHeader}>
+              <div>
+                <h3 className={styles.sectionTitle}>Edit Food</h3>
+                <p className={styles.sectionSubtitle}>{editingFood.name}</p>
               </div>
-            );
-          })}
+              <button
+                className={styles.secondaryButton}
+                type="button"
+                onClick={() => setEditingFood(null)}
+              >
+                Close
+              </button>
+            </header>
+
+            <FoodForm
+              isAdmin={isAdmin}
+              isSubmitting={isSubmitting}
+              onSubmit={handleCreate}
+              editingFood={editingFood}
+              onUpdate={handleUpdate}
+              onCancelEdit={() => setEditingFood(null)}
+            />
+          </section>
         </div>
       )}
     </div>
