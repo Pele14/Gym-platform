@@ -7,7 +7,7 @@ from sqlalchemy.exc import OperationalError
 from app.config import Config
 from app.extensions import db, jwt
 from app.routes import register_routes
-
+from app.extensions import redis_client
 
 def create_app():
     app = Flask(__name__)
@@ -17,7 +17,16 @@ def create_app():
 
     db.init_app(app)
     jwt.init_app(app)
-
+    redis_client.connection_pool = redis_client.from_url(
+        app.config["REDIS_URL"],
+        decode_responses=True
+    ).connection_pool
+    
+    @jwt.token_in_blocklist_loader
+    def check_if_token_revoked(jwt_header, jwt_payload):
+        jti = jwt_payload["jti"]
+        token = redis_client.get(f"jwt_blocklist:{jti}")
+        return token is not None
     register_routes(app)
 
     with app.app_context():

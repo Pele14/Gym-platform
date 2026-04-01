@@ -20,7 +20,7 @@ export default function NutritionGoalCard({
 
   return (
     <div className={styles.nutritionCard}>
-      <h3 className={styles.subtitle}>Nutrition goal</h3>
+      <h3 className={styles.nutritionCardTitle}>Nutrition goal</h3>
 
       {isLoading && <p className={styles.message}>Loading nutrition goal...</p>}
 

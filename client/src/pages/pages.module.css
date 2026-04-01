@@ -375,6 +375,34 @@
   gap: 0.9rem;
 }
 
+.profileControlsRow {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.settingsToggleButton {
+  border: 1px solid var(--border-primary);
+  background: var(--bg-section-bg);
+  color: var(--text-secondary);
+  border-radius: 999px;
+  padding: 0.42rem 0.82rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.settingsToggleButton:hover {
+  background: var(--bg-hover);
+  border-color: var(--border-card);
+}
+
+.settingsToggleButtonActive {
+  background: rgba(31, 138, 80, 0.16);
+  border-color: rgba(31, 138, 80, 0.35);
+  color: var(--color-success-accent);
+}
+
 .statsRow {
   display: grid;
   grid-template-columns: 1fr 1fr;

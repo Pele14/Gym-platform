@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { SettingsForm } from "../features/user";
 import { useWorkoutSession, type WorkoutSession } from "../features/workout_session";
 import AppLayout from "../common/components/AppLayout";
@@ -100,13 +100,25 @@ function formatMetricValue(value: number): string {
 }
 
 export default function ProfilePage() {
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [selectedWorkoutMetric, setSelectedWorkoutMetric] = useState<WorkoutMetric>("reps");
   const [calendarMonth, setCalendarMonth] = useState(() => {
     const now = new Date();
     return { year: now.getFullYear(), month: now.getMonth() };
   });
 
-  const { history } = useWorkoutSession();
+  const {
+    history,
+    isLoading: isHistoryLoading,
+    error: historyError,
+    loadWorkoutHistory,
+  } = useWorkoutSession();
+
+  useEffect(() => {
+    void loadWorkoutHistory().catch(() => {
+      // Error is already stored in hook state and rendered below.
+    });
+  }, [loadWorkoutHistory]);
 
   const weeklyWorkoutStats = useMemo(
     () => buildWeeklyWorkoutStats(history, STATS_WEEKS),
@@ -201,9 +213,23 @@ export default function ProfilePage() {
   return (
     <AppLayout pageTitle="Profile">
       <div className={styles.profileSectionStack}>
-          <article className={styles.profileFormContainer}>
-            <SettingsForm />
-          </article>
+          <div className={styles.profileControlsRow}>
+            <button
+              className={`${styles.settingsToggleButton} ${
+                isSettingsOpen ? styles.settingsToggleButtonActive : ""
+              }`}
+              type="button"
+              onClick={() => setIsSettingsOpen((prev) => !prev)}
+            >
+              {isSettingsOpen ? "Hide Settings" : "Settings"}
+            </button>
+          </div>
+
+          {isSettingsOpen && (
+            <article className={styles.profileFormContainer}>
+              <SettingsForm />
+            </article>
+          )}
 
           <div className={styles.statsRow}>
             <article className={styles.profileStatsCard}>
@@ -249,22 +275,28 @@ export default function ProfilePage() {
               </div>
 
               <div className={styles.barChartShell}>
-                <div className={styles.barChartPlot}>
-                  {workoutBarChartData.map((point) => (
-                    <div key={point.weekLabel} className={styles.barChartColumn}>
-                      <span className={styles.barChartValue}>{formatMetricValue(point.value)}</span>
-                      <div className={styles.barChartTrack}>
-                        <div
-                          className={`${styles.barChartBar} ${point.isLatest ? styles.barChartBarLatest : ""}`}
-                          style={{ height: `${point.barHeight}px` }}
-                          aria-label={`${point.weekLabel}: ${formatMetricValue(point.value)} ${selectedMetricSummary.unit}`}
-                          role="img"
-                        />
+                {isHistoryLoading ? (
+                  <p className={styles.cardMeta}>Loading workout statistics...</p>
+                ) : historyError ? (
+                  <p className={styles.cardMeta}>{historyError}</p>
+                ) : (
+                  <div className={styles.barChartPlot}>
+                    {workoutBarChartData.map((point) => (
+                      <div key={point.weekLabel} className={styles.barChartColumn}>
+                        <span className={styles.barChartValue}>{formatMetricValue(point.value)}</span>
+                        <div className={styles.barChartTrack}>
+                          <div
+                            className={`${styles.barChartBar} ${point.isLatest ? styles.barChartBarLatest : ""}`}
+                            style={{ height: `${point.barHeight}px` }}
+                            aria-label={`${point.weekLabel}: ${formatMetricValue(point.value)} ${selectedMetricSummary.unit}`}
+                            role="img"
+                          />
+                        </div>
+                        <span className={styles.barChartLabel}>{point.weekLabel}</span>
                       </div>
-                      <span className={styles.barChartLabel}>{point.weekLabel}</span>
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                )}
               </div>
 
               <div className={styles.statsSummaryGrid}>
@@ -328,24 +360,32 @@ export default function ProfilePage() {
               </div>
 
               <div className={styles.calendarGrid}>
-                {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((d) => (
-                  <div key={d} className={styles.calendarDayHeader}>{d}</div>
-                ))}
-                {calendarDays.map((cell, idx) =>
-                  cell === null ? (
-                    <div key={`empty-${idx}`} className={styles.calendarCellEmpty} />
-                  ) : (
-                    <div
-                      key={cell.dateKey}
-                      className={[
-                        styles.calendarCell,
-                        cell.hasWorkout ? styles.calendarCellDone : "",
-                        cell.isToday ? styles.calendarCellToday : "",
-                      ].filter(Boolean).join(" ")}
-                    >
-                      <span className={styles.calendarDayNumber}>{cell.day}</span>
-                    </div>
-                  )
+                {isHistoryLoading ? (
+                  <p className={styles.cardMeta}>Loading workout calendar...</p>
+                ) : historyError ? (
+                  <p className={styles.cardMeta}>{historyError}</p>
+                ) : (
+                  <>
+                    {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((d) => (
+                      <div key={d} className={styles.calendarDayHeader}>{d}</div>
+                    ))}
+                    {calendarDays.map((cell, idx) =>
+                      cell === null ? (
+                        <div key={`empty-${idx}`} className={styles.calendarCellEmpty} />
+                      ) : (
+                        <div
+                          key={cell.dateKey}
+                          className={[
+                            styles.calendarCell,
+                            cell.hasWorkout ? styles.calendarCellDone : "",
+                            cell.isToday ? styles.calendarCellToday : "",
+                          ].filter(Boolean).join(" ")}
+                        >
+                          <span className={styles.calendarDayNumber}>{cell.day}</span>
+                        </div>
+                      )
+                    )}
+                  </>
                 )}
               </div>
             </article>

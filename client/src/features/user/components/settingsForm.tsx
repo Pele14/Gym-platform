@@ -90,6 +90,11 @@ export default function SettingsForm() {
 
       {error && <p className={styles.error}>{error}</p>}
 
+      <NutritionGoalCard
+        canCalculate={hasRequiredNutritionFields}
+        isDisabled={isSubmitting}
+      />
+
       <form className={styles.form} onSubmit={handleSubmit}>
         <section className={styles.formSectionCard}>
           <div className={styles.sectionHeader}>
@@ -257,11 +262,6 @@ export default function SettingsForm() {
           </button>
         </div>
       </form>
-
-      <NutritionGoalCard
-        canCalculate={hasRequiredNutritionFields}
-        isDisabled={isSubmitting}
-      />
     </div>
   );
 }

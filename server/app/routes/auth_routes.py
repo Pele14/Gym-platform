@@ -1,5 +1,6 @@
 from flask import Blueprint, request
-from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, get_jwt
+from datetime import datetime, timezone, timedelta
 
 from app.services.auth_services import AuthService
 from app.utils.authvalidators import (
@@ -10,6 +11,8 @@ from app.utils.authvalidators import (
     validate_first_name,
     validate_last_name
 )
+from app.extensions import redis_client
+
 
 auth_bp = Blueprint("auth", __name__, url_prefix="/api/auth")
 
@@ -99,3 +102,18 @@ def me():
         return {"message": "User not found"}, 404
 
     return {"user": user.to_dict()}, 200
+
+@auth_bp.route("/logout", methods=["POST"])
+@jwt_required()
+def logout():
+    jwt_data = get_jwt()
+
+    jti = jwt_data["jti"]
+    exp = jwt_data["exp"]
+
+    now = datetime.now(timezone.utc).timestamp()
+    ttl = max(int(exp - now), 1)
+
+    redis_client.setex(f"jwt_blocklist:{jti}", ttl, "true")
+
+    return {"message": "Logout successful"}, 200

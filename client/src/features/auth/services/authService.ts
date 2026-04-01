@@ -1,5 +1,5 @@
 import { http } from "../../../services/http";
-import { setToken, removeToken } from "../../../services/tokenStorage";
+import { getToken, setToken, removeToken } from "../../../services/tokenStorage";
 import type {
   AuthResponse,
   LoginPayload,
@@ -32,6 +32,22 @@ export const authService = {
     return http<MeResponse>("/api/auth/me", {
       method: "GET",
     });
+  },
+
+  async logoutRemote(): Promise<void> {
+    const token = getToken();
+
+    if (!token) {
+      return;
+    }
+
+    await http<{ message: string }>("/api/auth/logout", {
+      method: "POST",
+    });
+  },
+
+  logoutLocal(): void {
+    removeToken();
   },
 
   logout(): void {

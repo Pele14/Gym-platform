@@ -162,11 +162,19 @@
 }
 
 .nutritionCard {
-  margin-top: 1rem;
+  margin-top: 0.4rem;
   padding: 1rem;
   border: 1px solid var(--tone-2a3d32);
   border-radius: 12px;
   background: var(--bg-section-bg);
+}
+
+.nutritionCardTitle {
+  margin: 0 0 0.7rem 0;
+  color: var(--text-primary);
+  font-size: 1.02rem;
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 .goalGrid {
