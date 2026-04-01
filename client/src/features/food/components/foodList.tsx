@@ -17,8 +17,6 @@ export default function FoodList() {
   const [editingFood, setEditingFood] = useState<Food | null>(null);
 
   const isAdmin = user?.role === "admin";
-  const systemFoodsCount = foods.filter((food) => food.is_system).length;
-  const customFoodsCount = foods.length - systemFoodsCount;
 
   const handleCreate = async (payload: CreateFoodPayload, isSystem: boolean) => {
     await createFood(payload, isSystem);
@@ -77,11 +75,6 @@ export default function FoodList() {
           <p className={styles.subtitle}>
             Manage nutrition entries and quickly edit system or custom food.
           </p>
-          <div className={styles.metricRow}>
-            <span className={styles.metricChip}>{foods.length} total</span>
-            <span className={styles.metricChip}>{systemFoodsCount} system</span>
-            <span className={styles.metricChip}>{customFoodsCount} custom</span>
-          </div>
         </div>
 
         <div className={styles.viewToggle} role="tablist" aria-label="Food management views">

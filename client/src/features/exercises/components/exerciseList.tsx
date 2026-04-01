@@ -23,6 +23,8 @@ export default function ExerciseList() {
   const [editingExercise, setEditingExercise] = useState<Exercise | null>(null);
 
   const isAdmin = user?.role === "admin";
+  const systemExercisesCount = exercises.filter((exercise) => exercise.is_system).length;
+  const customExercisesCount = exercises.length - systemExercisesCount;
 
   const handleCreate = async (
     payload: CreateExercisePayload,
@@ -133,7 +135,9 @@ export default function ExerciseList() {
           <header className={styles.sectionHeader}>
             <div>
               <h3 className={styles.sectionTitle}>Existing Exercises</h3>
-              <p className={styles.sectionSubtitle}>{exercises.length} total</p>
+              <p className={styles.sectionSubtitle}>
+                Showing {filteredExercises.length} of {exercises.length} · {systemExercisesCount} system · {customExercisesCount} custom
+              </p>
             </div>
 
             <div className={styles.searchGroup}>
