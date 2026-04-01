@@ -340,6 +340,18 @@
   align-items: center;
 }
 
+.modalSearchStack {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.searchHint {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
 .modalActions {
   display: flex;
   justify-content: flex-end;

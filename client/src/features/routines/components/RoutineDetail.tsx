@@ -81,6 +81,8 @@ export default function RoutineDetail({
 
   const [addExerciseId, setAddExerciseId] = useState("");
   const [addExerciseNotes, setAddExerciseNotes] = useState("");
+  const [addExerciseSearchQuery, setAddExerciseSearchQuery] = useState("");
+  const [editExerciseSearchQuery, setEditExerciseSearchQuery] = useState("");
 
   const moveExercise = async (index: number, direction: -1 | 1) => {
     const targetIndex = index + direction;
@@ -147,11 +149,59 @@ export default function RoutineDetail({
 
   const exerciseList = routine.exercises || [];
 
+  const addExerciseQuery = addExerciseSearchQuery.trim().toLowerCase();
+  const editExerciseQuery = editExerciseSearchQuery.trim().toLowerCase();
+
+  const filteredAddExercises = exercises.filter((exercise) => {
+    if (!addExerciseQuery) {
+      return true;
+    }
+
+    return [
+      exercise.name,
+      exercise.muscle_group,
+      exercise.description ?? "",
+      exercise.equipment ?? "",
+      exercise.difficulty ?? "",
+    ].some((value) => value.toLowerCase().includes(addExerciseQuery));
+  });
+
+  const filteredEditExercises = exercises.filter((exercise) => {
+    if (!editExerciseQuery) {
+      return true;
+    }
+
+    return [
+      exercise.name,
+      exercise.muscle_group,
+      exercise.description ?? "",
+      exercise.equipment ?? "",
+      exercise.difficulty ?? "",
+    ].some((value) => value.toLowerCase().includes(editExerciseQuery));
+  });
+
+  const selectedAddExercise = exercises.find((exercise) => String(exercise.id) === addExerciseId);
+  const selectedEditExercise = editExerciseModal
+    ? exercises.find((exercise) => String(exercise.id) === editExerciseModal.exercise_id)
+    : null;
+
   const getNextSetOrder = (planExerciseId: number) => {
     const targetExercise = exerciseList.find((item) => item.id === planExerciseId);
     const sets = targetExercise?.sets || [];
 
     return sets.length > 0 ? Math.max(...sets.map((item) => item.set_order)) + 1 : 1;
+  };
+
+  const closeAddExerciseModal = () => {
+    setShowAddExercise(false);
+    setAddExerciseId("");
+    setAddExerciseNotes("");
+    setAddExerciseSearchQuery("");
+  };
+
+  const closeEditExerciseModal = () => {
+    setEditExerciseModal(null);
+    setEditExerciseSearchQuery("");
   };
 
   return (
@@ -347,20 +397,23 @@ export default function RoutineDetail({
       <button
         className={styles.addExerciseButton}
         type="button"
-        onClick={() => setShowAddExercise(true)}
+        onClick={() => {
+          setShowAddExercise(true);
+          setAddExerciseSearchQuery("");
+        }}
       >
         + Add Exercise
       </button>
 
       {showAddExercise && (
-        <div className={styles.modalOverlay} onClick={() => setShowAddExercise(false)}>
+        <div className={styles.modalOverlay} onClick={closeAddExerciseModal}>
           <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
             <div className={styles.modalHeader}>
               <h3 className={styles.modalTitle}>Add Exercise</h3>
               <button
                 className={styles.modalClose}
                 type="button"
-                onClick={() => setShowAddExercise(false)}
+                onClick={closeAddExerciseModal}
               >
                 ✕
               </button>
@@ -381,26 +434,68 @@ export default function RoutineDetail({
                   exercise_order: nextExerciseOrder,
                   notes: addExerciseNotes.trim() || undefined,
                 });
-                setAddExerciseId("");
-                setAddExerciseNotes("");
-                setShowAddExercise(false);
+                closeAddExerciseModal();
               }}
             >
-              <label className={styles.modalLabel}>Exercise</label>
-              <select
-                className={styles.select}
-                value={addExerciseId}
-                onChange={(e) => setAddExerciseId(e.target.value)}
+              <label className={styles.modalLabel} htmlFor="add-exercise-search">Search exercise</label>
+              <input
+                id="add-exercise-search"
+                className={styles.input}
+                type="search"
+                placeholder="Search exercise..."
+                value={addExerciseSearchQuery}
+                onChange={(e) => setAddExerciseSearchQuery(e.target.value)}
                 disabled={isSubmitting || exercisesLoading}
-                required
-              >
-                <option value="">Select exercise</option>
-                {exercises.map((ex) => (
-                  <option key={ex.id} value={ex.id}>
-                    {ex.name} ({ex.muscle_group})
-                  </option>
-                ))}
-              </select>
+              />
+
+              <div className={styles.exercisePickerList}>
+                {filteredAddExercises.length > 0 ? (
+                  filteredAddExercises.map((exercise) => {
+                    const isSelected = addExerciseId === String(exercise.id);
+
+                    return (
+                      <button
+                        key={exercise.id}
+                        className={`${styles.exercisePickerOption} ${
+                          isSelected ? styles.exercisePickerOptionSelected : ""
+                        }`}
+                        type="button"
+                        onClick={() => setAddExerciseId(String(exercise.id))}
+                        disabled={isSubmitting || exercisesLoading}
+                      >
+                        <div className={styles.exercisePickerInfo}>
+                          <span className={styles.exercisePickerName}>{exercise.name}</span>
+                          <span className={styles.exercisePickerMeta}>
+                            {exercise.muscle_group}
+                            {exercise.equipment ? ` • ${exercise.equipment}` : ""}
+                            {exercise.difficulty ? ` • ${exercise.difficulty}` : ""}
+                          </span>
+                        </div>
+                      </button>
+                    );
+                  })
+                ) : (
+                  <p className={styles.exercisePickerEmpty}>
+                    {addExerciseSearchQuery.trim()
+                      ? "No exercises match your search."
+                      : "Exercises will appear here."}
+                  </p>
+                )}
+              </div>
+
+              {selectedAddExercise && (
+                <div className={styles.exercisePickerSelectedCard}>
+                  <span className={styles.exercisePickerSelectedLabel}>Selected</span>
+                  <strong className={styles.exercisePickerSelectedName}>
+                    {selectedAddExercise.name}
+                  </strong>
+                  <span className={styles.exercisePickerSelectedMeta}>
+                    {selectedAddExercise.muscle_group}
+                    {selectedAddExercise.equipment ? ` • ${selectedAddExercise.equipment}` : ""}
+                    {selectedAddExercise.difficulty ? ` • ${selectedAddExercise.difficulty}` : ""}
+                  </span>
+                </div>
+              )}
 
               <label className={styles.modalLabel}>Notes</label>
               <textarea
@@ -415,11 +510,15 @@ export default function RoutineDetail({
                 <button
                   className={styles.secondaryButton}
                   type="button"
-                  onClick={() => setShowAddExercise(false)}
+                  onClick={closeAddExerciseModal}
                 >
                   Cancel
                 </button>
-                <button className={styles.button} type="submit" disabled={isSubmitting}>
+                <button
+                  className={styles.button}
+                  type="submit"
+                  disabled={isSubmitting || !addExerciseId}
+                >
                   {isSubmitting ? "Adding..." : "Add Exercise"}
                 </button>
               </div>
@@ -432,7 +531,7 @@ export default function RoutineDetail({
       {editExerciseModal && (
         <div
           className={styles.modalOverlay}
-          onClick={() => setEditExerciseModal(null)}
+          onClick={closeEditExerciseModal}
         >
           <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
             <div className={styles.modalHeader}>
@@ -440,7 +539,7 @@ export default function RoutineDetail({
               <button
                 className={styles.modalClose}
                 type="button"
-                onClick={() => setEditExerciseModal(null)}
+                onClick={closeEditExerciseModal}
               >
                 ✕
               </button>
@@ -454,28 +553,72 @@ export default function RoutineDetail({
                   exercise_order: Number(editExerciseModal.exercise_order),
                   notes: editExerciseModal.notes.trim() || undefined,
                 });
-                setEditExerciseModal(null);
+                closeEditExerciseModal();
               }}
             >
-              <label className={styles.modalLabel}>Exercise</label>
-              <select
-                className={styles.select}
-                value={editExerciseModal.exercise_id}
-                onChange={(e) =>
-                  setEditExerciseModal((prev) =>
-                    prev ? { ...prev, exercise_id: e.target.value } : prev
-                  )
-                }
+              <label className={styles.modalLabel} htmlFor="edit-exercise-search">Search exercise</label>
+              <input
+                id="edit-exercise-search"
+                className={styles.input}
+                type="search"
+                placeholder="Search exercise..."
+                value={editExerciseSearchQuery}
+                onChange={(e) => setEditExerciseSearchQuery(e.target.value)}
                 disabled={isSubmitting || exercisesLoading}
-                required
-              >
-                <option value="">Select exercise</option>
-                {exercises.map((ex) => (
-                  <option key={ex.id} value={ex.id}>
-                    {ex.name} ({ex.muscle_group})
-                  </option>
-                ))}
-              </select>
+              />
+
+              <div className={styles.exercisePickerList}>
+                {filteredEditExercises.length > 0 ? (
+                  filteredEditExercises.map((exercise) => {
+                    const isSelected = editExerciseModal.exercise_id === String(exercise.id);
+
+                    return (
+                      <button
+                        key={exercise.id}
+                        className={`${styles.exercisePickerOption} ${
+                          isSelected ? styles.exercisePickerOptionSelected : ""
+                        }`}
+                        type="button"
+                        onClick={() =>
+                          setEditExerciseModal((prev) =>
+                            prev ? { ...prev, exercise_id: String(exercise.id) } : prev
+                          )
+                        }
+                        disabled={isSubmitting || exercisesLoading}
+                      >
+                        <div className={styles.exercisePickerInfo}>
+                          <span className={styles.exercisePickerName}>{exercise.name}</span>
+                          <span className={styles.exercisePickerMeta}>
+                            {exercise.muscle_group}
+                            {exercise.equipment ? ` • ${exercise.equipment}` : ""}
+                            {exercise.difficulty ? ` • ${exercise.difficulty}` : ""}
+                          </span>
+                        </div>
+                      </button>
+                    );
+                  })
+                ) : (
+                  <p className={styles.exercisePickerEmpty}>
+                    {editExerciseSearchQuery.trim()
+                      ? "No exercises match your search."
+                      : "Exercises will appear here."}
+                  </p>
+                )}
+              </div>
+
+              {selectedEditExercise && (
+                <div className={styles.exercisePickerSelectedCard}>
+                  <span className={styles.exercisePickerSelectedLabel}>Selected</span>
+                  <strong className={styles.exercisePickerSelectedName}>
+                    {selectedEditExercise.name}
+                  </strong>
+                  <span className={styles.exercisePickerSelectedMeta}>
+                    {selectedEditExercise.muscle_group}
+                    {selectedEditExercise.equipment ? ` • ${selectedEditExercise.equipment}` : ""}
+                    {selectedEditExercise.difficulty ? ` • ${selectedEditExercise.difficulty}` : ""}
+                  </span>
+                </div>
+              )}
 
               <label className={styles.modalLabel}>Order</label>
               <input
@@ -506,14 +649,14 @@ export default function RoutineDetail({
                 <button
                   className={styles.secondaryButton}
                   type="button"
-                  onClick={() => setEditExerciseModal(null)}
+                  onClick={closeEditExerciseModal}
                 >
                   Cancel
                 </button>
                 <button
                   className={styles.button}
                   type="submit"
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || !editExerciseModal.exercise_id}
                 >
                   {isSubmitting ? "Saving..." : "Save"}
                 </button>

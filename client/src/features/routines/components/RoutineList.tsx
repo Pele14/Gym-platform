@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../routines.module.css";
 import RoutineForm from "./RoutineForm";
@@ -11,6 +11,7 @@ type RoutineView = "home" | "create" | "detail";
 export default function RoutineList() {
   const navigate = useNavigate();
   const [view, setView] = useState<RoutineView>("home");
+  const [searchQuery, setSearchQuery] = useState("");
 
   const {
     routines,
@@ -35,6 +36,26 @@ export default function RoutineList() {
     isSubmitting: isStartingWorkout,
   } = useWorkoutSession();
 
+  const filteredRoutines = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
+
+    if (!query) {
+      return routines;
+    }
+
+    return routines.filter((routine) =>
+      [routine.name, routine.description ?? "", String(routine.exercises?.length ?? 0)]
+        .join(" ")
+        .toLowerCase()
+        .includes(query)
+    );
+  }, [routines, searchQuery]);
+
+  const totalExercises = routines.reduce(
+    (total, routine) => total + (routine.exercises?.length ?? 0),
+    0
+  );
+
   if (isLoading) {
     return (
       <div className={styles.container}>
@@ -46,7 +67,32 @@ export default function RoutineList() {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Routines</h2>
+      <div className={styles.pageHeader}>
+        <div>
+          <h2 className={styles.title}>Routines</h2>
+          <p className={styles.pageSubtitle}>
+            Build, organize, and launch training plans without oversized cards.
+          </p>
+          <div className={styles.metricsRow}>
+            <span className={styles.metricChip}>{routines.length} routines</span>
+            <span className={styles.metricChip}>{totalExercises} exercises total</span>
+            <span className={styles.metricChip}>Compact planner</span>
+          </div>
+        </div>
+
+        {view === "home" && (
+          <div className={styles.searchGroup}>
+            <input
+              className={styles.searchInput}
+              type="search"
+              placeholder="Search routines..."
+              value={searchQuery}
+              onChange={(event) => setSearchQuery(event.target.value)}
+              aria-label="Search routines"
+            />
+          </div>
+        )}
+      </div>
 
       {error && <p className={styles.error}>{error}</p>}
 
@@ -66,7 +112,7 @@ export default function RoutineList() {
           </div>
 
           <div className={styles.quickSummaryList}>
-            {routines.map((routine) => (
+            {filteredRoutines.map((routine) => (
               <button
                 key={routine.id}
                 className={styles.summaryCard}
@@ -78,19 +124,24 @@ export default function RoutineList() {
               >
                 <div className={styles.summaryInfo}>
                   <h4>{routine.name}</h4>
-                  <p className={styles.smallText}>
+                  <p className={`${styles.smallText} ${styles.summaryDescription}`}>
                     {routine.description || "No description"}
                   </p>
-                  <p className={styles.smallText}>
-                    Exercises: {routine.exercises?.length ?? "Open to view"}
-                  </p>
+                  <div className={styles.summaryMetaRow}>
+                    <span className={styles.summaryMetaChip}>
+                      {routine.exercises?.length ?? 0} exercises
+                    </span>
+                    <span className={styles.summaryMetaChip}>Open detail</span>
+                  </div>
                 </div>
               </button>
             ))}
 
-            {routines.length === 0 && (
+            {routines.length === 0 ? (
               <p className={styles.message}>No routines yet.</p>
-            )}
+            ) : filteredRoutines.length === 0 ? (
+              <p className={styles.message}>No routines match your search.</p>
+            ) : null}
           </div>
         </>
       )}

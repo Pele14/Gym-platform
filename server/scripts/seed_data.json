@@ -1,0 +1,832 @@
+{
+  "foods": [
+    {
+      "name": "Chicken Breast",
+      "brand": "",
+      "calories_per_100g": 165,
+      "protein_per_100g": 31,
+      "carbs_per_100g": 0,
+      "fat_per_100g": 3.6
+    },
+    {
+      "name": "Salmon",
+      "brand": "",
+      "calories_per_100g": 208,
+      "protein_per_100g": 20,
+      "carbs_per_100g": 0,
+      "fat_per_100g": 13
+    },
+    {
+      "name": "Egg",
+      "brand": "",
+      "calories_per_100g": 155,
+      "protein_per_100g": 13,
+      "carbs_per_100g": 1.1,
+      "fat_per_100g": 11
+    },
+    {
+      "name": "Greek Yogurt",
+      "brand": "",
+      "calories_per_100g": 59,
+      "protein_per_100g": 10,
+      "carbs_per_100g": 3.6,
+      "fat_per_100g": 0.4
+    },
+    {
+      "name": "Cottage Cheese",
+      "brand": "",
+      "calories_per_100g": 98,
+      "protein_per_100g": 11.1,
+      "carbs_per_100g": 3.4,
+      "fat_per_100g": 4.3
+    },
+    {
+      "name": "Oats",
+      "brand": "",
+      "calories_per_100g": 389,
+      "protein_per_100g": 16.9,
+      "carbs_per_100g": 66.3,
+      "fat_per_100g": 6.9
+    },
+    {
+      "name": "Brown Rice",
+      "brand": "",
+      "calories_per_100g": 111,
+      "protein_per_100g": 2.6,
+      "carbs_per_100g": 23,
+      "fat_per_100g": 0.9
+    },
+    {
+      "name": "White Rice",
+      "brand": "",
+      "calories_per_100g": 130,
+      "protein_per_100g": 2.7,
+      "carbs_per_100g": 28,
+      "fat_per_100g": 0.3
+    },
+    {
+      "name": "Sweet Potato",
+      "brand": "",
+      "calories_per_100g": 86,
+      "protein_per_100g": 1.6,
+      "carbs_per_100g": 20.1,
+      "fat_per_100g": 0.1
+    },
+    {
+      "name": "Banana",
+      "brand": "",
+      "calories_per_100g": 89,
+      "protein_per_100g": 1.1,
+      "carbs_per_100g": 22.8,
+      "fat_per_100g": 0.3
+    },
+    {
+      "name": "Apple",
+      "brand": "",
+      "calories_per_100g": 52,
+      "protein_per_100g": 0.3,
+      "carbs_per_100g": 13.8,
+      "fat_per_100g": 0.2
+    },
+    {
+      "name": "Avocado",
+      "brand": "",
+      "calories_per_100g": 160,
+      "protein_per_100g": 2,
+      "carbs_per_100g": 8.5,
+      "fat_per_100g": 14.7
+    },
+    {
+      "name": "Almonds",
+      "brand": "",
+      "calories_per_100g": 579,
+      "protein_per_100g": 21.2,
+      "carbs_per_100g": 21.6,
+      "fat_per_100g": 49.9
+    },
+    {
+      "name": "Peanut Butter",
+      "brand": "",
+      "calories_per_100g": 588,
+      "protein_per_100g": 25,
+      "carbs_per_100g": 20,
+      "fat_per_100g": 50
+    },
+    {
+      "name": "Broccoli",
+      "brand": "",
+      "calories_per_100g": 34,
+      "protein_per_100g": 2.8,
+      "carbs_per_100g": 6.6,
+      "fat_per_100g": 0.4
+    },
+    {
+      "name": "Spinach",
+      "brand": "",
+      "calories_per_100g": 23,
+      "protein_per_100g": 2.9,
+      "carbs_per_100g": 3.6,
+      "fat_per_100g": 0.4
+    },
+    {
+      "name": "Olive Oil",
+      "brand": "",
+      "calories_per_100g": 884,
+      "protein_per_100g": 0,
+      "carbs_per_100g": 0,
+      "fat_per_100g": 100
+    },
+    {
+      "name": "Whole Wheat Bread",
+      "brand": "",
+      "calories_per_100g": 247,
+      "protein_per_100g": 13,
+      "carbs_per_100g": 41,
+      "fat_per_100g": 4.2
+    },
+    {
+      "name": "Tuna in Water",
+      "brand": "",
+      "calories_per_100g": 116,
+      "protein_per_100g": 26,
+      "carbs_per_100g": 0,
+      "fat_per_100g": 1
+    },
+    {
+      "name": "Whey Protein",
+      "brand": "",
+      "calories_per_100g": 400,
+      "protein_per_100g": 80,
+      "carbs_per_100g": 8,
+      "fat_per_100g": 6
+    },
+    {
+      "name": "Turkey Breast",
+      "brand": "",
+      "calories_per_100g": 135,
+      "protein_per_100g": 30,
+      "carbs_per_100g": 0,
+      "fat_per_100g": 1.5
+    },
+    {
+      "name": "Lean Ground Beef 5%",
+      "brand": "",
+      "calories_per_100g": 137,
+      "protein_per_100g": 21,
+      "carbs_per_100g": 0,
+      "fat_per_100g": 5,
+      "notes": "raw"
+    },
+    {
+      "name": "Cod",
+      "brand": "",
+      "calories_per_100g": 82,
+      "protein_per_100g": 18,
+      "carbs_per_100g": 0,
+      "fat_per_100g": 0.7
+    },
+    {
+      "name": "Shrimp",
+      "brand": "",
+      "calories_per_100g": 99,
+      "protein_per_100g": 24,
+      "carbs_per_100g": 0.2,
+      "fat_per_100g": 0.3
+    },
+    {
+      "name": "Tofu",
+      "brand": "",
+      "calories_per_100g": 76,
+      "protein_per_100g": 8,
+      "carbs_per_100g": 1.9,
+      "fat_per_100g": 4.8
+    },
+    {
+      "name": "Tempeh",
+      "brand": "",
+      "calories_per_100g": 193,
+      "protein_per_100g": 20,
+      "carbs_per_100g": 9.4,
+      "fat_per_100g": 10.8
+    },
+    {
+      "name": "Lentils Cooked",
+      "brand": "",
+      "calories_per_100g": 116,
+      "protein_per_100g": 9,
+      "carbs_per_100g": 20,
+      "fat_per_100g": 0.4
+    },
+    {
+      "name": "Chickpeas Cooked",
+      "brand": "",
+      "calories_per_100g": 164,
+      "protein_per_100g": 8.9,
+      "carbs_per_100g": 27.4,
+      "fat_per_100g": 2.6
+    },
+    {
+      "name": "Black Beans Cooked",
+      "brand": "",
+      "calories_per_100g": 132,
+      "protein_per_100g": 8.9,
+      "carbs_per_100g": 23.7,
+      "fat_per_100g": 0.5
+    },
+    {
+      "name": "Quinoa Cooked",
+      "brand": "",
+      "calories_per_100g": 120,
+      "protein_per_100g": 4.4,
+      "carbs_per_100g": 21.3,
+      "fat_per_100g": 1.9
+    },
+    {
+      "name": "Couscous Cooked",
+      "brand": "",
+      "calories_per_100g": 112,
+      "protein_per_100g": 3.8,
+      "carbs_per_100g": 23.2,
+      "fat_per_100g": 0.2
+    },
+    {
+      "name": "Pasta Cooked",
+      "brand": "",
+      "calories_per_100g": 157,
+      "protein_per_100g": 5.8,
+      "carbs_per_100g": 30.9,
+      "fat_per_100g": 0.9
+    },
+    {
+      "name": "Potato Boiled",
+      "brand": "",
+      "calories_per_100g": 87,
+      "protein_per_100g": 1.9,
+      "carbs_per_100g": 20.1,
+      "fat_per_100g": 0.1
+    },
+    {
+      "name": "Blueberries",
+      "brand": "",
+      "calories_per_100g": 57,
+      "protein_per_100g": 0.7,
+      "carbs_per_100g": 14.5,
+      "fat_per_100g": 0.3
+    },
+    {
+      "name": "Strawberries",
+      "brand": "",
+      "calories_per_100g": 32,
+      "protein_per_100g": 0.7,
+      "carbs_per_100g": 7.7,
+      "fat_per_100g": 0.3
+    },
+    {
+      "name": "Orange",
+      "brand": "",
+      "calories_per_100g": 47,
+      "protein_per_100g": 0.9,
+      "carbs_per_100g": 11.8,
+      "fat_per_100g": 0.1
+    },
+    {
+      "name": "Kiwi",
+      "brand": "",
+      "calories_per_100g": 61,
+      "protein_per_100g": 1.1,
+      "carbs_per_100g": 14.7,
+      "fat_per_100g": 0.5
+    },
+    {
+      "name": "Grapes",
+      "brand": "",
+      "calories_per_100g": 69,
+      "protein_per_100g": 0.7,
+      "carbs_per_100g": 18.1,
+      "fat_per_100g": 0.2
+    },
+    {
+      "name": "Pineapple",
+      "brand": "",
+      "calories_per_100g": 50,
+      "protein_per_100g": 0.5,
+      "carbs_per_100g": 13.1,
+      "fat_per_100g": 0.1
+    },
+    {
+      "name": "Mango",
+      "brand": "",
+      "calories_per_100g": 60,
+      "protein_per_100g": 0.8,
+      "carbs_per_100g": 15,
+      "fat_per_100g": 0.4
+    },
+    {
+      "name": "Cucumber",
+      "brand": "",
+      "calories_per_100g": 15,
+      "protein_per_100g": 0.7,
+      "carbs_per_100g": 3.6,
+      "fat_per_100g": 0.1
+    },
+    {
+      "name": "Tomato",
+      "brand": "",
+      "calories_per_100g": 18,
+      "protein_per_100g": 0.9,
+      "carbs_per_100g": 3.9,
+      "fat_per_100g": 0.2
+    },
+    {
+      "name": "Carrot",
+      "brand": "",
+      "calories_per_100g": 41,
+      "protein_per_100g": 0.9,
+      "carbs_per_100g": 9.6,
+      "fat_per_100g": 0.2
+    },
+    {
+      "name": "Bell Pepper",
+      "brand": "",
+      "calories_per_100g": 31,
+      "protein_per_100g": 1,
+      "carbs_per_100g": 6,
+      "fat_per_100g": 0.3
+    },
+    {
+      "name": "Zucchini",
+      "brand": "",
+      "calories_per_100g": 17,
+      "protein_per_100g": 1.2,
+      "carbs_per_100g": 3.1,
+      "fat_per_100g": 0.3
+    },
+    {
+      "name": "Green Beans",
+      "brand": "",
+      "calories_per_100g": 31,
+      "protein_per_100g": 1.8,
+      "carbs_per_100g": 7,
+      "fat_per_100g": 0.1
+    },
+    {
+      "name": "Asparagus",
+      "brand": "",
+      "calories_per_100g": 20,
+      "protein_per_100g": 2.2,
+      "carbs_per_100g": 3.9,
+      "fat_per_100g": 0.1
+    },
+    {
+      "name": "Mushrooms",
+      "brand": "",
+      "calories_per_100g": 22,
+      "protein_per_100g": 3.1,
+      "carbs_per_100g": 3.3,
+      "fat_per_100g": 0.3
+    },
+    {
+      "name": "Walnuts",
+      "brand": "",
+      "calories_per_100g": 654,
+      "protein_per_100g": 15.2,
+      "carbs_per_100g": 13.7,
+      "fat_per_100g": 65.2
+    },
+    {
+      "name": "Cashews",
+      "brand": "",
+      "calories_per_100g": 553,
+      "protein_per_100g": 18.2,
+      "carbs_per_100g": 30.2,
+      "fat_per_100g": 43.8
+    },
+    {
+      "name": "Chia Seeds",
+      "brand": "",
+      "calories_per_100g": 486,
+      "protein_per_100g": 16.5,
+      "carbs_per_100g": 42.1,
+      "fat_per_100g": 30.7
+    },
+    {
+      "name": "Flax Seeds",
+      "brand": "",
+      "calories_per_100g": 534,
+      "protein_per_100g": 18.3,
+      "carbs_per_100g": 28.9,
+      "fat_per_100g": 42.2
+    },
+    {
+      "name": "Skim Milk",
+      "brand": "",
+      "calories_per_100g": 34,
+      "protein_per_100g": 3.4,
+      "carbs_per_100g": 5,
+      "fat_per_100g": 0.1
+    },
+    {
+      "name": "Cheddar Cheese",
+      "brand": "",
+      "calories_per_100g": 403,
+      "protein_per_100g": 25,
+      "carbs_per_100g": 1.3,
+      "fat_per_100g": 33.1
+    },
+    {
+      "name": "Dark Chocolate 85%",
+      "brand": "",
+      "calories_per_100g": 598,
+      "protein_per_100g": 12.8,
+      "carbs_per_100g": 19.2,
+      "fat_per_100g": 52
+    }
+  ],
+  "exercises": [
+    {
+      "name": "Barbell Back Squat",
+      "muscle_group": "Legs",
+      "description": "Compound squat variation focused on quads, glutes, and core.",
+      "equipment": "Barbell",
+      "difficulty": "Intermediate"
+    },
+    {
+      "name": "Front Squat",
+      "muscle_group": "Legs",
+      "description": "Front-loaded squat emphasizing quads and upper-back stability.",
+      "equipment": "Barbell",
+      "difficulty": "Intermediate"
+    },
+    {
+      "name": "Romanian Deadlift",
+      "muscle_group": "Hamstrings",
+      "description": "Hip-hinge movement for hamstrings, glutes, and lower back.",
+      "equipment": "Barbell",
+      "difficulty": "Intermediate"
+    },
+    {
+      "name": "Conventional Deadlift",
+      "muscle_group": "Back",
+      "description": "Full-body pull from floor targeting posterior chain strength.",
+      "equipment": "Barbell",
+      "difficulty": "Advanced"
+    },
+    {
+      "name": "Bench Press",
+      "muscle_group": "Chest",
+      "description": "Horizontal pressing movement for chest, shoulders, and triceps.",
+      "equipment": "Barbell",
+      "difficulty": "Intermediate"
+    },
+    {
+      "name": "Incline Dumbbell Press",
+      "muscle_group": "Chest",
+      "description": "Upper chest pressing variation using dumbbells.",
+      "equipment": "Dumbbells",
+      "difficulty": "Beginner"
+    },
+    {
+      "name": "Overhead Press",
+      "muscle_group": "Shoulders",
+      "description": "Vertical press focusing deltoids and triceps.",
+      "equipment": "Barbell",
+      "difficulty": "Intermediate"
+    },
+    {
+      "name": "Dumbbell Lateral Raise",
+      "muscle_group": "Shoulders",
+      "description": "Isolation movement for lateral deltoids.",
+      "equipment": "Dumbbells",
+      "difficulty": "Beginner"
+    },
+    {
+      "name": "Pull-Up",
+      "muscle_group": "Back",
+      "description": "Bodyweight vertical pull for lats and upper back.",
+      "equipment": "Pull-up Bar",
+      "difficulty": "Intermediate"
+    },
+    {
+      "name": "Bent-Over Row",
+      "muscle_group": "Back",
+      "description": "Rowing movement for mid-back and lats.",
+      "equipment": "Barbell",
+      "difficulty": "Intermediate"
+    },
+    {
+      "name": "Lat Pulldown",
+      "muscle_group": "Back",
+      "description": "Machine-based vertical pulling exercise.",
+      "equipment": "Cable Machine",
+      "difficulty": "Beginner"
+    },
+    {
+      "name": "Seated Cable Row",
+      "muscle_group": "Back",
+      "description": "Horizontal pulling movement for upper back.",
+      "equipment": "Cable Machine",
+      "difficulty": "Beginner"
+    },
+    {
+      "name": "Barbell Curl",
+      "muscle_group": "Arms",
+      "description": "Biceps-focused elbow flexion movement.",
+      "equipment": "Barbell",
+      "difficulty": "Beginner"
+    },
+    {
+      "name": "Triceps Pushdown",
+      "muscle_group": "Arms",
+      "description": "Cable triceps extension movement.",
+      "equipment": "Cable Machine",
+      "difficulty": "Beginner"
+    },
+    {
+      "name": "Walking Lunge",
+      "muscle_group": "Legs",
+      "description": "Unilateral leg movement for quads and glutes.",
+      "equipment": "Dumbbells",
+      "difficulty": "Beginner"
+    },
+    {
+      "name": "Leg Press",
+      "muscle_group": "Legs",
+      "description": "Machine lower-body press targeting quads and glutes.",
+      "equipment": "Machine",
+      "difficulty": "Beginner"
+    },
+    {
+      "name": "Hip Thrust",
+      "muscle_group": "Glutes",
+      "description": "Glute-dominant hip extension movement.",
+      "equipment": "Barbell",
+      "difficulty": "Intermediate"
+    },
+    {
+      "name": "Plank",
+      "muscle_group": "Core",
+      "description": "Isometric core stability hold.",
+      "equipment": "Bodyweight",
+      "difficulty": "Beginner"
+    },
+    {
+      "name": "Hanging Knee Raise",
+      "muscle_group": "Core",
+      "description": "Dynamic abdominal movement from a hanging position.",
+      "equipment": "Pull-up Bar",
+      "difficulty": "Intermediate"
+    },
+    {
+      "name": "Calf Raise",
+      "muscle_group": "Calves",
+      "description": "Ankle plantarflexion movement for calf development.",
+      "equipment": "Machine",
+      "difficulty": "Beginner"
+    },
+    {
+      "name": "Dumbbell Bench Press",
+      "muscle_group": "Chest",
+      "description": "Chest press variation with dumbbells.",
+      "equipment": "Dumbbells",
+      "difficulty": "Beginner"
+    },
+    {
+      "name": "Push-Up",
+      "muscle_group": "Chest",
+      "description": "Bodyweight pushing exercise for chest, shoulders and triceps.",
+      "equipment": "Bodyweight",
+      "difficulty": "Beginner"
+    },
+    {
+      "name": "Incline Barbell Press",
+      "muscle_group": "Chest",
+      "description": "Incline press focusing upper chest.",
+      "equipment": "Barbell",
+      "difficulty": "Intermediate"
+    },
+    {
+      "name": "Chest Fly Machine",
+      "muscle_group": "Chest",
+      "description": "Machine fly movement for chest isolation.",
+      "equipment": "Machine",
+      "difficulty": "Beginner"
+    },
+    {
+      "name": "Pec Deck Fly",
+      "muscle_group": "Chest",
+      "description": "Seated fly targeting chest fibers through adduction.",
+      "equipment": "Machine",
+      "difficulty": "Beginner"
+    },
+    {
+      "name": "Dips",
+      "muscle_group": "Arms",
+      "description": "Bodyweight dip emphasizing triceps and chest.",
+      "equipment": "Dip Bars",
+      "difficulty": "Intermediate"
+    },
+    {
+      "name": "Arnold Press",
+      "muscle_group": "Shoulders",
+      "description": "Rotational dumbbell shoulder press.",
+      "equipment": "Dumbbells",
+      "difficulty": "Intermediate"
+    },
+    {
+      "name": "Face Pull",
+      "muscle_group": "Shoulders",
+      "description": "Cable pull for rear delts and upper back stability.",
+      "equipment": "Cable Machine",
+      "difficulty": "Beginner"
+    },
+    {
+      "name": "Rear Delt Fly",
+      "muscle_group": "Shoulders",
+      "description": "Isolation for posterior deltoids.",
+      "equipment": "Dumbbells",
+      "difficulty": "Beginner"
+    },
+    {
+      "name": "Upright Row",
+      "muscle_group": "Shoulders",
+      "description": "Vertical pull emphasizing delts and traps.",
+      "equipment": "Barbell",
+      "difficulty": "Intermediate"
+    },
+    {
+      "name": "Chin-Up",
+      "muscle_group": "Back",
+      "description": "Supinated grip pull-up variation targeting lats and biceps.",
+      "equipment": "Pull-up Bar",
+      "difficulty": "Intermediate"
+    },
+    {
+      "name": "One-Arm Dumbbell Row",
+      "muscle_group": "Back",
+      "description": "Single-arm rowing exercise for lats and mid-back.",
+      "equipment": "Dumbbells",
+      "difficulty": "Beginner"
+    },
+    {
+      "name": "T-Bar Row",
+      "muscle_group": "Back",
+      "description": "Heavy rowing movement for back thickness.",
+      "equipment": "Machine",
+      "difficulty": "Intermediate"
+    },
+    {
+      "name": "Hammer Curl",
+      "muscle_group": "Arms",
+      "description": "Neutral-grip curl for brachialis and forearms.",
+      "equipment": "Dumbbells",
+      "difficulty": "Beginner"
+    },
+    {
+      "name": "Dumbbell Curl",
+      "muscle_group": "Arms",
+      "description": "Classic biceps curl with dumbbells.",
+      "equipment": "Dumbbells",
+      "difficulty": "Beginner"
+    },
+    {
+      "name": "Skull Crusher",
+      "muscle_group": "Arms",
+      "description": "Lying triceps extension movement.",
+      "equipment": "EZ Bar",
+      "difficulty": "Intermediate"
+    },
+    {
+      "name": "Overhead Triceps Extension",
+      "muscle_group": "Arms",
+      "description": "Triceps isolation through overhead extension.",
+      "equipment": "Dumbbells",
+      "difficulty": "Beginner"
+    },
+    {
+      "name": "Close-Grip Bench Press",
+      "muscle_group": "Arms",
+      "description": "Bench press variation emphasizing triceps.",
+      "equipment": "Barbell",
+      "difficulty": "Intermediate"
+    },
+    {
+      "name": "Bulgarian Split Squat",
+      "muscle_group": "Legs",
+      "description": "Unilateral squat for quads and glutes.",
+      "equipment": "Dumbbells",
+      "difficulty": "Intermediate"
+    },
+    {
+      "name": "Goblet Squat",
+      "muscle_group": "Legs",
+      "description": "Front-loaded dumbbell squat for lower body.",
+      "equipment": "Dumbbells",
+      "difficulty": "Beginner"
+    },
+    {
+      "name": "Leg Extension",
+      "muscle_group": "Legs",
+      "description": "Machine isolation for quadriceps.",
+      "equipment": "Machine",
+      "difficulty": "Beginner"
+    },
+    {
+      "name": "Leg Curl",
+      "muscle_group": "Hamstrings",
+      "description": "Machine isolation for hamstrings.",
+      "equipment": "Machine",
+      "difficulty": "Beginner"
+    },
+    {
+      "name": "Step-Up",
+      "muscle_group": "Legs",
+      "description": "Single-leg step pattern for quads and glutes.",
+      "equipment": "Dumbbells",
+      "difficulty": "Beginner"
+    },
+    {
+      "name": "Glute Bridge",
+      "muscle_group": "Glutes",
+      "description": "Hip extension movement focused on glutes.",
+      "equipment": "Bodyweight",
+      "difficulty": "Beginner"
+    },
+    {
+      "name": "Cable Crunch",
+      "muscle_group": "Core",
+      "description": "Weighted abdominal crunch with cable machine.",
+      "equipment": "Cable Machine",
+      "difficulty": "Intermediate"
+    },
+    {
+      "name": "Russian Twist",
+      "muscle_group": "Core",
+      "description": "Rotational core movement for obliques.",
+      "equipment": "Bodyweight",
+      "difficulty": "Beginner"
+    },
+    {
+      "name": "Side Plank",
+      "muscle_group": "Core",
+      "description": "Isometric anti-lateral flexion core hold.",
+      "equipment": "Bodyweight",
+      "difficulty": "Beginner"
+    },
+    {
+      "name": "Mountain Climber",
+      "muscle_group": "Core",
+      "description": "Dynamic core and conditioning exercise.",
+      "equipment": "Bodyweight",
+      "difficulty": "Beginner"
+    },
+    {
+      "name": "Bicycle Crunch",
+      "muscle_group": "Core",
+      "description": "Alternating crunch pattern targeting abs and obliques.",
+      "equipment": "Bodyweight",
+      "difficulty": "Beginner"
+    },
+    {
+      "name": "Seated Calf Raise",
+      "muscle_group": "Calves",
+      "description": "Seated calf movement emphasizing soleus.",
+      "equipment": "Machine",
+      "difficulty": "Beginner"
+    },
+    {
+      "name": "Standing Calf Raise",
+      "muscle_group": "Calves",
+      "description": "Standing calf movement emphasizing gastrocnemius.",
+      "equipment": "Machine",
+      "difficulty": "Beginner"
+    },
+    {
+      "name": "Sumo Deadlift",
+      "muscle_group": "Legs",
+      "description": "Wide-stance deadlift variation emphasizing adductors and glutes.",
+      "equipment": "Barbell",
+      "difficulty": "Advanced"
+    },
+    {
+      "name": "Good Morning",
+      "muscle_group": "Hamstrings",
+      "description": "Hip-hinge pattern targeting posterior chain.",
+      "equipment": "Barbell",
+      "difficulty": "Advanced"
+    },
+    {
+      "name": "Farmer's Carry",
+      "muscle_group": "Full Body",
+      "description": "Loaded carry improving grip, core, and conditioning.",
+      "equipment": "Dumbbells",
+      "difficulty": "Intermediate"
+    },
+    {
+      "name": "Jump Rope",
+      "muscle_group": "Cardio",
+      "description": "Conditioning movement improving coordination and endurance.",
+      "equipment": "Jump Rope",
+      "difficulty": "Beginner"
+    }
+  ]
+}

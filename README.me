@@ -122,3 +122,24 @@ Dark mode / theme switcher
 Audit log
 
 Dockerization of the project
+
+Seed system foods and exercises
+
+A JSON seed importer is available in server/scripts for loading system food and exercise catalogs without manual admin entry.
+
+Files:
+- server/scripts/import_seed_json.py
+- server/scripts/seed_data.json
+
+Run locally:
+- cd server
+- python -m scripts.import_seed_json --file scripts/seed_data.json
+
+Run in Docker:
+- docker compose exec server python -m scripts.import_seed_json --file scripts/seed_data.json
+
+The import is idempotent for system entries:
+- Foods are matched by name + brand (case-insensitive)
+- Exercises are matched by name (case-insensitive)
+
+Each run prints created/updated/skipped counts.

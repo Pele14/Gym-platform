@@ -6,6 +6,11 @@ import App from "./App";
 import { AuthProvider } from "./features/auth";
 import "./global.css";
 
+const THEME_STORAGE_KEY = "ui:theme";
+const storedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+const initialTheme = storedTheme === "light" ? "light" : "dark";
+document.documentElement.setAttribute("data-theme", initialTheme);
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>

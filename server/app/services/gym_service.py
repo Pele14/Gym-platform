@@ -3,6 +3,7 @@ from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 from app.config import Config
+from app.extensions import redis_client
 from app.repositories.auth_repository import AuthRepository
 
 
@@ -92,6 +93,15 @@ class GymService:
 
         return gyms, None
 
+    _CACHE_TTL = 3600  # 1 hour
+    _CACHE_PRECISION = 2  # ~1 km grid
+
+    @staticmethod
+    def _cache_key(lat: float, lng: float) -> str:
+        rounded_lat = round(lat, GymService._CACHE_PRECISION)
+        rounded_lng = round(lng, GymService._CACHE_PRECISION)
+        return f"gyms:nearby:{rounded_lat}:{rounded_lng}"
+
     @staticmethod
     def get_nearby_gyms(current_user_id: int, lat: float, lng: float):
         user = AuthRepository.get_by_id(current_user_id)
@@ -99,8 +109,21 @@ class GymService:
         if not user:
             return None, "User not found."
 
+        cache_key = GymService._cache_key(lat, lng)
+        cached = redis_client.get(cache_key)
+        if cached:
+            try:
+                return json.loads(cached), None
+            except (json.JSONDecodeError, TypeError):
+                pass
+
         gyms, error = GymService._fetch_nearby_gyms_from_provider(lat=lat, lng=lng)
         if error:
             return None, error
+
+        try:
+            redis_client.setex(cache_key, GymService._CACHE_TTL, json.dumps(gyms))
+        except Exception:
+            pass  # Cache write failure is non-fatal
 
         return gyms, None

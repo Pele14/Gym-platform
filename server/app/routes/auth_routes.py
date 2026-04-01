@@ -1,7 +1,7 @@
-from flask import Blueprint, request
+from flask import Blueprint, current_app, request
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, get_jwt
 from datetime import datetime, timezone, timedelta
-
+from app.services.email_service import EmailService
 from app.services.auth_services import AuthService
 from app.utils.authvalidators import (
     validate_email,
@@ -26,7 +26,6 @@ def register():
     last_name = data.get("last_name", "").strip()
     email = data.get("email", "").strip().lower()
     password = data.get("password", "").strip()
-   
 
     valid, error = validate_username(username)
     if not valid:
@@ -39,7 +38,7 @@ def register():
     valid, error = validate_password(password)
     if not valid:
         return {"message": error}, 400
-    
+
     valid, error = validate_first_name(first_name)
     if not valid:
         return {"message": error}, 400
@@ -47,20 +46,44 @@ def register():
     valid, error = validate_last_name(last_name)
     if not valid:
         return {"message": error}, 400
-    
-    user, error = AuthService.register_user(username, first_name, last_name, email, password)
+
+    user, error = AuthService.register_user(
+        username,
+        first_name,
+        last_name,
+        email,
+        password,
+    )
 
     if error:
         return {"message": error}, 400
 
+    email_sent = True
+    try:
+        EmailService.send_registration_confirmation(
+            to_email=user.email,
+            first_name=user.first_name,
+        )
+    except Exception:
+        email_sent = False
+        current_app.logger.exception(
+            "Failed to send registration email for user_id=%s email=%s",
+            user.id,
+            user.email,
+        )
+
     access_token = create_access_token(identity=str(user.id))
 
-    return {
+    response = {
         "message": "User registered successfully",
         "access_token": access_token,
         "user": user.to_dict()
-    }, 201
+    }
 
+    if not email_sent:
+        response["warning"] = "Registration email was not sent."
+
+    return response, 201
 
 @auth_bp.route("/login", methods=["POST"])
 def login():

@@ -29,8 +29,20 @@ export default function DailyLogView({ date }: DailyLogViewProps) {
   const [showEntryForm, setShowEntryForm] = useState<number | null>(null);
   const [selectedFood, setSelectedFood] = useState<Food | null>(null);
   const [foods, setFoods] = useState<Food[]>([]);
+  const [isFoodsLoading, setIsFoodsLoading] = useState(false);
   const [entryGrams, setEntryGrams] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
+
+  const normalizedSearchQuery = searchQuery.trim().toLowerCase();
+
+  const filteredFoods = foods.filter((food) => {
+    if (!normalizedSearchQuery) {
+      return true;
+    }
+
+    return [food.name, food.brand ?? ""]
+      .some((value) => value.toLowerCase().includes(normalizedSearchQuery));
+  });
 
   const resetEntryFlow = () => {
     setSelectedFood(null);
@@ -40,12 +52,26 @@ export default function DailyLogView({ date }: DailyLogViewProps) {
     setFoods([]);
   };
 
-  const openEntryModal = (mealId: number) => {
+  const openEntryModal = async (mealId: number) => {
     setSelectedFood(null);
     setEntryGrams("");
     setSearchQuery("");
-    setFoods([]);
     setShowEntryForm(mealId);
+
+    if (foods.length > 0) {
+      return;
+    }
+
+    try {
+      setIsFoodsLoading(true);
+      const data = await foodService.getFoods();
+      setFoods(data.foods);
+    } catch (err) {
+      console.error(err);
+      setFoods([]);
+    } finally {
+      setIsFoodsLoading(false);
+    }
   };
 
   const handleCreateMeal = async () => {
@@ -54,18 +80,6 @@ export default function DailyLogView({ date }: DailyLogViewProps) {
       await createMeal(mealName.trim());
       setMealName("");
       setShowMealForm(false);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const handleLoadFoods = async () => {
-    try {
-      const data = await foodService.getFoods();
-      const filtered = data.foods.filter((food) =>
-        food.name.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-      setFoods(filtered);
     } catch (err) {
       console.error(err);
     }
@@ -274,7 +288,9 @@ export default function DailyLogView({ date }: DailyLogViewProps) {
                         <button
                           className={styles.button}
                           type="button"
-                          onClick={() => openEntryModal(meal.id)}
+                          onClick={() => {
+                            void openEntryModal(meal.id);
+                          }}
                           disabled={isSubmitting}
                         >
                           + Add Food
@@ -306,29 +322,28 @@ export default function DailyLogView({ date }: DailyLogViewProps) {
 
                 {!selectedFood ? (
                   <>
-                    <label className={styles.modalLabel}>Search food</label>
-                    <div className={styles.modalSearchRow}>
+                    <label className={styles.modalLabel} htmlFor="food-smart-search">Search food</label>
+                    <div className={styles.modalSearchStack}>
                       <input
+                        id="food-smart-search"
                         className={styles.input}
-                        type="text"
+                        type="search"
                         placeholder="Search food..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
+                        disabled={isSubmitting || isFoodsLoading}
                       />
-                      <button
-                        className={styles.button}
-                        type="button"
-                        onClick={handleLoadFoods}
-                        disabled={isSubmitting}
-                      >
-                        Search
-                      </button>
+                      <p className={styles.searchHint}>
+                        Type to instantly filter by food name or brand.
+                      </p>
                     </div>
 
                     <div className={styles.foodSearchSection}>
-                      {foods.length > 0 ? (
+                      {isFoodsLoading ? (
+                        <p className={styles.message}>Loading food library...</p>
+                      ) : filteredFoods.length > 0 ? (
                         <div className={styles.foodList}>
-                          {foods.map((food) => (
+                          {filteredFoods.map((food) => (
                             <div
                               key={food.id}
                               className={styles.foodOption}
@@ -348,9 +363,9 @@ export default function DailyLogView({ date }: DailyLogViewProps) {
                         </div>
                       ) : (
                         <p className={styles.message}>
-                          {searchQuery.trim()
-                            ? "No matching food yet. Try another search."
-                            : "Search to pick a food for this meal."}
+                          {normalizedSearchQuery
+                            ? "No matching food found. Try another search."
+                            : "Start typing to pick a food for this meal."}
                         </p>
                       )}
                     </div>

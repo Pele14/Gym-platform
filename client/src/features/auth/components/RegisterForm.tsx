@@ -31,9 +31,11 @@ export function RegisterForm() {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const field = e.target.dataset.field ?? e.target.name;
+
     setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [field]: e.target.value,
     }));
   };
 
@@ -41,16 +43,35 @@ export function RegisterForm() {
     <div className={styles.container}>
       <h2 className={styles.title}>Create Account</h2>
 
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <form className={styles.form} onSubmit={handleSubmit} autoComplete="off">
+        <input
+          type="text"
+          name="register_fake_username"
+          autoComplete="username"
+          tabIndex={-1}
+          aria-hidden="true"
+          style={{ display: "none" }}
+        />
+        <input
+          type="password"
+          name="register_fake_password"
+          autoComplete="new-password"
+          tabIndex={-1}
+          aria-hidden="true"
+          style={{ display: "none" }}
+        />
+
         <div className={styles.inputGroup}>
-          <label className={styles.label} htmlFor="username">
+          <label className={styles.label} htmlFor="register_username">
             Username
           </label>
           <input
             className={styles.input}
-            id="username"
-            name="username"
+            id="register_username"
+            name="register_username"
+            data-field="username"
             type="text"
+            autoComplete="new-password"
             value={formData.username}
             onChange={handleChange}
             required
@@ -59,14 +80,16 @@ export function RegisterForm() {
         </div>
 
         <div className={styles.inputGroup}>
-          <label className={styles.label} htmlFor="first_name">
+          <label className={styles.label} htmlFor="register_first_name">
             First Name
           </label>
           <input
             className={styles.input}
-            id="first_name"
-            name="first_name"
+            id="register_first_name"
+            name="register_first_name"
+            data-field="first_name"
             type="text"
+            autoComplete="new-password"
             value={formData.first_name}
             onChange={handleChange}
             required
@@ -75,14 +98,16 @@ export function RegisterForm() {
         </div>
 
         <div className={styles.inputGroup}>
-          <label className={styles.label} htmlFor="last_name">
+          <label className={styles.label} htmlFor="register_last_name">
             Last Name
           </label>
           <input
             className={styles.input}
-            id="last_name"
-            name="last_name"
+            id="register_last_name"
+            name="register_last_name"
+            data-field="last_name"
             type="text"
+            autoComplete="new-password"
             value={formData.last_name}
             onChange={handleChange}
             required
@@ -91,14 +116,16 @@ export function RegisterForm() {
         </div>
 
         <div className={styles.inputGroup}>
-          <label className={styles.label} htmlFor="email">
+          <label className={styles.label} htmlFor="register_email">
             Email
           </label>
           <input
             className={styles.input}
-            id="email"
-            name="email"
+            id="register_email"
+            name="register_email"
+            data-field="email"
             type="email"
+            autoComplete="new-password"
             value={formData.email}
             onChange={handleChange}
             required
@@ -107,14 +134,16 @@ export function RegisterForm() {
         </div>
 
         <div className={styles.inputGroup}>
-          <label className={styles.label} htmlFor="password">
+          <label className={styles.label} htmlFor="register_password">
             Password
           </label>
           <input
             className={styles.input}
-            id="password"
-            name="password"
+            id="register_password"
+            name="register_password"
+            data-field="password"
             type="password"
+            autoComplete="new-password"
             value={formData.password}
             onChange={handleChange}
             required

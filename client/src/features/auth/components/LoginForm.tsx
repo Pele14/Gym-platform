@@ -38,7 +38,7 @@ export function LoginForm() {
     <div className={styles.container}>
       <h2 className={styles.title}>Sign In</h2>
 
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <form className={styles.form} onSubmit={handleSubmit} autoComplete="off">
         <div className={styles.inputGroup}>
           <label className={styles.label} htmlFor="email">
             Email
@@ -48,6 +48,7 @@ export function LoginForm() {
             id="email"
             name="email"
             type="email"
+            autoComplete="off"
             value={formData.email}
             onChange={handleChange}
             required
@@ -64,6 +65,7 @@ export function LoginForm() {
             id="password"
             name="password"
             type="password"
+            autoComplete="off"
             value={formData.password}
             onChange={handleChange}
             required
