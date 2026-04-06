@@ -42,7 +42,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const logout = (): void => {
     void authService.logoutRemote().catch(() => {
-      // Non-blocking: local logout must always succeed even if backend request fails.
     });
     authService.logoutLocal();
     setUser(null);

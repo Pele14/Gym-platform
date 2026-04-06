@@ -70,13 +70,10 @@ export default function RoutineList() {
       <div className={styles.pageHeader}>
         <div>
           <h2 className={styles.title}>Routines</h2>
-          <p className={styles.pageSubtitle}>
-            Build, organize, and launch training plans without oversized cards.
-          </p>
+  
           <div className={styles.metricsRow}>
             <span className={styles.metricChip}>{routines.length} routines</span>
             <span className={styles.metricChip}>{totalExercises} exercises total</span>
-            <span className={styles.metricChip}>Compact planner</span>
           </div>
         </div>
 
@@ -127,12 +124,6 @@ export default function RoutineList() {
                   <p className={`${styles.smallText} ${styles.summaryDescription}`}>
                     {routine.description || "No description"}
                   </p>
-                  <div className={styles.summaryMetaRow}>
-                    <span className={styles.summaryMetaChip}>
-                      {routine.exercises?.length ?? 0} exercises
-                    </span>
-                    <span className={styles.summaryMetaChip}>Open detail</span>
-                  </div>
                 </div>
               </button>
             ))}
